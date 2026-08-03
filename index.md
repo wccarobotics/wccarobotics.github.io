@@ -7,7 +7,7 @@ layout: home
     <h1>WCCA Robotics</h1>
     <p>The robotics program of <a href="https://westcoastchristian.org/" target="_blank">West Coast Christian Academy</a> — competing in FIRST Tech Challenge and FIRST LEGO League.</p>
     <div class="hero-buttons">
-      <a href="/support" class="btn btn-primary">Support Our Teams</a>
+      <a href="/support" class="btn btn-primary btn-gold-outline">Support Our Teams</a>
       <a href="https://www.youtube.com/@wccarobotics" class="btn btn-secondary" target="_blank">Follow Us on YouTube</a>
     </div>
   </div>
@@ -16,32 +16,22 @@ layout: home
 <div class="section section-alt">
   <div class="container">
     <div class="highlight-box">
-      <h3>🏆 Champions Award at FLL Championship!</h3>
-      <p><strong>Marcus Bartholomew the Third Junior</strong> won the <strong>Champions Award</strong> (1st place overall) at the Adventist Robotics FLL Championship on May 3 — the second year in a row! They also placed 3rd in Robot Performance and advance to the Florida Robo Rally. <strong>Robo Gators of the Lost Park</strong> won the <strong>Robot Performance Award</strong> with a high score of 460 points — 1st place in robot game! Congratulations to both teams!</p>
-      <a href="/tournaments/fll/2026-FLL-Championship" class="btn btn-blue" style="margin-top: 0.75rem;">View Tournament Results →</a>
-    </div>
-    <div class="highlight-box" style="margin-top: 1.5rem;">
-      <h3>🏆 Control Award & 3rd Place at FTC Championship!</h3>
-      <p>Our FTC team <strong>Marcus Bartholomew the Third Senior</strong> won the <strong>Control Award</strong> and finished <strong>3rd place in the playoffs</strong> at the Adventist Robotics FTC Championship on April 12! As the 4th-seeded alliance, we upset the #1 seed in the upper bracket before falling in the lower bracket semifinals.</p>
-      <a href="/tournaments/ftc/2026-Adventist-Robotics-League-Championship-FTC" class="btn btn-blue" style="margin-top: 0.75rem;">View Tournament Results →</a>
-      <a href="/ftc/ftc-decode-portfolio-32314-v1.0.pdf" class="btn btn-blue" style="margin-top: 0.5rem;">View Our Judging Portfolio →</a>
-    </div>
-    <div class="highlight-box" style="margin-top: 1.5rem;">
-      <h3>🏆 1st and 2nd at FLL Florida Qualifier!</h3>
-      <p>Our FLL teams swept the top spots at the Adventist Robotics Florida Qualifying Tournament on March 29! <strong>Robo Gators of the Lost Park</strong> won the <strong>Champions Award</strong> and <strong>Marcus Bartholomew the Third Junior</strong> took 2nd place — both teams advance to the Championship!</p>
-      <a href="/tournaments/fll/2026-FLL-Florida-Qualifier" class="btn btn-blue" style="margin-top: 0.75rem;">View Tournament Results →</a>
-    </div>
-    <div class="highlight-box" style="margin-top: 1.5rem;">
-      <h3>🏆 Scrimmage Champions!</h3>
-      <p>Our FTC team <strong>Marcus Bartholomew the Third Senior</strong> won the <strong>Adventist Robotics FTC Carolina Scrimmage</strong> finals 2–1 on March 1, 2026!</p>
-      <a href="/ftc#competitions" class="btn btn-blue" style="margin-top: 0.75rem;">Watch the Matches →</a>
+      <h3>🏆 2025–26 Season Highlights</h3>
+      <p>All three WCCA Robotics teams earned major awards and top finishes during an outstanding season:</p>
+      <ul>
+        <li><strong>Marcus Bartholomew the Third Junior</strong> won the Champion's Award at the Adventist Robotics FLL Championship, placed 3rd in Robot Performance, finished as Champion's Award runner-up at the Florida Qualifier, and placed 2nd in Robot Game at the Florida Robo Rally.</li>
+        <li><strong>Robo Gators of the Lost Park</strong> won the Florida Qualifier Champion's Award, three Robot Performance Awards, and the Robo Rally Inclusion Core Values trophy.</li>
+        <li><strong>Marcus Bartholomew the Third Senior</strong> won the FTC Carolina Scrimmage championship, then earned the Control Award and placed 3rd in the playoffs at the Adventist Robotics FTC Championship.</li>
+      </ul>
+      <a href="/tournaments/fll/" class="btn btn-blue" style="margin-top: 0.75rem;">View FLL Results →</a>
+      <a href="/tournaments/ftc/" class="btn btn-blue" style="margin-top: 0.75rem;">View FTC Results →</a>
     </div>
   </div>
 </div>
 
 <div class="section">
   <div class="container section-center">
-    <h2>Our Teams</h2>
+    <h2>Our 2025–26 Teams</h2>
     <div class="team-cards">
 
       <div class="team-card">
@@ -50,7 +40,7 @@ layout: home
           <span class="badge">FTC — FIRST Tech Challenge</span>
           <h3>Marcus Bartholomew the Third Senior</h3>
           <p><small class="team-number">FTC Team #32314</small></p>
-          <p>Our newest team! Competing in FIRST Tech Challenge for the first time in the 2025–26 Decode season. Building, programming, and driving robots in head-to-head competition.</p>
+          <p>WCCA's first FTC team competed in the 2025–26 Decode season, designing, building, programming, and driving robots in head-to-head competition.</p>
           <a href="/ftc" class="btn btn-blue" style="margin-top: 0.5rem;">Meet the Team →</a>
         </div>
       </div>
@@ -61,7 +51,7 @@ layout: home
           <span class="badge">FLL — FIRST LEGO League</span>
           <h3>Marcus Bartholomew the Third Junior</h3>
           <p><small class="team-number">FLL Team #61349</small></p>
-          <p>In our third year and coming off a national championship! Competing in the 2025–26 Unearthed season with LEGO SPIKE Prime robots.</p>
+          <p>In its third year, the team competed in the 2025–26 Unearthed season with LEGO SPIKE Prime robots after winning a national championship the previous season.</p>
           <a href="/fll" class="btn btn-blue" style="margin-top: 0.5rem;">See Our Story →</a>
         </div>
       </div>
@@ -72,7 +62,7 @@ layout: home
           <span class="badge">FLL — FIRST LEGO League</span>
           <h3>Robo Gators of the Lost Park</h3>
           <p><small class="team-number">FLL Team #64434</small></p>
-          <p>Our homeschool FLL team, competing for the first time in the 2025–26 Unearthed season.</p>
+          <p>Our homeschool FLL team completed its first year of competition in the 2025–26 Unearthed season.</p>
           <a href="/fll#the-fourth" class="btn btn-blue" style="margin-top: 0.5rem;">Learn More →</a>
         </div>
       </div>
@@ -95,7 +85,7 @@ layout: home
   <h2>Help Us Build the Future</h2>
   <p>Whether you follow us on social media, volunteer your time, or make a donation — every bit of support helps our students learn, grow, and compete.</p>
   <div class="hero-buttons">
-    <a href="/support" class="btn btn-primary">Get Involved</a>
+    <a href="/support" class="btn btn-primary btn-gold-outline">Get Involved</a>
     <a href="https://securepayment.link/westcoastchristian/donations-home/" class="btn btn-secondary" target="_blank">Donate</a>
   </div>
 </div>

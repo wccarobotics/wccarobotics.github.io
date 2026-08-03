@@ -8,9 +8,9 @@ title: "FTC Team — Marcus Bartholomew the Third Senior"
 # Marcus Bartholomew the Third Senior
 **FTC Team #32314**
 
-**FIRST Tech Challenge** · 1st Year · 2025–26 Decode Season
+**FIRST Tech Challenge** · First Season · 2025–26 Decode
 
-We're WCCA's first-ever FTC team! FIRST Tech Challenge is a robotics competition for 7th through 12th graders where teams design, build, and program robots to compete in head-to-head matches.
+The 2025–26 season was WCCA's first year competing in FIRST Tech Challenge, a robotics competition for 7th through 12th graders where teams design, build, and program robots for head-to-head matches.
 
 ---
 
@@ -18,9 +18,9 @@ We're WCCA's first-ever FTC team! FIRST Tech Challenge is a robotics competition
 
 FIRST Tech Challenge is a robotics competition where you build and program a robot to play in a robot game. There's a different game every year.
 
-This year's game is called **Decode**. The main way to score points is by getting balls, called artifacts, into your alliance's goal. The game is played with two alliances of two robots each — so there are four robots playing on a 12-foot by 12-foot field during each match.
+The 2025–26 game was called **Decode**. The main way to score points was by getting balls, called artifacts, into an alliance's goal. The game was played with two alliances of two robots each, with four robots on a 12-foot by 12-foot field during each match.
 
-Each match starts with **30 seconds of autonomous period** where the robot runs using pre-programmed logic. Then there are **2 minutes of teleop period** where the robot can be remote controlled by drivers.
+Each match started with a **30-second autonomous period** in which the robot ran using pre-programmed logic. That was followed by a **2-minute teleop period** in which drivers controlled the robot.
 
 <div class="video-container">
   <iframe src="https://www.youtube.com/embed/WxE8lCb5wHE" frameborder="0" allowfullscreen></iframe>
@@ -59,18 +59,18 @@ The starter bot taught us a lot, but we wanted to take things to the next level 
 
 ### Robot 2: The RI3D Bot
 
-Our current robot is based on [GoBilda's **Robot in 3 Days (RI3D)** design](https://www.gobilda.com/robot-in-3-days-resource-guide-decode/).
+Our second robot was based on [GoBilda's **Robot in 3 Days (RI3D)** design](https://www.gobilda.com/robot-in-3-days-resource-guide-decode/).
 
-This robot is a big upgrade from the starter bot:
+This robot was a big upgrade from the starter bot:
 
-- **Mecanum drive** — Unlike the tank drive, mecanum wheels let the robot drive in any direction, including sideways. This makes it much more maneuverable on the field.
-- **Intake** — Instead of relying on a human player to load artifacts, this robot can pick up artifacts off the field on its own.
-- **Dual launchers with diverters** — The robot has launchers on both sides, with a diverter to direct artifacts to the left or right launcher.  This can let us (or the robot) choose which color artifact to launch.
-- **Odometry system** - We added odometry wheels and the [GoBilda Pinpoint computer](https://www.gobilda.com/4-bar-odometry-pack-2-pods-1-pinpoint-computer/) to help the robot track where it is on the field.  This was an upgrade that we originally made to the starter bot and moved to the new bot.
-- **Limelight camera** — We added a [Limelight 3A camera](https://limelightvision.io/products/limelight-3a).  This will also help us better detect the robot's position on the field.
-- **Pedro Pathing** — We're working on using [Pedro Pathing](https://pedropathing.com/) for smooth, accurate autonomous movement.
+- **Mecanum drive** — Unlike the tank drive, mecanum wheels let the robot drive in any direction, including sideways. This made it much more maneuverable on the field.
+- **Intake** — Instead of relying on a human player to load artifacts, the robot could pick up artifacts from the field on its own.
+- **Dual launchers with diverters** — The robot had launchers on both sides, with a diverter that directed artifacts to the left or right launcher. This let us choose which color artifact to launch.
+- **Odometry system** — We added odometry wheels and the [GoBilda Pinpoint computer](https://www.gobilda.com/4-bar-odometry-pack-2-pods-1-pinpoint-computer/) to help the robot track its position on the field. This was an upgrade that we originally made to the starter bot and moved to the new bot.
+- **Limelight camera** — We added a [Limelight 3A camera](https://limelightvision.io/products/limelight-3a) to help detect the robot's position on the field.
+- **Pedro Pathing** — We worked on using [Pedro Pathing](https://pedropathing.com/) for smooth, accurate autonomous movement.
 
-We're continuing to refine the robot — improving launcher consistency, fine-tuning autonomous routines, and working on auto-aim to hit the goal more reliably.
+Throughout the season, we refined the robot by improving launcher consistency, fine-tuning autonomous routines, and working on auto-aim to hit the goal more reliably.
 
 <div class="video-container">
   <iframe src="https://www.youtube.com/embed/PtHFdw_hqi0" frameborder="0" allowfullscreen></iframe>
@@ -93,7 +93,7 @@ For alliance selection for the playoffs, the [NC Avengers](https://www.ncavenger
 - 📺 [Qualification Matches](https://youtu.be/lL-e5rfkOyU)
 - 📺 [Playoff Matches](https://youtu.be/Oi7FmYCPAqE)
 
-## Follow Our Progress
+## Explore Our 2025–26 Work
 
 - 💻 [Our code and engineering docs on GitHub](https://github.com/wccarobotics/ftc-decode)
 - 📺 [YouTube](https://www.youtube.com/@wccarobotics)

@@ -9,7 +9,7 @@ title: "M.A.R.C.U.S."
 
 M.A.R.C.U.S. is a reusable robot programming framework for [FIRST LEGO League](https://www.firstlegoleague.org/) competitions. It runs directly on the LEGO SPIKE Prime hub and provides a menu-driven system for selecting and running multiple [Pybricks](https://pybricks.com/) programs during competition.
 
-M.A.R.C.U.S. was created by Lucas Plaisted, a WCCA Robotics member who built an early version of the menu system during the 2024–25 Submerged season while competing on our FLL team, Marcus Bartholomew the Third Junior. Now on our FTC team, Lucas developed M.A.R.C.U.S. as a polished, reusable framework that any FLL team can use. Both of our FLL teams use it this season.
+M.A.R.C.U.S. was created by Lucas Plaisted, a WCCA Robotics member who built an early version of the menu system during the 2024–25 Submerged season while competing on our FLL team, Marcus Bartholomew the Third Junior. After joining our FTC team, Lucas developed M.A.R.C.U.S. as a polished, reusable framework that any FLL team can use. Both of our FLL teams used it during the 2025–26 Unearthed season.
 
 <a href="https://github.com/lsplaisted/marcus" class="btn btn-blue">View on GitHub →</a>
 

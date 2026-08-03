@@ -5,7 +5,7 @@ title: "FLL Teams"
 
 # FLL Teams — FIRST LEGO League
 
-WCCA Robotics has two FLL teams competing in the 2025–26 **Unearthed** season (archaeology theme). FIRST LEGO League is a robotics competition for students in 4th through 8th grade where teams build autonomous LEGO robots, develop an innovation project, and demonstrate core values like teamwork and discovery.
+WCCA Robotics fielded two FLL teams during the 2025–26 **Unearthed** season, which had an archaeology theme. FIRST LEGO League is a robotics competition for students in 4th through 8th grade where teams build autonomous LEGO robots, develop an innovation project, and demonstrate core values like teamwork and discovery.
 
 <div class="highlight-box">
   <h3>🏆 FLL Championship Results</h3>
@@ -21,7 +21,7 @@ WCCA Robotics has two FLL teams competing in the 2025–26 **Unearthed** season 
 
 **FLL Team #61349** · 3rd Year · National Champions 🏆
 
-Our flagship FLL team is in its third year and has a track record of excellence. Named after a LEGO shark from the FLL Submerged mission, Marcus Bartholomew the Third Junior has become the heart and soul of WCCA Robotics.
+Our flagship FLL team completed its third year and continued its track record of excellence. Named after a LEGO shark from the FLL Submerged mission, Marcus Bartholomew the Third Junior became the heart and soul of WCCA Robotics. There is even a real shark named after Marcus!
 
 ### Awards & Accomplishments
 
@@ -82,9 +82,9 @@ Our flagship FLL team is in its third year and has a track record of excellence.
   <iframe src="https://www.youtube.com/embed/VYHs2L9nEM0" title="FLL Masterpiece Season Competition Robot Run" allowfullscreen></iframe>
 </div>
 
-### Current Season: Unearthed (2025–26)
+### 2025–26 Unearthed Season
 
-This year's FLL season has an archaeology theme. Our team is diving into research about archaeological methods and challenges as they prepare for competition. Follow along on our [GitHub wiki](https://github.com/wccarobotics/fll-unearthed/wiki).
+The Unearthed season had an archaeology theme. Our team researched archaeological methods and challenges as it prepared for competition. Explore the team's work on our [GitHub wiki](https://github.com/wccarobotics/fll-unearthed/wiki).
 
 **Innovation Project:** [COCOPlus Hydration Packets](/innovation-cocoplus) — a natural, freeze-dried coconut water hydration solution designed to keep archaeologists hydrated in extreme conditions.
 
@@ -96,9 +96,9 @@ This year's FLL season has an archaeology theme. Our team is diving into researc
 
 **FLL Team #64434**
 
-**1st Year** · Homeschool Team
+**2025–26** · First Season · Homeschool Team
 
-Our newest FLL team is made up primarily of homeschool students competing for the first time in the 2025–26 Unearthed season. We're excited to see what they accomplish!
+Our second FLL team was made up primarily of homeschool students and completed its first year of competition during the 2025–26 Unearthed season.
 
 **Innovation Project:** [The Protection Backpack](/innovation-backpack) — a portable weather shield to help archaeologists work comfortably in extreme conditions.
 
@@ -106,7 +106,7 @@ Our newest FLL team is made up primarily of homeschool students competing for th
 
 ## Tournament Results
 
-Our FLL teams compete in Adventist Robotics tournaments. See detailed match results, video timestamps, and awards from recent tournaments:
+Our FLL teams competed in Adventist Robotics tournaments. See detailed match results, video timestamps, and awards from the season:
 
 <a href="/tournaments/fll/" class="btn btn-blue">View Tournament Results →</a>
 
@@ -114,7 +114,7 @@ Our FLL teams compete in Adventist Robotics tournaments. See detailed match resu
 
 ## M.A.R.C.U.S.
 
-Our FLL teams use **M.A.R.C.U.S.** (Multiple Amazing Robot Code Usage Selector) — an open-source robot programming framework for SPIKE Prime that provides a menu-driven system for selecting and running mission programs during competition.
+Our 2025–26 FLL teams used **M.A.R.C.U.S.** (Multiple Amazing Robot Code Usage Selector) — an open-source robot programming framework for SPIKE Prime that provides a menu-driven system for selecting and running mission programs during competition.
 
 <a href="/marcus" class="btn btn-blue">Learn About M.A.R.C.U.S. →</a>
 
