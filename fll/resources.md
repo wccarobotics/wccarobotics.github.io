@@ -18,9 +18,36 @@ A collection of resources for our FIRST LEGO League teams — starter robot desi
 
 ## Starter Robot Designs
 
-[FLL Tutorials](https://flltutorials.com/en/RobotGame.html) publishes free building instructions for competition-ready base robots. A solid base robot with a modular attachment system makes everything else easier — pick one, build it, then design your own attachments for it. Click any robot below for its building instructions.
+A solid base robot with a modular attachment system makes everything else easier — pick one, build it, then design your own attachments for it.
 
-<div class="team-cards">
+### Our Designs
+
+Two SPIKE Prime base robots we designed and built for our own teams. Both are free to download and open in [BrickLink Studio](https://www.bricklink.com/v3/studio/download.page), where you can rotate the model, pull it apart, and step through how it goes together.
+
+<div class="team-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 330px));">
+  <div class="team-card">
+    <a href="/fll/marcus-bot.io"><img src="/assets/images/fll-bots/marcus-bot.jpg" alt="Marcus Bot — a very compact SPIKE Prime robot base, with the attachment motors partially covering the hub"></a>
+    <div class="team-card-body">
+      <h3>Marcus Bot</h3>
+      <p>A very compact robot base, achieved by having the attachment motors partially cover the hub.</p>
+      <p><a href="/fll/marcus-bot.io">Download the Studio file →</a></p>
+    </div>
+  </div>
+  <div class="team-card">
+    <a href="/fll/chair-bot.io"><img src="/assets/images/fll-bots/chair-bot.jpg" alt="Chair Bot — a SPIKE Prime robot with the hub and drive motors mounted vertically"></a>
+    <div class="team-card-body">
+      <h3>Chair Bot</h3>
+      <p>A robot with the hub and drive motors mounted vertically — hence the name "Chair Bot".</p>
+      <p><a href="/fll/chair-bot.io">Download the Studio file →</a></p>
+    </div>
+  </div>
+</div>
+
+### FLL Tutorials Designs
+
+[FLL Tutorials](https://flltutorials.com/en/RobotGame.html) publishes free building instructions for competition-ready base robots. Click any robot below for its building instructions.
+
+<div class="team-cards" style="grid-template-columns: repeat(auto-fit, minmax(280px, 330px));">
   <div class="team-card">
     <a href="https://flltutorials.com/en/robotgame/building/one%20kit%20build/2020/08/06/CoopBot.html"><img src="/assets/images/fll-bots/coop-bot.jpg" alt="Coop Bot — a compact SPIKE Prime base robot with a black front bumper frame"></a>
     <div class="team-card-body">
