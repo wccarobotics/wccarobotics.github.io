@@ -39,4 +39,4 @@ Our FTC team competes in Adventist Robotics tournaments. Each tournament page be
 
 ---
 
-<small>These tournament pages were generated with the help of the [FTC Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.github/skills/ftc-tournament-analyzer/SKILL.md) AI skill — analyzing livestream video, speech recognition, and event data to produce timestamped match documentation.</small>
+<small>These tournament pages were generated with the help of the [FTC Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.claude/skills/ftc-tournament-analyzer/SKILL.md) AI skill — analyzing livestream video, speech recognition, and event data to produce timestamped match documentation.</small>

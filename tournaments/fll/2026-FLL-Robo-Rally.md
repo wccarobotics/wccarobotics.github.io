@@ -195,4 +195,4 @@ The **Monkey Tron** alliance earned a bye straight into the Red bracket final. W
 
 ---
 
-<small>This page was generated with the help of the [FLL Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.github/skills/fll-tournament-analyzer/SKILL.md) AI skill.</small>
+<small>This page was generated with the help of the [FLL Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.claude/skills/fll-tournament-analyzer/SKILL.md) AI skill.</small>

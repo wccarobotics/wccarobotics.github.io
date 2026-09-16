@@ -385,7 +385,7 @@ Format the video link as `H:MM:SS` or `M:SS` for the display text, with the link
 | Q5 | 32314 / 27795 | 24813 / 23958 | **45** – 30 | [1:23:45](https://www.youtube.com/watch?v=VIDEO_ID&t=5025) |
 ```
 
-For full details on the frame capture approach (Playwright setup, overlay reading, scanning strategies), see the [FTC Tournament Analyzer skill](/.github/skills/ftc-tournament-analyzer/SKILL.md), Step 2.
+For full details on the frame capture approach (Playwright setup, overlay reading, scanning strategies), see the [FTC Tournament Analyzer skill](/.claude/skills/ftc-tournament-analyzer/SKILL.md), Step 2.
 
 ## Batch processing
 
@@ -477,8 +477,8 @@ When data gets too large or a season ends, archive to `scouting/archive/FRIENDLY
 During a tournament, run the scouting watcher script as a background process:
 
 ```bash
-python .github/skills/ftc-scouting-processor/scouting_watcher.py --event USARLCMP --season 2025
-python .github/skills/ftc-scouting-processor/scouting_watcher.py --event USARLCMP --season 2025 --check 5
+python .claude/skills/ftc-scouting-processor/scouting_watcher.py --event USARLCMP --season 2025
+python .claude/skills/ftc-scouting-processor/scouting_watcher.py --event USARLCMP --season 2025 --check 5
 ```
 
 This script:

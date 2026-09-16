@@ -402,7 +402,7 @@ Alliances were formed through alliance selection after qualification matches. Th
 
 > "Judges' citation for the winner, extracted from the captions and cleaned up."
 
-<small>Match data provided by the [FIRST Tech Challenge Events API](https://ftc-events.firstinspires.org/services/API). This page was generated with the help of the [FTC Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.github/skills/ftc-tournament-analyzer/SKILL.md) AI skill.</small>
+<small>Match data provided by the [FIRST Tech Challenge Events API](https://ftc-events.firstinspires.org/services/API). This page was generated with the help of the [FTC Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.claude/skills/ftc-tournament-analyzer/SKILL.md) AI skill.</small>
 ```
 
 Video links use the format: `https://www.youtube.com/watch?v=VIDEO_ID&t=SECONDS`

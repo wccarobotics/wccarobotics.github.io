@@ -16,7 +16,7 @@ This skill generates professional 1920×1080 PNG images of FTC match results and
 
 ## How to use
 
-The script is at `.github/skills/ftc-scorecard-generator/generate_scorecard.py`.
+The script is at `.claude/skills/ftc-scorecard-generator/generate_scorecard.py`.
 
 ### Prerequisites
 
@@ -28,7 +28,7 @@ python -m playwright install chromium
 ### Single scorecard from a URL
 
 ```bash
-python .github/skills/ftc-scorecard-generator/generate_scorecard.py \
+python .claude/skills/ftc-scorecard-generator/generate_scorecard.py \
   --url https://ftc-events.firstinspires.org/2025/USARLRAS/qualifications/1 \
   --output scorecard_q1.png
 ```
@@ -36,7 +36,7 @@ python .github/skills/ftc-scorecard-generator/generate_scorecard.py \
 ### Generate all scorecards for an event (batch mode)
 
 ```bash
-python .github/skills/ftc-scorecard-generator/generate_scorecard.py \
+python .claude/skills/ftc-scorecard-generator/generate_scorecard.py \
   --event-code USARLRAS --season 2025 --output-dir scorecards/
 ```
 
@@ -45,7 +45,7 @@ This generates scorecards for all qualification matches (1-10), playoff matches,
 ### Generate rankings only
 
 ```bash
-python .github/skills/ftc-scorecard-generator/generate_scorecard.py \
+python .claude/skills/ftc-scorecard-generator/generate_scorecard.py \
   --url https://ftc-events.firstinspires.org/2025/USARLRAS/rankings \
   --output rankings.png
 ```
@@ -53,7 +53,7 @@ python .github/skills/ftc-scorecard-generator/generate_scorecard.py \
 ### Specific qualification matches only
 
 ```bash
-python .github/skills/ftc-scorecard-generator/generate_scorecard.py \
+python .claude/skills/ftc-scorecard-generator/generate_scorecard.py \
   --event-code USARLRAS --season 2025 --qual-matches 1,4,5,7,9
 ```
 

@@ -27,13 +27,18 @@ All CSS is in `assets/css/style.css` (single file, no preprocessor). All JS is i
 
 Header nav is hardcoded in `_includes/header.html`. FTC and FLL are both dropdowns. Active state is determined by `page.url` matching patterns (e.g., `/ftc`, `/tournaments/ftc`).
 
-### Skills (`.github/skills/`)
+### Skills (`.claude/skills/`)
 
-Skills are AI agent playbooks — detailed SKILL.md files with step-by-step workflows, heuristics, and output templates. They are NOT CI workflows. Three exist:
+Skills are AI agent playbooks — detailed SKILL.md files with step-by-step workflows, heuristics, and output templates. They are NOT CI workflows. Four exist:
 
 - `fll-tournament-analyzer` — creates FLL tournament result pages from YouTube livestream + FLL Gameday API
 - `ftc-tournament-analyzer` — creates FTC tournament result pages from YouTube livestream + FTC Events website
 - `ftc-scorecard-generator` — screenshots FTC Events pages into branded 1920×1080 PNGs using Playwright
+- `ftc-scouting-processor` — reads photos of handwritten scouting forms and updates the scouting pages
+
+They live in `.claude/skills/` because both Claude Code and GitHub Copilot discover
+repository skills from that path — Copilot also accepts `.github/skills/`, but Claude Code
+does not.
 
 ### Reference data
 

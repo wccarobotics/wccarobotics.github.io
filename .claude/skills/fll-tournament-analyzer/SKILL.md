@@ -161,7 +161,7 @@ Cross-reference the schedule with the API data:
 Run the analysis script to find countdown markers:
 
 ```bash
-python .github/skills/fll-tournament-analyzer/analyze_tournament.py \
+python .claude/skills/fll-tournament-analyzer/analyze_tournament.py \
   --captions captions.en.vtt \
   --scoreboard-id {event-id} \
   --output analysis.json

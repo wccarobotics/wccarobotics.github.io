@@ -178,5 +178,5 @@ Alliances were formed through alliance selection after qualification matches. Th
 
   > "What an incredible display of talent and teamwork. You've embodied the spirit of FIRST Tech Challenge with every step of your journey. Your enthusiasm, hard work, passion, and unity along with great design, programming, and construction have lifted you to new heights."
 
-<small>Match data provided by the [FIRST Tech Challenge Events API](https://ftc-events.firstinspires.org/services/API). This page was generated with the help of the [FTC Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.github/skills/ftc-tournament-analyzer/SKILL.md) AI skill.</small>
+<small>Match data provided by the [FIRST Tech Challenge Events API](https://ftc-events.firstinspires.org/services/API). This page was generated with the help of the [FTC Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.claude/skills/ftc-tournament-analyzer/SKILL.md) AI skill.</small>
 

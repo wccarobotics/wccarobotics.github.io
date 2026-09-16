@@ -119,4 +119,4 @@ On this page you can see the results of the Florida Qualifying Tournament. There
 
 ---
 
-<small>This page was generated with the help of the [FLL Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.github/skills/fll-tournament-analyzer/SKILL.md) AI skill.</small>
+<small>This page was generated with the help of the [FLL Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.claude/skills/fll-tournament-analyzer/SKILL.md) AI skill.</small>

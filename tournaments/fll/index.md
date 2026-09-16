@@ -67,4 +67,4 @@ Our FLL teams compete in Adventist Robotics tournaments. Each tournament page be
 
 ---
 
-<small>These tournament pages were generated with the help of the [FLL Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.github/skills/fll-tournament-analyzer/SKILL.md) AI skill — analyzing livestream video, speech recognition, and scoreboard data to produce timestamped match documentation.</small>
+<small>These tournament pages were generated with the help of the [FLL Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.claude/skills/fll-tournament-analyzer/SKILL.md) AI skill — analyzing livestream video, speech recognition, and scoreboard data to produce timestamped match documentation.</small>

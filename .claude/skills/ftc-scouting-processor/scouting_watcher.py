@@ -6,8 +6,8 @@ then triggers Copilot CLI to process scouting forms and update pages.
 Run this as a background process during a tournament.
 
 Usage:
-    python .github/skills/ftc-scouting-processor/scouting_watcher.py --event USARLCMP --season 2025
-    python .github/skills/ftc-scouting-processor/scouting_watcher.py --event USARLCMP --season 2025 --check 5
+    python .claude/skills/ftc-scouting-processor/scouting_watcher.py --event USARLCMP --season 2025
+    python .claude/skills/ftc-scouting-processor/scouting_watcher.py --event USARLCMP --season 2025 --check 5
 
 Requires:
     - icloud-credentials.json (git-ignored)
@@ -24,7 +24,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-REPO_DIR = Path(__file__).parent.parent.parent.parent  # .github/skills/ftc-scouting-processor/ → repo root
+REPO_DIR = Path(__file__).parent.parent.parent.parent  # .claude/skills/ftc-scouting-processor/ → repo root
 INCOMING_DIR = REPO_DIR / "scouting" / "incoming"
 STATE_FILE = INCOMING_DIR / "watcher_state.json"
 POLL_INTERVAL = 30  # seconds

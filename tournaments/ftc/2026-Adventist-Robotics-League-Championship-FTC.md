@@ -208,4 +208,4 @@ Semifinalists were presented during the [opening ceremony](https://www.youtube.c
 
   > "This is a team that soars in all areas. Their outstanding robot went through well-documented iterations. And when their voices could have stayed small, they chose to amplify them, reaching thousands, inspiring future innovators through posts, videos, and interactions throughout the community and around the world. They swooped into our hearts with grins ear to ear."
 
-<small>Match data provided by the [FIRST Tech Challenge Events API](https://ftc-events.firstinspires.org/services/API). This page was generated with the help of the [FTC Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.github/skills/ftc-tournament-analyzer/SKILL.md) AI skill.</small>
+<small>Match data provided by the [FIRST Tech Challenge Events API](https://ftc-events.firstinspires.org/services/API). This page was generated with the help of the [FTC Tournament Analyzer](https://github.com/wccarobotics/wccarobotics.github.io/blob/main/.claude/skills/ftc-tournament-analyzer/SKILL.md) AI skill.</small>
