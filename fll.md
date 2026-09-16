@@ -120,4 +120,12 @@ Our 2025–26 FLL teams used **M.A.R.C.U.S.** (Multiple Amazing Robot Code Usage
 
 ---
 
+## Team Resources
+
+Starter robot designs, building and programming tutorials, and season resources for the BIOGLOW challenge — everything our teams use to get started.
+
+<a href="/fll/resources" class="btn btn-blue">Browse Team Resources →</a>
+
+---
+
 *Want to join an FLL team or support our students? [Learn how you can help!](/support)*
