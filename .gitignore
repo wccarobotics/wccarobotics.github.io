@@ -8,3 +8,4 @@ __pycache__/
 ftc-api-credentials.json
 icloud-credentials.json
 scouting/incoming/
+tools/ftc-stats/output/

@@ -40,6 +40,20 @@ They live in `.claude/skills/` because both Claude Code and GitHub Copilot disco
 repository skills from that path — Copilot also accepts `.github/skills/`, but Claude Code
 does not.
 
+### Tools (`tools/`, excluded from the Jekyll build)
+
+- `tools/ftc-stats/FtcStats.cs` — .NET 10 single-file app that computes qualification stats
+  (RP standings with bonus-RP rates, OPR, npOPR, auto OPR, DPR, CCWM, schedule difficulty,
+  match predictions with expected RP, and Monte Carlo projections of final rank / top-N odds)
+  from the FTC Events API. Works mid-tournament. Run from `tools/ftc-stats`:
+  `dotnet run FtcStats.cs -- https://ftc-events.firstinspires.org/2026/USMISAS`.
+  Options: `--through N` (pretend only quals 1..N are played and score the predictions),
+  `--shrink X` (ridge toward average team; default 0.5 while quals remain, 0 = classic OPR once
+  complete), `--sims N`, `--markdown`, `--save DIR` / `--load DIR` (cache raw API JSON).
+- FTC API gotchas: in `matches`, `score{Color}Foul` is foul points that alliance *committed*
+  (awarded to the opponent). Bonus RPs are the boolean `...RP` fields in `scores/{event}/qual`.
+  2026 ranking = avg RP (3 win / 1 tie / +1 per bonus), then avg pre-foul score.
+
 ### Reference data
 
 `decode_manual_sections/` contains the FTC DECODE Competition Manual split into ~88 text files by section. Use these to answer game rules questions accurately.
