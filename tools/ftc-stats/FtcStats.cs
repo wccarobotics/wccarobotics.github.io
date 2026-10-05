@@ -1,4 +1,4 @@
-// FTC qualification-match stats: OPR / DPR / CCWM, ranking points, schedule difficulty,
+// FTC qualification-match stats: OPR / defense / margin ratings, ranking points, schedule difficulty,
 // predictions for the rest of the qualification schedule, and projected final rankings.
 //
 // Usage:
@@ -246,7 +246,13 @@ record Tournament(List<Match> Matches, List<int> Teams, Dictionary<int, string> 
 // few matches have been played.
 class Model
 {
-    public required Dictionary<int, double> Opr, NpOpr, AutoOpr, Dpr, Ccwm;
+    public required Dictionary<int, double> Opr, NpOpr, AutoOpr;
+    // Def: points per match the team holds opponents below what their OPRs predict.
+    // Margin: OPR + Def, the team's contribution to its alliance's winning margin.
+    public required Dictionary<int, double> Def, Margin;
+    // p-value of an F-test for whether per-team defense ratings explain scores better than
+    // offense alone; null when there aren't enough matches to test.
+    public double? DefenseP;
     // Per bonus RP: each team's contribution to the chance its alliance earns that bonus.
     public required Dictionary<string, Dictionary<int, double>> Bonus;
     public required double MeanOpr, Shrink;
@@ -264,10 +270,11 @@ class Model
 
         // Solves (A^T A + ridge * I) x = A^T b + ridge * prior, using only alliances where
         // `value` is known (score details can lag behind results).
-        Dictionary<int, double> Solve(Func<Match, Alliance, double?> value)
+        // `prior` defaults to the average value split evenly across the alliance.
+        Dictionary<int, double> Solve(Func<Match, Alliance, double?> value, double? prior = null)
         {
             var data = rows.Select(r => (r.a, v: value(r.m, r.a))).Where(x => x.v is not null).ToList();
-            double prior = data.Count == 0 ? 0 : data.Average(x => x.v!.Value) / perAlliance;
+            prior ??= data.Count == 0 ? 0 : data.Average(x => x.v!.Value) / perAlliance;
             var ata = new double[n, n];
             var rhs = new double[n];
             foreach (var (a, v) in data)
@@ -281,20 +288,29 @@ class Model
             for (int i = 0; i < n; i++)
             {
                 ata[i, i] += ridge;
-                rhs[i] += ridge * prior;
+                rhs[i] += ridge * prior.Value;
             }
             var x = LinearAlgebra.SolveSpd(ata, rhs);
             return evt.Teams.ToDictionary(t => t, t => x[index[t]]);
         }
 
         var opr = Solve((m, a) => a.Score!.Value);
+        // Defense: how far below their predicted score the opponents finished, credited to the
+        // defending alliance. Comparing against the opponents' OPR (rather than their raw score,
+        // as DPR does) keeps a tough schedule from looking like bad defense. Shrinks toward 0.
+        var def = Solve((m, a) =>
+        {
+            var opp = m.Opponent(a);
+            return opp.Teams.Sum(t => opr[t]) - opp.Score!.Value;
+        }, prior: 0);
         var model = new Model
         {
             Opr = opr,
             NpOpr = Solve((m, a) => a.NpScore),
             AutoOpr = Solve((m, a) => a.Auto ?? 0),
-            Dpr = Solve((m, a) => m.Opponent(a).Score!.Value),
-            Ccwm = Solve((m, a) => a.Score!.Value - m.Opponent(a).Score!.Value),
+            Def = def,
+            Margin = evt.Teams.ToDictionary(t => t, t => opr[t] + def[t]),
+            DefenseP = DefenseSignificance(rows, index),
             Bonus = evt.BonusNames.ToDictionary(b => b, b => Solve((m, a) => a.Bonuses is null ? null : a.Bonuses.GetValueOrDefault(b) ? 1 : 0)),
             MeanOpr = opr.Values.Average(),
             Shrink = shrink,
@@ -320,6 +336,56 @@ class Model
             model.MarginSigma = fallback;
         }
         return model;
+    }
+
+    // F-test comparing "score = sum of offense ratings" with "score = sum of offense ratings
+    // minus sum of opponents' defense ratings". The defense model has n - 1 extra parameters
+    // (one rating per team, less one because adding a constant to every offense and defense
+    // rating changes nothing).
+    static double? DefenseSignificance(List<(Match m, Alliance a)> rows, Dictionary<int, int> index)
+    {
+        int n = index.Count, p0 = n, p1 = 2 * n - 1, count = rows.Count;
+        if (count - p1 < 5) return null;
+
+        double Ssr(bool withDefense)
+        {
+            int k = withDefense ? 2 * n : n;
+            double[] Features(Match m, Alliance a)
+            {
+                var x = new double[k];
+                foreach (int t in a.Teams) x[index[t]] = 1;
+                if (withDefense)
+                    foreach (int t in m.Opponent(a).Teams) x[n + index[t]] = -1;
+                return x;
+            }
+            var xtx = new double[k, k];
+            var xty = new double[k];
+            foreach (var (m, a) in rows)
+            {
+                var x = Features(m, a);
+                for (int i = 0; i < k; i++)
+                {
+                    if (x[i] == 0) continue;
+                    xty[i] += x[i] * a.Score!.Value;
+                    for (int j = 0; j < k; j++) xtx[i, j] += x[i] * x[j];
+                }
+            }
+            for (int i = 0; i < k; i++) xtx[i, i] += 1e-6;
+            var b = LinearAlgebra.SolveSpd(xtx, xty);
+            return rows.Sum(r =>
+            {
+                var x = Features(r.m, r.a);
+                double pred = 0;
+                for (int i = 0; i < k; i++) pred += x[i] * b[i];
+                return Math.Pow(r.a.Score!.Value - pred, 2);
+            });
+        }
+
+        double s0 = Ssr(false), s1 = Ssr(true);
+        int d1 = p1 - p0, d2 = count - p1;
+        if (s1 <= 0) return null;
+        double f = (s0 - s1) / d1 / (s1 / d2);
+        return Stats.FDistributionUpperTail(f, d1, d2);
     }
 
     public double Predict(Alliance a) => a.Teams.Sum(t => Opr[t]);
@@ -533,6 +599,55 @@ static class Stats
 {
     public static double NormalCdf(double z) => 0.5 * (1 + Erf(z / Math.Sqrt(2)));
 
+    // P(F > f) for an F distribution with (d1, d2) degrees of freedom.
+    public static double FDistributionUpperTail(double f, double d1, double d2) =>
+        f <= 0 ? 1 : RegularizedBeta(d2 / (d2 + d1 * f), d2 / 2, d1 / 2);
+
+    // Regularized incomplete beta function I_x(a, b) (Numerical Recipes continued fraction).
+    static double RegularizedBeta(double x, double a, double b)
+    {
+        if (x <= 0) return 0;
+        if (x >= 1) return 1;
+        double front = Math.Exp(LogGamma(a + b) - LogGamma(a) - LogGamma(b) + a * Math.Log(x) + b * Math.Log(1 - x));
+        return x < (a + 1) / (a + b + 2)
+            ? front * BetaContinuedFraction(x, a, b) / a
+            : 1 - front * BetaContinuedFraction(1 - x, b, a) / b;
+    }
+
+    static double BetaContinuedFraction(double x, double a, double b)
+    {
+        const double tiny = 1e-300;
+        double c = 1, d = 1 - (a + b) * x / (a + 1);
+        d = 1 / (Math.Abs(d) < tiny ? tiny : d);
+        double h = d;
+        for (int m = 1; m <= 300; m++)
+        {
+            int m2 = 2 * m;
+            double aa = m * (b - m) * x / ((a + m2 - 1) * (a + m2));
+            d = 1 + aa * d; d = 1 / (Math.Abs(d) < tiny ? tiny : d);
+            c = 1 + aa / c; if (Math.Abs(c) < tiny) c = tiny;
+            h *= d * c;
+            aa = -(a + m) * (a + b + m) * x / ((a + m2) * (a + m2 + 1));
+            d = 1 + aa * d; d = 1 / (Math.Abs(d) < tiny ? tiny : d);
+            c = 1 + aa / c; if (Math.Abs(c) < tiny) c = tiny;
+            double delta = d * c;
+            h *= delta;
+            if (Math.Abs(delta - 1) < 1e-12) break;
+        }
+        return h;
+    }
+
+    // Lanczos approximation.
+    static double LogGamma(double x)
+    {
+        double[] g = [76.18009172947146, -86.50532032941677, 24.01409824083091, -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5];
+        double y = x, tmp = x + 5.5;
+        tmp -= (x + 0.5) * Math.Log(tmp);
+        double ser = 1.000000000190015;
+        foreach (double c in g) ser += c / ++y;
+        return -tmp + Math.Log(2.5066282746310005 * ser / x);
+    }
+
     // Abramowitz & Stegun 7.1.26 (max error 1.5e-7).
     static double Erf(double x)
     {
@@ -671,8 +786,8 @@ class Report(Tournament evt, Tournament full, Model model, Dictionary<int, (int 
             OPR    Offensive Power Rating: least-squares estimate of points each team adds to its alliance score
             npOPR  OPR computed from scores with opponent fouls removed
             Auto   OPR computed from autonomous points only
-            DPR    Points the team's opponents score (lower is better defense/luck)
-            CCWM   Calculated contribution to winning margin
+            Def    Points per match the team holds opponents below what their OPRs predict (higher is better)
+            Margin OPR + Def: the team's contribution to its alliance's winning margin
             xW     Expected wins in played matches given everyone's OPR; Luck = actual wins − xW
             Partner/Opp OPR   Average partner OPR and average opposing-alliance OPR total, over the full qual schedule
             Avg-team win%     Win rate a perfectly average team would expect in this team's slots
@@ -731,7 +846,7 @@ class Report(Tournament evt, Tournament full, Model model, Dictionary<int, (int 
     void PrintTeamStats()
     {
         Heading("Team ratings", 2);
-        var header = new List<string> { "#", "Team", "Name", "W-L-T", "OPR", "npOPR", "Auto", "DPR", "CCWM", "Avg Score", "xW", "Luck" };
+        var header = new List<string> { "#", "Team", "Name", "W-L-T", "OPR", "npOPR", "Auto", "Def", "Margin", "Avg Score", "xW", "Luck" };
 
         var rows = new List<string[]>();
         int i = 0;
@@ -741,13 +856,27 @@ class Report(Tournament evt, Tournament full, Model model, Dictionary<int, (int 
             {
                 (++i).ToString(), l.Team.ToString(), Name(l.Team), $"{l.Wins}-{l.Losses}-{l.Ties}",
                 F(model.Opr[l.Team]), F(model.NpOpr[l.Team]), F(model.AutoOpr[l.Team]),
-                F(model.Dpr[l.Team]), F(model.Ccwm[l.Team]),
+                F(model.Def[l.Team]), F(model.Margin[l.Team]),
                 l.Played > 0 ? F(l.TotalScore / l.Played) : "—",
                 F(l.ExpectedWins), (l.Wins + l.Ties * 0.5 - l.ExpectedWins).ToString("+0.0;-0.0;0.0"),
             };
             rows.Add(row.ToArray());
         }
         Table(header.ToArray(), rows, leftAligned: ["Name"]);
+        PrintDefenseNote();
+    }
+
+    void PrintDefenseNote()
+    {
+        Console.WriteLine();
+        if (model.DefenseP is not double p)
+        {
+            Console.WriteLine("Def: not enough matches yet to tell defense apart from random variation.");
+            return;
+        }
+        Console.WriteLine(p >= 0.05
+            ? $"Def: differences between teams are consistent with random match-to-match variation (p = {p:F2}); treat them as noise."
+            : $"Def: differences between teams are larger than random variation would explain (p = {p:F3}).");
     }
 
     void PrintSchedule(bool hasRemaining)

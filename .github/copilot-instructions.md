@@ -43,7 +43,8 @@ does not.
 ### Tools (`tools/`, excluded from the Jekyll build)
 
 - `tools/ftc-stats/FtcStats.cs` — .NET 10 single-file app that computes qualification stats
-  (RP standings with bonus-RP rates, OPR, npOPR, auto OPR, DPR, CCWM, schedule difficulty,
+  (RP standings with bonus-RP rates, OPR, npOPR, auto OPR, schedule-adjusted defense and
+  margin ratings with a significance check, schedule difficulty,
   match predictions with expected RP, and Monte Carlo projections of final rank / top-N odds)
   from the FTC Events API. Works mid-tournament. Run from `tools/ftc-stats`:
   `dotnet run FtcStats.cs -- https://ftc-events.firstinspires.org/2026/USMISAS`.
