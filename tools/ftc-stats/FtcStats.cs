@@ -1,5 +1,6 @@
-// FTC qualification-match stats: OPR / defense / margin ratings, ranking points, schedule difficulty,
-// predictions for the rest of the qualification schedule, and projected final rankings.
+// FTC event stats: qualification OPR / defense / margin ratings, ranking points, schedule difficulty,
+// predictions for the rest of the qualification schedule, projected final rankings, and the
+// event's playoffs and awards.
 //
 // Usage:
 //   dotnet run FtcStats.cs -- <season> <eventCode> [options]
@@ -11,6 +12,10 @@
 //                   0.5 while qual matches remain and 0 once quals are complete.
 //   --sims N        Number of Monte Carlo simulations for rank projections (default 20000)
 //   --markdown      Print markdown tables instead of aligned text
+//   --no-title      Leave out the top-level heading (for embedding in a page that has its own)
+//   --summary FILE  Also write a JSON summary of the event (team count, average/top OPR, high score)
+//   --final         The event is over: leave out scheduled matches that never got results
+//                   instead of predicting them
 //   --save DIR      Save the raw API responses to DIR
 //   --load DIR      Read raw API responses from DIR instead of calling the API
 //
@@ -22,6 +27,7 @@
 using System.Globalization;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 
@@ -30,7 +36,7 @@ CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 var opts = Options.Parse(args);
 if (opts is null)
 {
-    Console.Error.WriteLine("Usage: dotnet run FtcStats.cs -- <season> <eventCode> | <ftc-events URL> [--through N] [--shrink X] [--sims N] [--markdown] [--save DIR] [--load DIR]");
+    Console.Error.WriteLine("Usage: dotnet run FtcStats.cs -- <season> <eventCode> | <ftc-events URL> [--through N] [--shrink X] [--sims N] [--markdown] [--no-title] [--final] [--summary FILE] [--save DIR] [--load DIR]");
     return 1;
 }
 
@@ -47,12 +53,40 @@ catch (Exception ex)
 {
     Console.Error.WriteLine($"Warning: couldn't load score details, so bonus ranking points are unavailable ({ex.Message})");
 }
+string? eventName = null;
+try
+{
+    eventName = ((string?)(await source.Get("event", $"events?eventCode={opts.EventCode}"))["events"]?.AsArray().FirstOrDefault()?["name"])?.Trim();
+}
+catch (Exception ex)
+{
+    Console.Error.WriteLine($"Warning: couldn't load event details ({ex.Message})");
+}
+// Playoffs and awards (skipped when simulating a partial event with --through).
+async Task<JsonArray?> Optional(string name, string path, string key)
+{
+    if (opts.Through is not null) return null;
+    try { return (await source.Get(name, path))[key]?.AsArray(); }
+    catch (Exception ex) { Console.Error.WriteLine($"Warning: couldn't load {name} ({ex.Message})"); return null; }
+}
+var playoffs = Playoffs.Build(
+    await Optional("playoff-matches", $"matches/{opts.EventCode}?tournamentLevel=playoff", "matches"),
+    await Optional("alliances", $"alliances/{opts.EventCode}", "alliances"),
+    await Optional("awards", $"awards/{opts.EventCode}", "awards"),
+    opts.Final);
 JsonArray? rankings = opts.Through is null
     ? (await source.Get("rankings", $"rankings/{opts.EventCode}"))["rankings"]?.AsArray()
     : null;
 
 var full = Tournament.Build(schedule, results, scores, null);
 var evt = opts.Through is null ? full : Tournament.Build(schedule, results, scores, opts.Through);
+int unposted = 0;
+if (opts.Final)
+{
+    unposted = evt.Remaining.Count();
+    evt = evt with { Matches = evt.Played.ToList() };
+    full = evt;
+}
 if (evt.Matches.Count == 0)
 {
     Console.Error.WriteLine($"No qualification schedule found for {opts.Season} {opts.EventCode}.");
@@ -63,19 +97,43 @@ if (evt.Matches.Count == 0)
 // standard number and matches what other stats sites report.
 double shrink = opts.Shrink ?? (evt.Remaining.Any() ? 0.5 : 0);
 var model = Model.Fit(evt, shrink);
-var official = rankings?.ToDictionary(r => (int)r!["teamNumber"]!, r => (Rank: (int)r!["rank"]!, AvgRp: (double)r["sortOrder1"]!)) ?? new();
+var official = rankings?.ToDictionary(r => (int)r!["teamNumber"]!, r => new OfficialRank(
+    (int)r!["rank"]!, (double)r["sortOrder1"]!, (int?)r["matchesPlayed"] ?? 0, (int?)r["matchesCounted"] ?? 0)) ?? new();
 
-new Report(evt, full, model, official, opts).Print();
+new Report(evt, full, model, official, eventName, unposted, playoffs, opts).Print();
+
+if (opts.SummaryFile is not null)
+{
+    // A machine-readable summary for pages that compare events (e.g. the season index).
+    var played = evt.Played.ToList();
+    var top = model.Opr.MaxBy(kv => kv.Value);
+    var high = played.SelectMany(m => m.Alliances.Select(a => (m.Number, Score: a.Score!.Value))).DefaultIfEmpty().MaxBy(x => x.Score);
+    var summaryJson = new JsonObject
+    {
+        ["event"] = opts.EventCode,
+        ["teams"] = evt.Teams.Count,
+        ["qualsPlayed"] = played.Count,
+        ["avgOpr"] = Math.Round(model.MeanOpr, 1),
+        ["topOpr"] = Math.Round(top.Value, 1),
+        ["topOprTeam"] = top.Key,
+        ["highScore"] = played.Count == 0 ? null : high.Score,
+        ["highScoreMatch"] = played.Count == 0 ? null : high.Number,
+        ["winners"] = playoffs.Winner is int w ? new JsonArray(playoffs.Alliances.First(a => a.Number == w).Teams.Select(t => (JsonNode)t).ToArray()) : null,
+    };
+    await File.WriteAllTextAsync(opts.SummaryFile, summaryJson.ToJsonString());
+}
 return 0;
 
 // ---------------------------------------------------------------------------
 
-record Options(int Season, string EventCode, int? Through, double? Shrink, int Sims, bool Markdown, string? SaveDir, string? LoadDir)
+record OfficialRank(int Rank, double AvgRp, int MatchesPlayed, int MatchesCounted);
+
+record Options(int Season, string EventCode, int? Through, double? Shrink, int Sims, bool Markdown, bool NoTitle, bool Final, string? SummaryFile, string? SaveDir, string? LoadDir)
 {
     public static Options? Parse(string[] args)
     {
         var positional = new List<string>();
-        int? through = null; double? shrink = null; int sims = 20000; bool md = false; string? save = null, load = null;
+        int? through = null; double? shrink = null; int sims = 20000; bool md = false, noTitle = false, final = false; string? save = null, load = null, summary = null;
         for (int i = 0; i < args.Length; i++)
         {
             switch (args[i])
@@ -84,6 +142,9 @@ record Options(int Season, string EventCode, int? Through, double? Shrink, int S
                 case "--shrink": shrink = double.Parse(args[++i], CultureInfo.InvariantCulture); break;
                 case "--sims": sims = int.Parse(args[++i]); break;
                 case "--markdown": md = true; break;
+                case "--no-title": noTitle = true; break;
+                case "--final": final = true; break;
+                case "--summary": summary = args[++i]; break;
                 case "--save": save = args[++i]; break;
                 case "--load": load = args[++i]; break;
                 default: positional.Add(args[i]); break;
@@ -95,7 +156,7 @@ record Options(int Season, string EventCode, int? Through, double? Shrink, int S
             positional = uri.AbsolutePath.Split('/', StringSplitOptions.RemoveEmptyEntries).Take(2).ToList();
 
         if (positional.Count != 2 || !int.TryParse(positional[0], out int season)) return null;
-        return new Options(season, positional[1].ToUpperInvariant(), through, shrink, sims, md, save, load);
+        return new Options(season, positional[1].ToUpperInvariant(), through, shrink, sims, md, noTitle, final, summary, save, load);
     }
 }
 
@@ -159,7 +220,8 @@ record Slot(int Team, bool Surrogate, bool Dq);
 
 // NpScore: score without the foul points the opponents gave away (the ranking tiebreaker).
 // Bonuses: bonus ranking point flags from the score details (null if not available).
-record Alliance(List<Slot> Slots, int? Score, int? Auto, int? NpScore, Dictionary<string, bool>? Bonuses)
+// Tiebreak2: the game-specific second tiebreaker from the score details (see Rp.Tiebreak2Fields).
+record Alliance(List<Slot> Slots, int? Score, int? Auto, int? NpScore, Dictionary<string, bool>? Bonuses, double? Tiebreak2 = null)
 {
     public IEnumerable<int> Teams => Slots.Select(s => s.Team);
 }
@@ -180,13 +242,14 @@ record Tournament(List<Match> Matches, List<int> Teams, Dictionary<int, string> 
     public static Tournament Build(JsonArray schedule, JsonArray results, JsonArray? scores, int? through)
     {
         var resultsByNumber = results
-            .Where(r => r!["postResultTime"] is not null && r["scoreRedFinal"] is not null)
+            .Where(r => Results.IsPlayed(r!))
             .ToDictionary(r => (int)r!["matchNumber"]!);
 
         // Bonus RPs are the boolean "...RP" fields of each alliance's score details, which lets
         // this work for any season's game without hardcoding names.
         var bonusNames = new List<string>();
         var details = new Dictionary<(int, string), Dictionary<string, bool>>();
+        var tiebreak2 = new Dictionary<(int, string), double>();
         foreach (var ms in scores ?? [])
         {
             foreach (var a in ms!["alliances"]!.AsArray())
@@ -196,7 +259,10 @@ record Tournament(List<Match> Matches, List<int> Teams, Dictionary<int, string> 
                     .ToDictionary(kv => kv.Key, kv => (bool)kv.Value!);
                 foreach (var name in flags.Keys)
                     if (!bonusNames.Contains(name)) bonusNames.Add(name);
-                details[((int)ms["matchNumber"]!, (string)a["alliance"]!)] = flags;
+                var key = ((int)ms["matchNumber"]!, (string)a["alliance"]!);
+                details[key] = flags;
+                if (Rp.Tiebreak2Fields.All(f => a[f] is not null))
+                    tiebreak2[key] = Rp.Tiebreak2Fields.Sum(f => (double)a[f]!);
             }
         }
         var names = new Dictionary<int, string>();
@@ -226,7 +292,8 @@ record Tournament(List<Match> Matches, List<int> Teams, Dictionary<int, string> 
                 return new Alliance(slots,
                     (int?)result?[$"score{color}Final"], (int?)result?[$"score{color}Auto"],
                     (int?)result?[$"score{color}Final"] - ((int?)result?[$"score{other}Foul"] ?? 0),
-                    result is null ? null : details.GetValueOrDefault((number, color)));
+                    result is null ? null : details.GetValueOrDefault((number, color)),
+                    result is null || !tiebreak2.TryGetValue((number, color), out double tb2) ? null : tb2);
             }
 
             matches.Add(new Match(number, MakeAlliance("Red"), MakeAlliance("Blue")));
@@ -253,6 +320,7 @@ class Model
     // p-value of an F-test for whether per-team defense ratings explain scores better than
     // offense alone; null when there aren't enough matches to test.
     public double? DefenseP;
+    public bool DefenseSeparable;
     // Per bonus RP: each team's contribution to the chance its alliance earns that bonus.
     public required Dictionary<string, Dictionary<int, double>> Bonus;
     public required double MeanOpr, Shrink;
@@ -310,12 +378,13 @@ class Model
             AutoOpr = Solve((m, a) => a.Auto ?? 0),
             Def = def,
             Margin = evt.Teams.ToDictionary(t => t, t => opr[t] + def[t]),
-            DefenseP = DefenseSignificance(rows, index),
+
             Bonus = evt.BonusNames.ToDictionary(b => b, b => Solve((m, a) => a.Bonuses is null ? null : a.Bonuses.GetValueOrDefault(b) ? 1 : 0)),
             MeanOpr = opr.Values.Average(),
             Shrink = shrink,
             Observations = rows.Count,
         };
+        (model.DefenseP, model.DefenseSeparable) = DefenseSignificance(rows, index);
 
         // Spread of actual match margins around predicted margins, used for win probabilities.
         // Residuals on the training data understate the true error, so correct for the number
@@ -339,15 +408,15 @@ class Model
     }
 
     // F-test comparing "score = sum of offense ratings" with "score = sum of offense ratings
-    // minus sum of opponents' defense ratings". The defense model has n - 1 extra parameters
-    // (one rating per team, less one because adding a constant to every offense and defense
-    // rating changes nothing).
-    static double? DefenseSignificance(List<(Match m, Alliance a)> rows, Dictionary<int, int> index)
+    // minus sum of opponents' defense ratings". The degrees of freedom are the ranks of the two
+    // models: usually n and 2n - 1 (adding a constant to every offense and defense rating
+    // changes nothing), but fewer when, say, every match includes every team.
+    static (double? P, bool Separable) DefenseSignificance(List<(Match m, Alliance a)> rows, Dictionary<int, int> index)
     {
-        int n = index.Count, p0 = n, p1 = 2 * n - 1, count = rows.Count;
-        if (count - p1 < 5) return null;
+        int n = index.Count, count = rows.Count;
+        int p0 = 0, p1 = 0;
 
-        double Ssr(bool withDefense)
+        (double Ssr, int Rank) Fit(bool withDefense)
         {
             int k = withDefense ? 2 * n : n;
             double[] Features(Match m, Alliance a)
@@ -370,22 +439,27 @@ class Model
                     for (int j = 0; j < k; j++) xtx[i, j] += x[i] * x[j];
                 }
             }
+            int rank = LinearAlgebra.Rank(xtx);
             for (int i = 0; i < k; i++) xtx[i, i] += 1e-6;
             var b = LinearAlgebra.SolveSpd(xtx, xty);
-            return rows.Sum(r =>
+            double ssr = rows.Sum(r =>
             {
                 var x = Features(r.m, r.a);
                 double pred = 0;
                 for (int i = 0; i < k; i++) pred += x[i] * b[i];
                 return Math.Pow(r.a.Score!.Value - pred, 2);
             });
+            return (ssr, rank);
         }
 
-        double s0 = Ssr(false), s1 = Ssr(true);
+        var (s0, r0) = Fit(false);
+        var (s1, r1) = Fit(true);
+        p0 = r0; p1 = r1;
+        if (p1 <= p0) return (null, false);
         int d1 = p1 - p0, d2 = count - p1;
-        if (s1 <= 0) return null;
+        if (d2 < 5 || s1 <= 0) return (null, true);
         double f = (s0 - s1) / d1 / (s1 / d2);
-        return Stats.FDistributionUpperTail(f, d1, d2);
+        return (Stats.FDistributionUpperTail(f, d1, d2), true);
     }
 
     public double Predict(Alliance a) => a.Teams.Sum(t => Opr[t]);
@@ -418,11 +492,103 @@ class Model
     }
 }
 
+// ---------------------------------------------------------------------------
+
+record PlayoffAlliance(int Number, List<(string Role, int Team)> Members)
+{
+    public IEnumerable<int> Teams => Members.Select(m => m.Team);
+}
+
+record PlayoffMatch(string Label, string Round, List<int> Red, List<int> Blue, int? RedScore, int? BlueScore, string? Video)
+{
+    public bool Played => RedScore is not null && BlueScore is not null;
+    public bool IsFinal => Label.StartsWith("Final", StringComparison.OrdinalIgnoreCase);
+}
+
+record Award(string Name, int? Team, string? Person);
+
+// Playoff alliances and matches, plus awards. Everything is optional: scrimmages and league meets
+// often have no playoffs, and awards are posted after the event.
+record Playoffs(List<PlayoffAlliance> Alliances, List<PlayoffMatch> Matches, List<Award> Awards, int? Winner, int? Finalist)
+{
+    public PlayoffAlliance? AllianceOf(IEnumerable<int> teams) =>
+        Alliances.FirstOrDefault(a => teams.Any(t => a.Teams.Contains(t)));
+
+    public static Playoffs Build(JsonArray? matches, JsonArray? alliances, JsonArray? awards, bool eventOver)
+    {
+        var allianceList = new List<PlayoffAlliance>();
+        foreach (var a in alliances ?? [])
+        {
+            var members = new List<(string, int)>();
+            foreach (var (key, role) in new[] { ("captain", "Captain"), ("round1", "1st pick"), ("round2", "2nd pick"), ("round3", "3rd pick"), ("backup", "Backup") })
+                if (a![key]?["teamNumber"] is JsonNode t) members.Add((role, (int)t));
+            if (members.Count > 0) allianceList.Add(new PlayoffAlliance((int)a!["number"]!, members));
+        }
+
+        var matchList = new List<PlayoffMatch>();
+        foreach (var m in matches ?? [])
+        {
+            List<int> Side(string color) => m!["teams"]!.AsArray()
+                .Where(t => ((string)t!["station"]!).StartsWith(color)).OrderBy(t => (string)t!["station"]!)
+                .Select(t => (int)t!["teamNumber"]!).ToList();
+            string label = Regex.Replace(((string?)m!["description"] ?? $"Playoff {m["matchNumber"]}").Trim(), @"\s+", " ");
+            bool posted = Results.IsPlayed(m);
+            matchList.Add(new PlayoffMatch(label, Regex.Replace(label, @"\s*Match \d+$", ""), Side("Red"), Side("Blue"),
+                posted ? (int?)m["scoreRedFinal"] : null, posted ? (int?)m["scoreBlueFinal"] : null,
+                YouTubeUrl((string?)m["videoURL"])));
+        }
+
+        // Events sometimes post the award list before the recipients; skip the empty entries.
+        var awardList = (awards ?? []).Select(a => new Award(((string)a!["name"]!).Trim(), (int?)a["teamNumber"], ((string?)a["person"])?.Trim()))
+            .Where(a => a.Team is not null || !string.IsNullOrEmpty(a.Person)).ToList();
+
+        var result = new Playoffs(allianceList, matchList, awardList, null, null);
+        // Winner and finalist: from the alliance awards when posted, otherwise from the finals
+        // once the event is over (most final wins).
+        int? FromAward(string prefix) => awardList.Where(a => a.Name.StartsWith(prefix) && a.Team is not null)
+            .Select(a => result.AllianceOf([a.Team!.Value])?.Number).FirstOrDefault(n => n is not null);
+        int? winner = FromAward("Winning Alliance"), finalist = FromAward("Finalist Alliance");
+        if (winner is null && eventOver)
+        {
+            var finalWins = matchList.Where(m => m.IsFinal && m.Played && m.RedScore != m.BlueScore)
+                .Select(m => result.AllianceOf(m.RedScore > m.BlueScore ? m.Red : m.Blue)?.Number)
+                .Where(n => n is not null).GroupBy(n => n!.Value).OrderByDescending(g => g.Count()).ToList();
+            winner = finalWins.FirstOrDefault()?.Key;
+            var lastFinal = matchList.LastOrDefault(m => m.IsFinal && m.Played);
+            if (winner is not null && lastFinal is not null)
+                finalist = new[] { result.AllianceOf(lastFinal.Red)?.Number, result.AllianceOf(lastFinal.Blue)?.Number }.FirstOrDefault(n => n != winner);
+        }
+        return result with { Winner = winner, Finalist = finalist };
+    }
+
+    // Match videos come as youtu.be links; the site uses youtube.com/watch?v= for uploads.
+    static string? YouTubeUrl(string? url)
+    {
+        if (string.IsNullOrWhiteSpace(url)) return null;
+        var m = Regex.Match(url, @"(?:youtu\.be/|v=|/live/)([\w-]{11})");
+        return m.Success ? $"https://www.youtube.com/watch?v={m.Groups[1].Value}" : url.Trim();
+    }
+}
+
+static class Results
+{
+    // A match has a real result if it was posted, or if it started and has a nonzero score:
+    // matches can be scored without a postResultTime (official rankings count them), while
+    // matches that were started and abandoned show up as 0-0 with no postResultTime.
+    public static bool IsPlayed(JsonNode m) =>
+        m["scoreRedFinal"] is not null && m["scoreBlueFinal"] is not null &&
+        (m["postResultTime"] is not null ||
+         m["actualStartTime"] is not null && ((int)m["scoreRedFinal"]! > 0 || (int)m["scoreBlueFinal"]! > 0));
+}
+
 static class Rp
 {
     // RP per match: 3 for a win, 1 for a tie, plus 1 per bonus earned. Ranking is by average
-    // RP, then average pre-foul score. (Verified against the official 2026 rankings.)
+    // RP, then average pre-foul score, then the average of Tiebreak2Fields (total hive tips in
+    // 2026), then average auto points. Later official tiebreakers aren't reproduced. (Verified
+    // against the official 2026 rankings.)
     public const int Win = 3, Tie = 1;
+    public static readonly string[] Tiebreak2Fields = ["autoHiveTips", "teleopHiveTips"];
 
     public static int ForAlliance(Match m, Alliance a)
     {
@@ -435,10 +601,10 @@ static class Rp
 }
 
 // Ranking-point standings. Surrogate appearances don't count, and a disqualified team gets
-// 0 RP for the match.
+// 0 RP and 0 tiebreak points for the match.
 class Standings
 {
-    public required Dictionary<int, double> RpTotal, NpTotal;
+    public required Dictionary<int, double> RpTotal, NpTotal, Tb2Total, AutoTotal;
     public required Dictionary<int, int> Counted;
     public required List<int> Order;
 
@@ -446,10 +612,18 @@ class Standings
     public double AvgNp(int t) => Counted[t] == 0 ? 0 : NpTotal[t] / Counted[t];
     public int Rank(int t) => Order.IndexOf(t) + 1;
 
+    // The values the ranking sorts on, in order; teams with equal keys are tied on every
+    // tiebreaker computed here.
+    public (double, double, double, double) SortKey(int t) => Counted[t] == 0 ? (0, 0, 0, 0) :
+        (Math.Round(RpTotal[t] / Counted[t], 9), Math.Round(NpTotal[t] / Counted[t], 9),
+         Math.Round(Tb2Total[t] / Counted[t], 9), Math.Round(AutoTotal[t] / Counted[t], 9));
+
     public static Standings Compute(Tournament evt)
     {
         var rp = evt.Teams.ToDictionary(t => t, _ => 0.0);
         var np = evt.Teams.ToDictionary(t => t, _ => 0.0);
+        var tb2 = evt.Teams.ToDictionary(t => t, _ => 0.0);
+        var auto = evt.Teams.ToDictionary(t => t, _ => 0.0);
         var counted = evt.Teams.ToDictionary(t => t, _ => 0);
         foreach (var m in evt.Played)
         {
@@ -458,20 +632,24 @@ class Standings
                 int allianceRp = Rp.ForAlliance(m, a);
                 foreach (var slot in a.Slots.Where(s => !s.Surrogate))
                 {
+                    // A disqualified team gets no RP or tiebreak points for the match.
                     rp[slot.Team] += slot.Dq ? 0 : allianceRp;
-                    np[slot.Team] += a.NpScore!.Value;
+                    np[slot.Team] += slot.Dq ? 0 : a.NpScore!.Value;
+                    tb2[slot.Team] += slot.Dq ? 0 : a.Tiebreak2 ?? 0;
+                    auto[slot.Team] += slot.Dq ? 0 : a.Auto ?? 0;
                     counted[slot.Team]++;
                 }
             }
         }
-        return Create(evt.Teams, rp, np, counted);
+        return Create(evt.Teams, rp, np, tb2, auto, counted);
     }
 
-    public static Standings Create(List<int> teams, Dictionary<int, double> rp, Dictionary<int, double> np, Dictionary<int, int> counted)
+    public static Standings Create(List<int> teams, Dictionary<int, double> rp, Dictionary<int, double> np,
+        Dictionary<int, double> tb2, Dictionary<int, double> auto, Dictionary<int, int> counted)
     {
-        double Avg(Dictionary<int, double> d, int t) => counted[t] == 0 ? 0 : d[t] / counted[t];
-        var order = teams.OrderByDescending(t => Avg(rp, t)).ThenByDescending(t => Avg(np, t)).ThenBy(t => t).ToList();
-        return new Standings { RpTotal = rp, NpTotal = np, Counted = counted, Order = order };
+        var standings = new Standings { RpTotal = rp, NpTotal = np, Tb2Total = tb2, AutoTotal = auto, Counted = counted, Order = [] };
+        standings.Order.AddRange(teams.OrderByDescending(standings.SortKey).ThenBy(t => t));
+        return standings;
     }
 }
 
@@ -537,7 +715,7 @@ class RankProjection
                     }
                 }
             }
-            var final = Standings.Create(evt.Teams, rp, np, counted);
+            var final = Standings.Create(evt.Teams, rp, np, current.Tb2Total, current.AutoTotal, counted);
             for (int r = 0; r < final.Order.Count; r++)
             {
                 int t = final.Order[r];
@@ -563,6 +741,36 @@ class RankProjection
 
 static class LinearAlgebra
 {
+    // Numerical rank of a symmetric positive-semidefinite matrix (Gaussian elimination with
+    // full pivoting and a relative tolerance).
+    public static int Rank(double[,] source)
+    {
+        int n = source.GetLength(0);
+        var a = (double[,])source.Clone();
+        double max = 0;
+        foreach (double v in a) max = Math.Max(max, Math.Abs(v));
+        double tol = Math.Max(max, 1) * n * 1e-10;
+        var used = new bool[n];
+        int rank = 0;
+        for (int step = 0; step < n; step++)
+        {
+            int pivot = -1;
+            double best = tol;
+            for (int i = 0; i < n; i++)
+                if (!used[i] && Math.Abs(a[i, i]) > best) { best = Math.Abs(a[i, i]); pivot = i; }
+            if (pivot < 0) break;
+            used[pivot] = true;
+            rank++;
+            for (int i = 0; i < n; i++)
+            {
+                if (used[i] || a[i, pivot] == 0) continue;
+                double factor = a[i, pivot] / a[pivot, pivot];
+                for (int j = 0; j < n; j++) a[i, j] -= factor * a[pivot, j];
+            }
+        }
+        return rank;
+    }
+
     // Cholesky solve for a symmetric positive-definite system.
     public static double[] SolveSpd(double[,] a, double[] b)
     {
@@ -669,7 +877,7 @@ record TeamLine(int Team)
     public int ScheduledMatches;
 }
 
-class Report(Tournament evt, Tournament full, Model model, Dictionary<int, (int Rank, double AvgRp)> official, Options opts)
+class Report(Tournament evt, Tournament full, Model model, Dictionary<int, OfficialRank> official, string? eventName, int unposted, Playoffs playoffs, Options opts)
 {
     readonly Dictionary<int, TeamLine> _lines = Compute(evt, model);
     readonly Dictionary<int, Match> _actual = full.Matches.ToDictionary(m => m.Number);
@@ -701,7 +909,7 @@ class Report(Tournament evt, Tournament full, Model model, Dictionary<int, (int 
                         line.TotalScore += a.Score!.Value;
                         line.AvgTeamWinsPlayed += avgWin;
                         line.ExpectedWins += model.WinProbability(m, slot.Team);
-                        if (slot.Dq || a.Score < opp.Score) line.Losses++;
+                        if (a.Score < opp.Score) line.Losses++;
                         else if (a.Score > opp.Score) line.Wins++;
                         else line.Ties++;
                     }
@@ -732,7 +940,9 @@ class Report(Tournament evt, Tournament full, Model model, Dictionary<int, (int 
         return name.Length > 24 ? name[..23] + "…" : name;
     }
 
-    string Teams(Alliance a) => string.Join(" ", a.Teams);
+    // In markdown, separate alliance partners with " / " so the site's team-highlight script
+    // can tell the team numbers apart.
+    string Teams(Alliance a) => string.Join(opts.Markdown ? " / " : " ", a.Teams);
 
     static string F(double v, int digits = 1) => v.ToString("F" + digits);
     static string Pct(double v) => v > 0 && v < 0.005 ? "<1%" : v < 1 && v > 0.995 ? ">99%" : (v * 100).ToString("F0") + "%";
@@ -756,47 +966,76 @@ class Report(Tournament evt, Tournament full, Model model, Dictionary<int, (int 
         var played = evt.Played.ToList();
         var remaining = evt.Remaining.ToList();
 
-        Heading($"FTC {opts.Season} {opts.EventCode} — qualification stats", 1);
-        Console.WriteLine($"Qualification matches played: {played.Count} of {evt.Matches.Count}" +
-                          (opts.Through is not null ? $" (simulated through match {opts.Through})" : ""));
-        Console.WriteLine($"Teams: {evt.Teams.Count}   Playoff alliances: {_captains}   Average OPR: {F(model.MeanOpr)}   " +
-                          $"Match margin σ: {F(model.MarginSigma)}   Shrink: {model.Shrink}" +
-                          (opts.Shrink is null ? (remaining.Count > 0 ? " (default while matches remain)" : " (default once quals are complete)") : ""));
+        if (!opts.NoTitle)
+            Heading(eventName is null ? $"FTC {opts.Season} {opts.EventCode} — qualification stats" : $"{eventName} ({opts.EventCode}) — qualification stats", 1);
+        var info = new List<string>
+        {
+            $"Qualification matches played: {played.Count} of {evt.Matches.Count}" +
+                (opts.Through is not null ? $" (simulated through match {opts.Through})" : ""),
+            $"Teams: {evt.Teams.Count}   Playoff alliances: {_captains}   Average OPR: {F(model.MeanOpr)}   " +
+                $"Match margin σ: {F(model.MarginSigma)}" +
+                // The default shrink is an implementation detail on published pages.
+                (opts.Markdown && opts.Shrink is null ? "" : $"   Shrink: {model.Shrink}" +
+                    (opts.Shrink is null ? (remaining.Count > 0 ? " (default while matches remain)" : " (default once quals are complete)") : "")),
+        };
+        if (unposted > 0)
+            info.Add($"{unposted} scheduled qualification match{(unposted == 1 ? " has" : "es have")} no posted results and {(unposted == 1 ? "is" : "are")} left out.");
         if (played.Count == 0)
-            Console.WriteLine("No matches played yet — every team is rated as the average team.");
+            info.Add("No matches played yet — every team is rated as the average team.");
         int missingDetails = played.Sum(m => m.Alliances.Count(a => a.Bonuses is null));
         if (missingDetails > 0)
-            Console.WriteLine($"Warning: score details missing for {missingDetails} played alliance(s); their bonus RPs aren't counted.");
+            info.Add($"Warning: score details missing for {missingDetails} played alliance(s); their bonus RPs aren't counted.");
+        foreach (string line in info)
+            Console.WriteLine(opts.Markdown ? "- " + line.Replace("   ", " · ") : line);
 
         PrintRankings();
         PrintTeamStats();
         PrintSchedule(remaining.Count > 0);
         if (remaining.Count > 0) PrintPredictions(remaining);
         if (opts.Through is not null) PrintPredictionCheck(remaining);
+        PrintPlayoffs();
+        PrintAwards();
 
         Heading("Glossary", 2);
-        if (opts.Markdown) Console.WriteLine("```text");
-        Console.WriteLine("""
-            RP     Average ranking points per match (3 per win, 1 per tie, +1 per bonus earned)
-            Tiebreak  Average alliance score not counting foul points from opponents (breaks RP ties)
-            Bonus% Share of the team's matches where its alliance earned that bonus RP
-            Proj RP / Proj rank   Average final RP and rank across simulations of the remaining matches
-            Range  Middle 80% of simulated final ranks (10th to 90th percentile)
-            Top N  Chance of finishing in the top N (the alliance captain spots), and of finishing #1
-            OPR    Offensive Power Rating: least-squares estimate of points each team adds to its alliance score
-            npOPR  OPR computed from scores with opponent fouls removed
-            Auto   OPR computed from autonomous points only
-            Def    Points per match the team holds opponents below what their OPRs predict (higher is better)
-            Margin OPR + Def: the team's contribution to its alliance's winning margin
-            xW     Expected wins in played matches given everyone's OPR; Luck = actual wins − xW
-            Partner/Opp OPR   Average partner OPR and average opposing-alliance OPR total, over the full qual schedule
-            Avg-team win%     Win rate a perfectly average team would expect in this team's slots
-                              (lower = harder schedule); split into played and remaining matches
-            Proj W  Current wins (ties = ½) plus win probability in remaining matches
-            """);
-        if (opts.Markdown) Console.WriteLine("```");
-        Console.WriteLine();
-        Console.WriteLine("Match data provided by the FIRST Tech Challenge Events API (https://ftc-events.firstinspires.org/services/API).");
+        var glossary = new List<(string Term, string Meaning)>
+        {
+            ("RP", "Average ranking points per match (3 per win, 1 per tie, +1 per bonus earned)"),
+            ("Tiebreak", "Average alliance score not counting foul points from opponents (breaks RP ties)"),
+            ("Bonus%", "Share of the team's matches where its alliance earned that bonus RP"),
+        };
+        if (remaining.Count > 0)
+        {
+            glossary.AddRange([
+                ("Proj RP / Proj rank", "Average final RP and rank across simulations of the remaining matches"),
+                ("Range", "Middle 80% of simulated final ranks (10th to 90th percentile)"),
+                ($"Top {_captains} / #1", $"Chance of finishing in the top {_captains} (the alliance captain spots), and of finishing first"),
+            ]);
+        }
+        glossary.AddRange([
+            ("OPR", "Offensive Power Rating: least-squares estimate of the points each team adds to its alliance's score"),
+            ("npOPR", "OPR computed from scores without foul points from opponents"),
+            ("Auto", "OPR computed from autonomous points only"),
+            ("Def", "Points per match the team holds opponents below what their OPRs predict (higher is better)"),
+            ("Margin", "OPR + Def: the team's contribution to its alliance's winning margin"),
+            ("xW / Luck", "Expected wins in played matches given everyone's OPR; Luck = actual wins − xW"),
+            ("Partner / Opp OPR", "Average partner OPR and average opposing-alliance OPR total, over the full qual schedule"),
+            ("Avg-team win%", "Win rate a perfectly average team would expect in this team's matches (lower = harder schedule)"),
+        ]);
+        if (remaining.Count > 0)
+            glossary.Add(("Proj W", "Current wins (ties = ½) plus win probability in remaining matches"));
+        if (opts.Markdown)
+        {
+            Table(["Term", "Meaning"], glossary.Select(g => new[] { g.Term, g.Meaning }).ToList(), leftAligned: ["Term", "Meaning"]);
+            Console.WriteLine();
+            Console.WriteLine("<small>Match data provided by the [FIRST Tech Challenge Events API](https://ftc-events.firstinspires.org/services/API).</small>");
+        }
+        else
+        {
+            int width = glossary.Max(g => g.Term.Length) + 2;
+            foreach (var (term, meaning) in glossary) Console.WriteLine(term.PadRight(width) + meaning);
+            Console.WriteLine();
+            Console.WriteLine("Match data provided by the FIRST Tech Challenge Events API (https://ftc-events.firstinspires.org/services/API).");
+        }
     }
 
     void PrintRankings()
@@ -831,16 +1070,123 @@ class Report(Tournament evt, Tournament full, Model model, Dictionary<int, (int 
         // Sanity check the RP rules against the official rankings when we have them.
         if (official.Count > 0)
         {
+            // Teams tied on every tiebreaker computed here are listed by team number; the official
+            // order between them comes from a later tiebreaker, so any order within the tie is fine.
+            var tieGroups = _standings.Order.GroupBy(_standings.SortKey).Where(g => g.Count() > 1).ToList();
+            bool WithinTie(int t, int officialRank) => tieGroups.FirstOrDefault(g => g.Contains(t)) is { } g
+                && officialRank >= g.Min(_standings.Rank) && officialRank <= g.Max(_standings.Rank);
             var mismatched = _standings.Order
-                .Where(t => !official.TryGetValue(t, out var o) || o.Rank != _standings.Rank(t) || Math.Abs(o.AvgRp - _standings.AvgRp(t)) > 0.005)
+                .Where(t => !official.TryGetValue(t, out var o) || Math.Abs(o.AvgRp - _standings.AvgRp(t)) > 0.005
+                    || o.Rank != _standings.Rank(t) && !WithinTie(t, o.Rank))
                 .ToList();
+            bool tiesDiffer = _standings.Order.Any(t => official.TryGetValue(t, out var o) && o.Rank != _standings.Rank(t));
             Console.WriteLine();
-            Console.WriteLine(mismatched.Count == 0
-                ? "Computed rankings match the official rankings."
-                : "Warning: computed rankings differ from the official rankings for " +
-                  string.Join(", ", mismatched.Select(t => official.TryGetValue(t, out var o)
-                      ? $"{t} (official #{o.Rank}, {o.AvgRp:F2} RP)" : $"{t} (not ranked)")));
+            if (official.Values.Any(o => o.MatchesCounted > o.MatchesPlayed))
+                // League meets rank teams across every meet in the league.
+                Console.WriteLine("These rankings cover this meet only; the official rankings are league rankings that combine matches from every league meet.");
+            else if (mismatched.Count == 0)
+                Console.WriteLine(tiesDiffer
+                    ? "Computed rankings match the official rankings, except the order within ties on every tiebreaker computed here (the official order uses a later tiebreaker)."
+                    : "Computed rankings match the official rankings.");
+            else if (unposted > 0)
+                Console.WriteLine($"The official rankings also count the {unposted} match{(unposted == 1 ? "" : "es")} without posted scores, so they differ from these.");
+            else
+                Console.WriteLine("Warning: computed rankings differ from the official rankings for " +
+                    string.Join(", ", mismatched.Select(t => official.TryGetValue(t, out var o)
+                        ? $"{t} (official #{o.Rank}, {o.AvgRp:F2} RP)" : $"{t} (not ranked)")));
         }
+    }
+
+    string TeamWithName(int team) => $"{team} {Name(team)}".TrimEnd();
+
+    void PrintPlayoffs()
+    {
+        if (playoffs.Alliances.Count == 0 && playoffs.Matches.Count == 0) return;
+        Heading("Playoffs", 2);
+
+        if (playoffs.Winner is int w && playoffs.Alliances.FirstOrDefault(a => a.Number == w) is { } winner)
+        {
+            string teams = string.Join(", ", winner.Teams.Select(TeamWithName));
+            Console.WriteLine(opts.Markdown ? $"**Winning alliance:** Alliance {w} — {teams}" : $"Winning alliance: Alliance {w} — {teams}");
+        }
+
+        if (playoffs.Alliances.Count > 0)
+        {
+            Heading("Alliances", 3);
+            var roles = new[] { "Captain", "1st pick", "2nd pick", "3rd pick", "Backup" }
+                .Where(r => playoffs.Alliances.Any(a => a.Members.Any(m => m.Role == r))).ToList();
+            var rows = playoffs.Alliances.OrderBy(a => a.Number).Select(a =>
+            {
+                var row = new List<string> { a.Number.ToString() };
+                row.AddRange(roles.Select(r => a.Members.Where(m => m.Role == r).Select(m => TeamWithName(m.Team)).FirstOrDefault() ?? "—"));
+                var (won, lost) = AllianceRecord(a);
+                row.Add(won + lost == 0 ? "—" : $"{won}-{lost}");
+                row.Add(AllianceResult(a));
+                return row.ToArray();
+            }).ToList();
+            Table(["Alliance", .. roles, "Record", "Result"], rows, leftAligned: [.. roles, "Result"]);
+        }
+
+        if (playoffs.Matches.Count > 0)
+        {
+            Heading("Playoff matches", 3);
+            string Side(List<int> teams)
+            {
+                var alliance = playoffs.AllianceOf(teams);
+                // Alliance number last, so the final team number is followed by text, which the
+                // site's team-highlight script needs to recognize it.
+                return string.Join(opts.Markdown ? " / " : " ", teams) + (alliance is null ? "" : $" (A{alliance.Number})");
+            }
+            string Score(int? score, int? other) => score is null ? "—" : opts.Markdown && score > other ? $"**{score}**" : score.ToString()!;
+            bool videos = playoffs.Matches.Any(m => m.Video is not null);
+            var rows = playoffs.Matches.Select(m =>
+            {
+                var row = new List<string> { m.Label, Side(m.Red), Score(m.RedScore, m.BlueScore), Score(m.BlueScore, m.RedScore), Side(m.Blue) };
+                if (videos) row.Add(m.Video is null ? "—" : opts.Markdown ? $"[Video]({m.Video})" : m.Video);
+                return row.ToArray();
+            }).ToList();
+            string[] header = videos ? ["Match", "Red", "Red score", "Blue score", "Blue", "Video"] : ["Match", "Red", "Red score", "Blue score", "Blue"];
+            Table(header, rows, leftAligned: ["Match", "Red", "Blue", "Video"]);
+        }
+    }
+
+    (int Won, int Lost) AllianceRecord(PlayoffAlliance a)
+    {
+        int won = 0, lost = 0;
+        foreach (var m in playoffs.Matches.Where(m => m.Played))
+        {
+            bool red = m.Red.Any(a.Teams.Contains), blue = m.Blue.Any(a.Teams.Contains);
+            if (!red && !blue || m.RedScore == m.BlueScore) continue;
+            if ((m.RedScore > m.BlueScore) == red) won++; else lost++;
+        }
+        return (won, lost);
+    }
+
+    string AllianceResult(PlayoffAlliance a)
+    {
+        if (a.Number == playoffs.Winner) return "Winner";
+        if (a.Number == playoffs.Finalist) return "Finalist";
+        // Otherwise the round of the alliance's last match, if it lost that match and either the
+        // playoffs are over or it was an elimination round (lower bracket or final).
+        var last = playoffs.Matches.LastOrDefault(m => m.Played && (m.Red.Any(a.Teams.Contains) || m.Blue.Any(a.Teams.Contains)));
+        if (last is null) return "";
+        bool red = last.Red.Any(a.Teams.Contains);
+        bool lostLast = red ? last.RedScore < last.BlueScore : last.BlueScore < last.RedScore;
+        bool eliminating = playoffs.Winner is not null || opts.Final || !last.Label.StartsWith("Upper", StringComparison.OrdinalIgnoreCase);
+        return lostLast && eliminating ? $"Out in {last.Round}" : "";
+    }
+
+    void PrintAwards()
+    {
+        if (playoffs.Awards.Count == 0) return;
+        Heading("Awards", 2);
+        var rows = playoffs.Awards.Select(a =>
+        {
+            string team = a.Team is int t ? TeamWithName(t) : "";
+            string recipient = a.Person is null ? team : team == "" ? a.Person : $"{a.Person} ({team})";
+            return new[] { a.Name, recipient == "" ? "—" : recipient };
+        }).ToList();
+        Table(["Award", "Recipient"], rows, leftAligned: ["Award", "Recipient"]);
     }
 
     void PrintTeamStats()
@@ -869,14 +1215,20 @@ class Report(Tournament evt, Tournament full, Model model, Dictionary<int, (int 
     void PrintDefenseNote()
     {
         Console.WriteLine();
-        if (model.DefenseP is not double p)
+        if (!model.DefenseSeparable)
         {
-            Console.WriteLine("Def: not enough matches yet to tell defense apart from random variation.");
+            Console.WriteLine("Def: with this schedule, defense can't be told apart from offense (e.g. every match includes every team), so treat it as noise.");
             return;
         }
+        if (model.DefenseP is not double p)
+        {
+            Console.WriteLine("Def: not enough matches to tell defense apart from random variation.");
+            return;
+        }
+        string pText = p > 0.99 ? "p > 0.99" : p >= 0.01 ? $"p = {p:F2}" : $"p = {p:F3}";
         Console.WriteLine(p >= 0.05
-            ? $"Def: differences between teams are consistent with random match-to-match variation (p = {p:F2}); treat them as noise."
-            : $"Def: differences between teams are larger than random variation would explain (p = {p:F3}).");
+            ? $"Def: differences between teams are consistent with random match-to-match variation ({pText}); treat them as noise."
+            : $"Def: differences between teams are larger than random variation would explain ({pText}).");
     }
 
     void PrintSchedule(bool hasRemaining)
@@ -992,6 +1344,19 @@ class Report(Tournament evt, Tournament full, Model model, Dictionary<int, (int 
 
     void Table(string[] header, List<string[]> rows, string[] leftAligned)
     {
+        if (opts.Markdown)
+        {
+            // Write teams as "12345 Team Name" in one cell, the format the site's team-highlight
+            // script recognizes; escape pipes so names can't break the table.
+            int team = Array.IndexOf(header, "Team");
+            if (team >= 0 && team + 1 < header.Length && header[team + 1] == "Name")
+            {
+                header = header.Where((_, i) => i != team + 1).ToArray();
+                rows = rows.Select(r => r.Where((_, i) => i != team + 1)
+                    .Select((c, i) => i == team ? $"{c} {r[team + 1]}".TrimEnd() : c).ToArray()).ToList();
+            }
+            rows = rows.Select(r => r.Select(c => c.Replace("|", "\\|")).ToArray()).ToList();
+        }
         var left = header.Select(h => leftAligned.Contains(h) || h == "Team").ToArray();
         if (opts.Markdown)
         {

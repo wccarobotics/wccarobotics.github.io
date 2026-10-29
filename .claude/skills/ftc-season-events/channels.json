@@ -1,0 +1,30 @@
+{
+  "_comment": "YouTube channels that livestream or post FTC events, checked by find_videos.py. Add a channel whenever an event video turns up on one that isn't listed. 'region' is a hint for which events it covers.",
+  "channels": [
+    { "name": "FIRST in Michigan 1", "handle": "@fimvideo1", "region": "MI" },
+    { "name": "FUN Robotics Network", "handle": "@FUNRoboticsNetwork", "region": "WI / national (streams events around the US)" },
+    { "name": "FIRST Robotics Utah", "handle": "@UtahFTC", "region": "UT" },
+    { "name": "FTC Utah", "handle": "@ftcutah8872", "region": "UT" },
+    { "name": "Bolles Live", "handle": "@bolleslive815", "region": "FL (Jacksonville)" },
+    { "name": "FIRST in Florida", "handle": "@FIRSTinFlorida", "region": "FL" },
+    { "name": "MA FTC", "handle": "@MA-FTC", "region": "MA" },
+    { "name": "New England FIRST", "handle": "@NewEnglandFIRST", "region": "New England" },
+    { "name": "Stars of the Galaxy", "handle": "@StarsoftheGalaxy12099", "region": "OH (team 12099)" },
+    { "name": "FIRST In Ohio", "handle": "@FIRSTInOhio", "region": "OH (also streams FRC)" },
+    { "name": "AFRL STEM Outreach", "handle": "@AFRLSTEMOutreach", "region": "OH (Dayton)" },
+    { "name": "FIRST Chesapeake", "handle": "@FIRSTChesapeake", "region": "MD / VA / DC" },
+    { "name": "FIRST in Alabama", "handle": "@firstinalabama7409", "region": "AL" },
+    { "name": "FTC Iowa", "handle": "@FTCIowa", "region": "IA (schedules league meet streams weeks ahead)" },
+    { "name": "Tulsa Robotics Center", "handle": "@TulsaRoboticsCenter", "region": "OK (Tulsa league meets)" },
+    { "name": "JPEC Robotics", "handle": "@JPECRobotics", "region": "MI (South Central Robotics League)" },
+    { "name": "Oregon Robotics", "handle": "@OregonRobotics", "region": "OR (Silicon Forest)" },
+    { "name": "Leo RHS Robotics", "handle": "@leoRHSrobotics", "region": "OR (SOAR, Roseburg)" },
+    { "name": "FTC SoCal League G", "handle": "@ftc_socal_league_g", "region": "CA (SoCal League G)" },
+    { "name": "The Blockheads", "handle": "@lcecblockheads", "region": "CA (SoCal League C1, La Cañada)" },
+    { "name": "Team 4201: The Vitruvian Bots", "handle": "@Team4201", "region": "CA (SoCal Group H)" },
+    { "name": "NDHS RoboKnights", "handle": "@ndhsrobotics", "region": "CA (SoCal Group D)" },
+    { "name": "Okarche Warriors", "handle": "@OkarcheWarriors", "region": "OK (streams Hadfield League meets, OKC; titles don't name the meet)" },
+    { "name": "Sesi Pernambuco", "handle": "@sesipernambucoficial", "region": "Brazil (Recife; titles like \"FTC - 23/10\")" },
+    { "name": "Jason Cheng", "handle": "@jasoncheng9310", "region": "WA (Ritchie/Maxwell/Watt league meets)" }
+  ]
+}

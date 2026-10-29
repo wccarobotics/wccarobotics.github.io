@@ -1,0 +1,54 @@
+{
+  "_comment": "Videos found by searching YouTube, by event code. Livestream links listed in the FTC API are added automatically; an entry here with the same video ID (or the same URL, for non-YouTube links) overrides the label, and \"hide\": true removes a bad API link (e.g. a channel page with no saved recording).",
+  "USMISAS": [
+    { "label": "Day 1 livestream", "url": "https://www.youtube.com/live/PxsqeKP_bp8" },
+    { "label": "Day 2 livestream", "url": "https://www.youtube.com/live/lr6iMORuxMs" }
+  ],
+  "USFLJAS": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/od0H7wZ9TsM" }
+  ],
+  "USOHCON": [
+    { "label": "Video", "url": "https://www.youtube.com/watch?v=WpFqMhd65EM" }
+  ],
+  "USOHCOHM1": [
+    { "url": "https://www.twitch.tv/starsofthegalaxy12099", "hide": true, "why": "Twitch channel page; no saved broadcast (checked Oct 24)" }
+  ],
+  "USMISCM1": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/O0qWjMJ81GA" }
+  ],
+  "USIACONEM1": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/3cwW0rM8ivA" }
+  ],
+  "USOKOKDVM1": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/gBloQhx9MTo" }
+  ],
+  "USOKOKHGM1": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/bPRhM5FKsEM" }
+  ],
+  "USORRON": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/Gam56B7DedQ" }
+  ],
+  "USCALACAS1": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/thoD8vPXnx4" }
+  ],
+  "USOKOKHFM1": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/42c39YoJ8YA" }
+  ],
+  "BRREQ": [
+    { "label": "Day 1 livestream", "url": "https://www.youtube.com/live/K0E1Unp4MxI" },
+    { "label": "Day 2 livestream", "url": "https://www.youtube.com/live/m-kLWQ3HhjA" }
+  ],
+  "USCALALCS1": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/fwVddLaU58E" }
+  ],
+  "USFLNEM1": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/jD2rz7zcxCg" }
+  ],
+  "USWARIM1": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/DH8gT_3iDLo" }
+  ],
+  "USCALASOS1": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/ShX0K1kBlXQ" },
+    { "url": "https://www.youtube.com/@ndhsrobotics/live", "hide": true, "why": "API link is the channel's live page; the stream is ShX0K1kBlXQ" }
+  ]
+}

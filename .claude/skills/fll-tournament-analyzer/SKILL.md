@@ -99,7 +99,7 @@ Read the scores from the screenshot image. The scoreboard typically shows: Rank,
 Use `yt-dlp` to download auto-generated English captions. **Important:** The standard `--write-auto-sub --skip-download` approach often fails with "Did not get any data blocks" due to YouTube signature extraction issues. Use this workaround:
 
 ```bash
-yt-dlp --extractor-args "youtube:player_client=ios" --write-auto-sub --sub-lang en --sub-format vtt --skip-download -o "captions" "VIDEO_URL"
+python -m yt_dlp --extractor-args "youtube:player_client=ios" --write-auto-sub --sub-lang en --sub-format vtt --skip-download -o "captions" "VIDEO_URL"
 ```
 
 The `youtube:player_client=ios` flag bypasses the signature extraction problem.
@@ -110,7 +110,7 @@ Some livestreams have no auto-generated captions. In that case, download the aud
 
 ```bash
 # Download audio only
-yt-dlp --extractor-args "youtube:player_client=ios" -f 234 -o "tournament_audio.%(ext)s" "VIDEO_URL"
+python -m yt_dlp --extractor-args "youtube:player_client=ios" -f 234 -o "tournament_audio.%(ext)s" "VIDEO_URL"
 
 # Install faster-whisper
 pip install faster-whisper
@@ -135,7 +135,7 @@ This takes ~8 minutes for a 3.5-hour video on CPU. The output is a JSON array of
 
 If yt-dlp is not installed or is outdated, install/update it:
 ```bash
-pip install --upgrade yt-dlp
+python -m pip install --user --upgrade yt-dlp
 ```
 
 ### Step 3: Parse transcript and find match timestamps
@@ -374,7 +374,7 @@ Once the user confirms the page is final, remove temporary files: `captions.en.v
 - **Awards in a separate video**: The main livestream may end before the awards ceremony (e.g., during a break for judges' deliberation). If the captions end without any awards content, ask the user if there's a separate awards video. Download and analyze that video's captions the same way.
 - **Coach Mentor Award**: This is given to a coach/mentor, not a team. Note the coach's name and their team.
 - **Rising All-Star Award**: This award may have multiple winners (not just one).
-- **yt-dlp now requires a JS runtime** for YouTube. Use `--js-runtimes node --remote-components ejs:github`. To download a specific time window (much faster than the whole video for spot-checking a single match), use format 91 (144p HLS *with* audio) which downloads via ffmpeg at ~6-140×: `yt-dlp --js-runtimes node --remote-components ejs:github -N 16 -f 91 --download-sections "*H:MM:SS-H:MM:SS" -o "clip.%(ext)s" "URL"`. Format 91 HLS works reliably for windowed downloads; the DASH audio-only formats (140/251) are throttled and slow. (The older warning that `--download-sections` always fails applied to DASH formats — format 91 HLS works.)
+- **yt-dlp now requires a JS runtime** for YouTube. Use `--js-runtimes node --remote-components ejs:github`. To download a specific time window (much faster than the whole video for spot-checking a single match), use format 91 (144p HLS *with* audio) which downloads via ffmpeg at ~6-140×: `python -m yt_dlp --js-runtimes node --remote-components ejs:github -N 16 -f 91 --download-sections "*H:MM:SS-H:MM:SS" -o "clip.%(ext)s" "URL"`. Format 91 HLS works reliably for windowed downloads; the DASH audio-only formats (140/251) are throttled and slow. (The older warning that `--download-sections` always fails applied to DASH formats — format 91 HLS works.)
 - **Verifying/correcting a single match timestamp** (after the user spot-checks the draft): re-download just that ~9-minute window with format 91, re-transcribe it with **Whisper medium.en and `vad_filter=False`** (medium.en is far more accurate than base.en for countdowns, and disabling VAD prevents clipping the "3-2-1 lego" or detecting an adjacent buzzer instead). The full-video transcript is usually base.en for speed, but base.en mis-times or misses countdowns — never trust a base.en countdown for a final link without medium.en verification.
 - **Confirm a timestamp with a video frame, anchoring on a running clock.** Extract a frame with `ffmpeg -ss <local_offset> -i clip.mp4 -frames:v 1 -q:v 3 -y out.jpg` (`local_offset = absolute_video_t − clip_start_offset`). The on-screen match timer counts down from **02:30**. A frame reading exactly 02:30 is ambiguous — the clock may be reset and *held* on an empty field before the match. Instead, find a frame where the timer reads **02:29 or less** (proving the clock is actively running), then compute the start time by working backwards: `start_t = frame_t − (150 − timer_remaining_seconds)`. For example, a frame at video t=9248 showing 02:26 means 4 s elapsed, so the match started at ~t=9244. Place the link a bit before that start depending on what the announcer is saying (see link-placement convention below).
 
@@ -426,7 +426,7 @@ The typical awards given at FLL tournaments (in order of announcement):
 ## Dependencies
 
 ```bash
-pip install yt-dlp
+python -m pip install --user yt-dlp
 ```
 
 For videos without auto-generated captions:

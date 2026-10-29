@@ -9,6 +9,21 @@ Our FTC team competes in Adventist Robotics tournaments. Each tournament page be
 
 ---
 
+## 2026–27 BIOBUZZ Season
+
+<div class="tournament-list">
+
+<div class="tournament-card">
+  <h3><a href="/tournaments/ftc/biobuzz/">BIOBUZZ Events So Far</a></h3>
+  <p>Early-season scrimmages and events from around the world, with links to livestreams</p>
+  <p>📊 Rankings, OPR, and schedule difficulty for each event</p>
+  <a href="/tournaments/ftc/biobuzz/" class="btn btn-blue" style="margin-top: 0.5rem;">View Events →</a>
+</div>
+
+</div>
+
+---
+
 ## 2025–26 DECODE Season
 
 <div class="tournament-list">

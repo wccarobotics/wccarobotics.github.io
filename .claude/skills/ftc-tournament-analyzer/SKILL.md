@@ -223,7 +223,7 @@ This takes ~8 minutes for a 3.5-hour video on CPU.
 
 If yt-dlp is not installed or is outdated, install/update it:
 ```bash
-pip install --upgrade yt-dlp
+python -m pip install --user --upgrade yt-dlp
 ```
 
 ### Step 4 (Alternative): Parse transcript and find match timestamps
@@ -496,7 +496,7 @@ After generating the page, verify:
 ## Dependencies
 
 ```bash
-pip install yt-dlp
+python -m pip install --user yt-dlp
 ```
 
 For videos without auto-generated captions:

@@ -29,12 +29,13 @@ Header nav is hardcoded in `_includes/header.html`. FTC and FLL are both dropdow
 
 ### Skills (`.claude/skills/`)
 
-Skills are AI agent playbooks — detailed SKILL.md files with step-by-step workflows, heuristics, and output templates. They are NOT CI workflows. Four exist:
+Skills are AI agent playbooks — detailed SKILL.md files with step-by-step workflows, heuristics, and output templates. They are NOT CI workflows. Five exist:
 
 - `fll-tournament-analyzer` — creates FLL tournament result pages from YouTube livestream + FLL Gameday API
 - `ftc-tournament-analyzer` — creates FTC tournament result pages from YouTube livestream + FTC Events website
 - `ftc-scorecard-generator` — screenshots FTC Events pages into branded 1920×1080 PNGs using Playwright
 - `ftc-scouting-processor` — reads photos of handwritten scouting forms and updates the scouting pages
+- `ftc-season-events` — refreshes the season events page (`tournaments/ftc/biobuzz/`): finds and confirms event videos on YouTube and regenerates the per-event stats pages
 
 They live in `.claude/skills/` because both Claude Code and GitHub Copilot discover
 repository skills from that path — Copilot also accepts `.github/skills/`, but Claude Code
@@ -45,12 +46,19 @@ does not.
 - `tools/ftc-stats/FtcStats.cs` — .NET 10 single-file app that computes qualification stats
   (RP standings with bonus-RP rates, OPR, npOPR, auto OPR, schedule-adjusted defense and
   margin ratings with a significance check, schedule difficulty,
-  match predictions with expected RP, and Monte Carlo projections of final rank / top-N odds)
+  match predictions with expected RP, Monte Carlo projections of final rank / top-N odds, and the
+  event's playoff alliances, playoff matches and awards when it has them)
   from the FTC Events API. Works mid-tournament. Run from `tools/ftc-stats`:
   `dotnet run FtcStats.cs -- https://ftc-events.firstinspires.org/2026/USMISAS`.
   Options: `--through N` (pretend only quals 1..N are played and score the predictions),
   `--shrink X` (ridge toward average team; default 0.5 while quals remain, 0 = classic OPR once
-  complete), `--sims N`, `--markdown`, `--save DIR` / `--load DIR` (cache raw API JSON).
+  complete), `--sims N`, `--markdown`, `--no-title`, `--summary FILE` (JSON with avg/top OPR and high score, read by the
+  season index), `--final` (event is over: drop scheduled
+  matches with no results instead of predicting them), `--save DIR` / `--load DIR` (cache raw API JSON).
+- `tools/ftc-stats/build_season_pages.py` — regenerates `tournaments/ftc/biobuzz/`: an index of
+  season events with posted results (most recent first, with video links) and a stats page per
+  event from `FtcStats.cs`. Livestream links come from the API; add videos found on YouTube to
+  `tools/ftc-stats/season-videos.json`. Rerun it to update the pages as the season goes on.
 - FTC API gotchas: in `matches`, `score{Color}Foul` is foul points that alliance *committed*
   (awarded to the opponent). Bonus RPs are the boolean `...RP` fields in `scores/{event}/qual`.
   2026 ranking = avg RP (3 win / 1 tie / +1 per bonus), then avg pre-foul score.
@@ -156,7 +164,7 @@ FTC Scout provides OPR and other derived stats. No authentication required.
 ### Python dependencies for skills
 
 ```bash
-pip install yt-dlp                    # YouTube caption/audio download
+python -m pip install --user yt-dlp  # YouTube caption/audio download; run as `python -m yt_dlp` (the standalone yt-dlp.exe is blocked by App Control on the dev PC)
 pip install faster-whisper            # speech recognition (when no captions)
 pip install playwright Pillow numpy   # scorecard generator
 python -m playwright install chromium
