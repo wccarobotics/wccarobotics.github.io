@@ -25,6 +25,8 @@
     { "name": "NDHS RoboKnights", "handle": "@ndhsrobotics", "region": "CA (SoCal Group D)" },
     { "name": "Okarche Warriors", "handle": "@OkarcheWarriors", "region": "OK (streams Hadfield League meets, OKC; titles don't name the meet)" },
     { "name": "Sesi Pernambuco", "handle": "@sesipernambucoficial", "region": "Brazil (Recife; titles like \"FTC - 23/10\")" },
-    { "name": "Jason Cheng", "handle": "@jasoncheng9310", "region": "WA (Ritchie/Maxwell/Watt league meets)" }
+    { "name": "Jason Cheng", "handle": "@jasoncheng9310", "region": "WA (Ritchie/Maxwell/Watt league meets)" },
+    { "name": "FIRST Tech Challenge - Three Sisters League", "handle": "@ftcthreesistersleague", "region": "OR (Three Sisters League, Eugene)" },
+    { "name": "NTX FTC", "handle": "@ntxftc", "region": "TX (North Texas leagues)" }
   ]
 }

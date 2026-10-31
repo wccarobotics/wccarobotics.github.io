@@ -50,5 +50,14 @@
   "USCALASOS1": [
     { "label": "Livestream", "url": "https://www.youtube.com/live/ShX0K1kBlXQ" },
     { "url": "https://www.youtube.com/@ndhsrobotics/live", "hide": true, "why": "API link is the channel's live page; the stream is ShX0K1kBlXQ" }
+  ],
+  "USIAIRISM2": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/a_qYGE_78Hs" }
+  ],
+  "USOREUN": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/VU90Qroilyk" }
+  ],
+  "USTXNONIM1": [
+    { "label": "Livestream", "url": "https://www.youtube.com/live/zDyuEfqXA7w" }
   ]
 }

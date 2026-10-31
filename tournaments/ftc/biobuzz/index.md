@@ -9,6 +9,40 @@ FIRST Tech Challenge events from the 2026–27 BIOBUZZ season that have posted m
 
 | Date | Event | Location | Teams | Quals | Avg OPR | Top OPR | High score | Winners | Video |
 |---|---|---|---:|---:|---:|---:|---:|---|---|
+| Oct 31 | [Salk League Meet 1](./USWASAM1) | Tacoma, WA | 15 | 14 | 35.6 | 135.5 | 181 | — | [Livestream](https://ftcwa.live/salk) |
+| Oct 31 | [Hopper League Meet 1](./USWAHOM1) | Liberty Lake, WA | 8 | 6 | 22.0 | 34.3 | 68 | — | — |
+| Oct 31 | [Bardeen League Meet 1](./USWABAM1) | Duvall, WA | 16 | 8 | 31.7\* | 74.2\* | 127 | — | [Livestream](https://ftcwa.live/bardeen) |
+| Oct 31 | [Amarillo League Meet #1](./USTXWPAMM1) | Amarillo, TX | 22 | 28 | 22.2 | 53.3 | 91 | — | — |
+| Oct 31 | [NTX I-League Meet #1](./USTXNONIM1) | Plano, Texas, TX | 21 | 27 | 26.9 | 132.9 | 184 | — | [Livestream](https://www.youtube.com/live/zDyuEfqXA7w) |
+| Oct 31 | [CTX Blackjack Hearts League Meet 1](./USTXCEBHM1) | Austin, TX | 13 | 20 | 25.5 | 52.2 | 93 | — | — |
+| Oct 31 | [CTX Blackjack Clubs League Meet 1](./USTXCEBCM1) | Austin, TX | 11 | 17 | 27.4 | 65.9 | 155 | — | — |
+| Oct 31 | [Iron Mountain Scrimmage](./USORWIN) | Wilsonville, OR | 10 | 13 | 18.3 | 32.1 | 81 | — | — |
+| Oct 31 | [Three Sisters League Scrimmage](./USOREUN) | Eugene, OR | 13 | 17 | 17.4 | 48.1 | 75 | — | [Livestream](https://www.youtube.com/live/VU90Qroilyk) |
+| Oct 31 | [Carver League Meet 1](./USOKOKCRM1) | Yukon, OK | 17 | 26 | 27.6 | 86.5 | 150 | — | — |
+| Oct 31 | [Southern League Meet # 1S](./USNVSNM1) | Las Vegas, NV | 15 | 19 | 24.2 | 89.1 | 134 | — | — |
+| Oct 31 | [P1-3 Central League Meet](./USNJCENM7) | Piscataway, NJ | 17 | 26 | 22.0 | 37.0 | 74 | — | — |
+| Oct 31 | [Windham Scrimmage](./USNHWIN) | Windham, NH | 9 | 14 | 20.1 | 62.5 | 113 | — | — |
+| Oct 31 | [Pepin League Meet 1](./USMNPPM1) | Byron, MN | 13 | 17 | 20.8 | 41.1 | 87 | — | — |
+| Oct 31 | [Mille Lacs League Meet 1](./USMNMLM1) | Apple Valley, MN | 18 | 23 | 19.0 | 44.5 | 82 | — | — |
+| Oct 31 | [Northern Meet 1 - Deerfield](./USILNIM1) | Deerfield, IL | 9 | 12 | 14.7 | 28.3 | 48 | — | — |
+| Oct 31 | [Central Meet 1 - East Peoria](./USILCIM6) | East Peoria, IL | 16 | 20 | 42.8 | 94.6 | 168 | — | — |
+| Oct 31 | [Halloween “Screammage"](./USIDMEN) | Meridian, ID | 9 | 14 | 17.5 | 36.5 | 60 | 11973 / 5026 | — |
+| Oct 31 | [Zinnia Wellman](./USIAZINM1) | Wellman, IA | 12 | 18 | 18.0 | 30.1 | 60 | — | — |
+| Oct 31 | [Daisy Norwalk](./USIANON) | Norwalk, IA | 20 | 25 | 19.7 | 37.5 | 80 | — | [Livestream](https://www.youtube.com/live/TornxXkc3vY) |
+| Oct 31 | [Iris Ames](./USIAIRISM2) | Ames, IA | 15 | 23 | 18.3 | 78.9 | 122 | — | [Livestream](https://www.youtube.com/live/a_qYGE_78Hs) |
+| Oct 31 | [Winterberry College Square Mall](./USIACFN) | Cedar Falls, IA | 6 | 9 | 12.2 | 21.3 | 51 | — | — |
+| Oct 31 | [Paulding-Dallas Meet #1](./USGAPDM1) | Dallas, GA | 11 | 14 | 21.8 | 64.4 | 114 | — | — |
+| Oct 31 | [Atlanta-Marist Meet #1](./USGAATLM1) | Atlanta, GA | 18 | 23 | 23.4 | 62.8 | 98 | — | — |
+| Oct 31 | [SoCal - S - Scrimmage 0](./USCALAWHS1) | West Hills, CA | 16 | 20 | 23.3 | 57.1 | 95 | — | — |
+| Oct 31 | [SoCal - O - Scrimmage 0](./USCALAMVS3) | Mission Viejo, CA | 14 | 18 | 20.9 | 103.3 | 139 | — | — |
+| Oct 31 | [SoCal - A - Scrimmage 0](./USCALALAS3) | Los Angeles, CA | 15 | 19 | 23.8 | 65.1 | 103 | — | — |
+| Oct 31 | [SoCal - E - Scrimmage 0](./USCALACLS1) | Claremont, CA | 12 | 12 | 13.8 | 29.4 | 58 | — | — |
+| Oct 31 | [Kyiv Scrimmage 1](./UAKYN1) | Kyiv, Ukraine | 4 | 5 | 16.5 | 30.4 | 51 | — | — |
+| Oct 31 | [Astana FIRST Scrimmage](./KZASN2) | Astana, Kazakhstan | 6 | 8 | 47.1 | 82.8 | 229 | 34350 / 37721 | — |
+| Oct 30 | [Metro Detroit League Meet Pink](./USMIMDM3) | Belleville, MI | 8 | 10 | 35.7 | 78.0 | 131 | — | — |
+| Oct 30 | [Southcentral League Meet 1](./USAKAKM1) | Anchorage, AK | 19 | 24 | 21.5 | 47.9 | 106 | — | — |
+| Oct 29 | [CTX HoT League Meet 1](./USTXCEWAM1) | Waco, TX | 18 | 27 | 20.6 | 71.5 | 124 | — | — |
+| Oct 29 | [Mason-Pollen](./USMICPM3) | Mason, MI | 11 | 14 | 16.3 | 31.2 | 74 | — | — |
 | Oct 28 | [Northwest-Pollen](./USMICPM2) | Jackson, MI | 8 | 10 | 20.2 | 35.5 | 68 | — | — |
 | Oct 27 | [MSCRL Chelsea Meet](./USMISCM5) | Chelsea, MI | 12 | 15 | 28.6 | 81.0 | 146 | — | — |
 | Oct 27 | [Lavender Scrimmage Coggon](./USIACON) | Coggon, IA | 6 | 9 | 22.9 | 40.9 | 73 | — | — |
@@ -32,7 +66,7 @@ FIRST Tech Challenge events from the 2026–27 BIOBUZZ season that have posted m
 | Oct 24 | [Herrington League Meet 1](./USOKOKHGM1) | Tulsa, OK | 10 | 15 | 25.8 | 75.2 | 134 | — | [Livestream](https://www.youtube.com/live/bPRhM5FKsEM) |
 | Oct 24 | [Hadfield League Meet 1](./USOKOKHFM1) | OKC, OK | 14 | 21 | 25.5 | 59.4 | 97 | — | [Livestream](https://www.youtube.com/live/42c39YoJ8YA) |
 | Oct 24 | [DaVinci League Meet 1](./USOKOKDVM1) | TBD, OK | 7 | 11 | 24.2 | 56.3 | 85 | — | [Livestream](https://www.youtube.com/live/gBloQhx9MTo) |
-| Oct 24 | [Central Ohio League Meet 1](./USOHCOHM1) | Columbus, OH | 13 | 20 | 26.1 | 116.8 | 163 | — | — |
+| Oct 24 | [Central Ohio League Meet 1](./USOHCOHM1) | Columbus, OH | 13 | 20 | 26.1 | 116.8 | 163 | — | [Livestream](https://www.youtube.com/live/07z482i0RiM) |
 | Oct 24 | [P1-1 Southern League Meet](./USNJSOM1) | Holmdel, NJ | 14 | 21 | 20.2 | 46.0 | 94 | — | — |
 | Oct 24 | [Metro Detroit League Meet Yellow](./USMIMDM2) | Belleville, MI | 12 | 15 | 16.8 | 30.0 | 60 | — | — |
 | Oct 24 | [Holt-Pollen](./USMICPM1) | Holt, MI | 8 | 10 | 12.3 | 20.9 | 39 | — | — |
@@ -83,4 +117,4 @@ FIRST Tech Challenge events from the 2026–27 BIOBUZZ season that have posted m
 
 \* Fewer than 3 matches per team, so these OPRs are especially rough.
 
-<small>Updated October 29, 2026. Event and match data provided by the [FIRST Tech Challenge Events API](https://ftc-events.firstinspires.org/services/API).</small>
+<small>Updated October 31, 2026. Event and match data provided by the [FIRST Tech Challenge Events API](https://ftc-events.firstinspires.org/services/API).</small>
