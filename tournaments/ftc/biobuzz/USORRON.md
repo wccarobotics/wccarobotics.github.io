@@ -16,7 +16,7 @@ Rankings, OPR, schedule difficulty, and more, calculated from the 6 qualificatio
 [Results on FTC Events](https://ftc-events.firstinspires.org/2026/USORRON) · [Livestream](https://www.youtube.com/live/Gam56B7DedQ)
 
 - Qualification matches played: 6 of 6
-- Teams: 15 · Playoff alliances: 4 · Average OPR: 11.2 · Match margin σ: 6.7
+- Teams: 15 · Playoff alliances: 4 · Average OPR: 12.6 · Match margin σ: 11.1
 - 13 scheduled qualification matches have no posted results and are left out.
 
 ## Rankings
@@ -45,21 +45,21 @@ Computed rankings match the official rankings.
 
 | # | Team | W-L-T | OPR | npOPR | Auto | Def | Margin | Avg Score | xW | Luck |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 1 | 25921 Syb@rEagles | 1-0-0 | 29.4 | 29.4 | -5.1 | -0.0 | 29.4 | 29.0 | 0.9 | +0.1 |
-| 2 | 23295 AURORA | 2-0-0 | 21.4 | 21.4 | -0.1 | 0.0 | 21.4 | 39.0 | 2.0 | 0.0 |
-| 3 | 9567 Cybernetic Elks 9567 | 0-1-0 | 19.6 | 19.6 | 0.1 | -0.0 | 19.6 | 20.0 | 0.1 | -0.1 |
-| 4 | 21231 42 | 2-0-0 | 17.6 | 17.6 | 0.1 | -0.0 | 17.6 | 26.5 | 1.6 | +0.4 |
-| 5 | 12695 Yellow Jackets | 1-1-0 | 17.6 | 17.6 | 0.1 | -0.0 | 17.6 | 28.5 | 1.0 | 0.0 |
-| 6 | 15341 Leo | 2-0-0 | 17.4 | 17.4 | 2.9 | -0.0 | 17.4 | 22.5 | 1.8 | +0.2 |
-| 7 | 31744 T.R.O.U.T | 0-1-0 | 13.9 | 13.9 | 0.4 | -0.0 | 13.9 | 21.0 | 0.1 | -0.1 |
-| 8 | 12693 Kaleidoscope | 1-1-0 | 10.6 | 10.6 | 0.1 | 0.0 | 10.6 | 17.5 | 1.0 | 0.0 |
-| 9 | 13189 Scorpio | 0-2-0 | 7.1 | 7.1 | -0.4 | -0.0 | 7.1 | 16.0 | 0.1 | -0.1 |
-| 10 | 28521 Infernovators | 0-1-0 | 6.5 | 6.5 | 0.0 | -0.0 | 6.5 | 13.0 | 0.4 | -0.4 |
-| 11 | 24143 Generals in Gear | 0-1-0 | 6.5 | 6.5 | 0.0 | -0.0 | 6.5 | 13.0 | 0.4 | -0.4 |
-| 12 | 38739 Darcie | 0-1-0 | 3.9 | 3.9 | 0.4 | -0.0 | 3.9 | 11.0 | 0.0 | 0.0 |
-| 13 | 37271 Ferocious Turbo Chickens | 0-2-0 | 0.4 | 0.4 | 7.9 | 0.0 | 0.4 | 19.0 | 0.1 | -0.1 |
-| 14 | 25682 Fancy Crabs | 2-0-0 | -0.4 | -0.4 | 5.1 | 0.0 | -0.4 | 23.0 | 1.8 | +0.2 |
-| 15 | 10274 MPHS Botcats | 1-1-0 | -3.6 | -3.6 | -0.1 | 0.0 | -3.6 | 10.5 | 0.6 | +0.4 |
+| 1 | 25921 Syb@rEagles | 1-0-0 | 33.0 | 33.0 | -5.0 | -10.7 | 22.3 | 29.0 | 0.8 | +0.2 |
+| 2 | 23295 AURORA | 2-0-0 | 25.0 | 25.0 | -0.0 | -10.7 | 14.3 | 39.0 | 2.0 | 0.0 |
+| 3 | 15341 Leo | 2-0-0 | 21.0 | 21.0 | 3.0 | 0.0 | 21.0 | 22.5 | 1.2 | +0.8 |
+| 4 | 9567 Cybernetic Elks 9567 | 0-1-0 | 16.0 | 16.0 | 0.0 | 10.7 | 26.7 | 20.0 | 0.2 | -0.2 |
+| 5 | 21231 42 | 2-0-0 | 14.0 | 14.0 | 0.0 | 10.7 | 24.7 | 26.5 | 1.5 | +0.5 |
+| 6 | 12695 Yellow Jackets | 1-1-0 | 14.0 | 14.0 | 0.0 | 10.7 | 24.7 | 28.5 | 1.0 | 0.0 |
+| 7 | 31744 T.R.O.U.T | 0-1-0 | 13.9 | 13.9 | 0.4 | -0.0 | 13.9 | 21.0 | 0.2 | -0.2 |
+| 8 | 24143 Generals in Gear | 0-1-0 | 13.0 | 13.0 | 0.0 | 10.7 | 23.7 | 13.0 | 0.5 | -0.5 |
+| 9 | 10274 MPHS Botcats | 1-1-0 | 10.7 | 10.7 | 1.1 | 0.0 | 10.7 | 10.5 | 1.1 | -0.1 |
+| 10 | 28521 Infernovators | 0-1-0 | 10.7 | 10.7 | 1.1 | 0.0 | 10.7 | 13.0 | 0.5 | -0.5 |
+| 11 | 13189 Scorpio | 0-2-0 | 7.1 | 7.1 | -0.4 | -0.0 | 7.1 | 16.0 | 0.2 | -0.2 |
+| 12 | 12693 Kaleidoscope | 1-1-0 | 7.0 | 7.0 | -0.0 | 0.0 | 7.0 | 17.5 | 1.3 | -0.3 |
+| 13 | 37271 Ferocious Turbo Chickens | 0-2-0 | 4.0 | 4.0 | 8.0 | -10.7 | -6.7 | 19.0 | 0.3 | -0.3 |
+| 14 | 38739 Darcie | 0-1-0 | 3.9 | 3.9 | 0.4 | -0.0 | 3.9 | 11.0 | 0.0 | 0.0 |
+| 15 | 25682 Fancy Crabs | 2-0-0 | -4.0 | -4.0 | 5.0 | 10.7 | 6.7 | 23.0 | 1.2 | +0.8 |
 
 Def: with this schedule, defense can't be told apart from offense (e.g. every match includes every team), so treat it as noise.
 
@@ -67,21 +67,21 @@ Def: with this schedule, defense can't be told apart from offense (e.g. every ma
 
 | # | Team | Partner OPR | Opp OPR | Avg-team win% |
 |---:|---|---:|---:|---:|
-| 1 | 38739 Darcie | 7.1 | 39.0 | <1% |
-| 2 | 9567 Cybernetic Elks 9567 | 0.4 | 28.0 | 1% |
-| 3 | 31744 T.R.O.U.T | 7.1 | 29.0 | 6% |
-| 4 | 25921 Syb@rEagles | -0.4 | 21.0 | 6% |
-| 5 | 13189 Scorpio | 8.9 | 34.0 | 14% |
-| 6 | 37271 Ferocious Turbo Chickens | 18.6 | 33.5 | 36% |
-| 7 | 12693 Kaleidoscope | 6.9 | 18.5 | 49% |
-| 8 | 12695 Yellow Jackets | 10.9 | 25.0 | 50% |
-| 9 | 21231 42 | 8.9 | 15.5 | 60% |
-| 10 | 15341 Leo | 5.1 | 13.5 | 66% |
-| 11 | 28521 Infernovators | 6.5 | 14.0 | 71% |
-| 12 | 24143 Generals in Gear | 6.5 | 14.0 | 71% |
-| 13 | 10274 MPHS Botcats | 14.1 | 15.0 | 88% |
-| 14 | 23295 AURORA | 17.6 | 14.5 | 97% |
-| 15 | 25682 Fancy Crabs | 23.4 | 14.0 | >99% |
+| 1 | 38739 Darcie | 7.1 | 39.0 | 4% |
+| 2 | 25921 Syb@rEagles | -4.0 | 21.0 | 13% |
+| 3 | 9567 Cybernetic Elks 9567 | 4.0 | 28.0 | 15% |
+| 4 | 31744 T.R.O.U.T | 7.1 | 29.0 | 20% |
+| 5 | 13189 Scorpio | 8.9 | 34.0 | 22% |
+| 6 | 37271 Ferocious Turbo Chickens | 15.0 | 33.5 | 33% |
+| 7 | 15341 Leo | 1.5 | 18.8 | 35% |
+| 8 | 24143 Generals in Gear | 10.7 | 24.7 | 45% |
+| 9 | 12695 Yellow Jackets | 14.5 | 25.0 | 51% |
+| 10 | 28521 Infernovators | 13.0 | 24.7 | 53% |
+| 11 | 10274 MPHS Botcats | 10.5 | 20.3 | 60% |
+| 12 | 21231 42 | 17.8 | 20.8 | 72% |
+| 13 | 12693 Kaleidoscope | 15.8 | 18.5 | 80% |
+| 14 | 23295 AURORA | 14.0 | 14.5 | 85% |
+| 15 | 25682 Fancy Crabs | 27.0 | 19.3 | 96% |
 
 ## Glossary
 

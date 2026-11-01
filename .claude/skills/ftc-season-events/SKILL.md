@@ -24,6 +24,7 @@ awards), use the **ftc-tournament-analyzer** skill instead. Offer it for events 
 | `tools/ftc-stats/build_season_pages.py` | Regenerates the index and every event's stats page from the FTC Events API |
 | `tools/ftc-stats/FtcStats.cs` | .NET 10 stats tool the build script runs for each event |
 | `tools/ftc-stats/season-videos.json` | Videos found by searching, by event code (the API's own livestream links are added automatically) |
+| `tools/ftc-stats/unofficial-events.json` | Events that aren't on FTC Events (unofficial scrimmages), with results read off their livestream |
 | `.claude/skills/ftc-season-events/find_videos.py` | Lists candidate videos for events that don't have one yet |
 | `.claude/skills/ftc-season-events/channels.json` | YouTube channels that stream FTC events, checked by `find_videos.py` |
 
@@ -187,6 +188,37 @@ bundle exec jekyll build
 
 Start the `jekyll` preview server (`.claude/launch.json`) and check `/tournaments/ftc/biobuzz/`:
 every Stats link loads, video links open the right video, and clicking a team number highlights it.
+
+### Unofficial events (results read from a stream)
+
+Some streams cover events that aren't on FTC Events (friendlies, unofficial scrimmages), so the API
+has no results for them. If the stream shows the standard FTC Live results screens, the results
+can be reconstructed and added to `tools/ftc-stats/unofficial-events.json`. The build script turns
+each entry into API-format JSON (in `.scratch/unofficial-events/`), runs `FtcStats.cs --load` on
+it, and lists the event with a † mark. Pick a code that can't clash with a real one (e.g.
+`BRGOAMI1`). The `_comment` in the file documents the fields.
+
+Find the results efficiently. Don't scan the whole video:
+
+1. Download the auto-captions (`--write-auto-subs --sub-langs "<lang>-orig" --sub-format json3`)
+   and search them for the announcer's cues: results on screen ("Resultado na tela/no telão"),
+   end of match ("fim de partida", "3 2 1"), match start countdowns.
+2. Grab frames a few seconds after each cue (the results screen follows a short "RED/BLUE WINS"
+   animation and stays up 30–60 s). Tile 4 frames per image to save reads.
+3. Use the titles on screen ("Qualification 6 of 11" on the results screen and in the in-match
+   overlay) to see which matches are missing, then search the gaps (bisect by the overlay's match
+   number) instead of sampling densely.
+4. **The rankings screen lists every match played so far** (alliances and scores), with a
+   "N / M matches played" counter. Find the one after the last qualification match and it holds the
+   whole schedule; use individual results screens for bonus RP icons (robot = swarm, 1/2 = the
+   pollinator RPs) and fouls.
+   Auto points: the in-match overlay's score at the start of teleop (timer just under 2:00, after
+   the 8 s transition) is the auto score, leave and park included.
+5. Check the transcription against the rankings screen's RP and tiebreak averages. Totals that don't
+   add up reveal surrogates (an appearance that doesn't count) and no-shows or DQs (0 RP and 0
+   tiebreak points). Search the captions for the team's name to tell which: the announcer usually
+   explains an absent team ("ainda não chegou"). FtcStats should then report
+   `Computed rankings match the official rankings.`
 
 ### 6. Report and commit
 

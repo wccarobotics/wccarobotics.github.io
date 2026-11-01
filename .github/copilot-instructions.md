@@ -59,8 +59,11 @@ does not.
   season events with posted results (most recent first, with video links) and a stats page per
   event from `FtcStats.cs`. Livestream links come from the API; add videos found on YouTube to
   `tools/ftc-stats/season-videos.json`. Rerun it to update the pages as the season goes on.
+  Events that aren't on FTC Events (unofficial scrimmages) can be added to
+  `tools/ftc-stats/unofficial-events.json` with results read off their livestream.
 - FTC API gotchas: in `matches`, `score{Color}Foul` is foul points that alliance *committed*
   (awarded to the opponent). Bonus RPs are the boolean `...RP` fields in `scores/{event}/qual`.
+  A `noShow` team in `schedule` gets 0 RP and 0 tiebreak points and is left out of OPR.
   2026 ranking = avg RP (3 win / 1 tie / +1 per bonus), then avg pre-foul score.
 
 ### Reference data

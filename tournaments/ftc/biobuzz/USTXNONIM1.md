@@ -38,7 +38,7 @@ Rankings, OPR, schedule difficulty, and more, calculated from the 27 qualificati
 | 14 | 9626 Hockabots | 2-3-0 | 1.60 | 28.0 | 40% | 0% | 0% |
 | 15 | 38286 Pixels n' Pliers | 2-3-0 | 1.40 | 27.4 | 20% | 0% | 0% |
 | 16 | 7904 Robotigers | 1-4-0 | 1.20 | 46.0 | 40% | 20% | 0% |
-| 17 | 37626 ITKAN 2026 FTC Wildflow… | 2-3-0 | 1.20 | 33.8 | 0% | 0% | 0% |
+| 17 | 37626 ITKAN Wildflowers | 2-3-0 | 1.20 | 33.8 | 0% | 0% | 0% |
 | 18 | 15878 Braswell Bengalbots | 1-4-0 | 0.80 | 29.0 | 20% | 0% | 0% |
 | 19 | 13072 Fellowship of the Robot | 1-4-0 | 0.80 | 24.8 | 20% | 0% | 0% |
 | 20 | 9054 Greenhill Robotics Gold | 2-3-0 | 0.80 | 23.0 | 20% | 0% | 0% |
@@ -50,27 +50,27 @@ These rankings cover this meet only; the official rankings are league rankings t
 
 | # | Team | W-L-T | OPR | npOPR | Auto | Def | Margin | Avg Score | xW | Luck |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 1 | 19564 ITKAN Solar | 5-0-0 | 132.9 | 136.0 | 40.2 | -1.4 | 131.5 | 149.6 | 5.0 | 0.0 |
-| 2 | 21171 ITKAN Lunar | 4-1-0 | 99.2 | 99.7 | 42.9 | -12.3 | 86.9 | 113.4 | 4.0 | 0.0 |
-| 3 | 9045 Greenhill Robotics Green | 4-1-0 | 41.8 | 45.3 | 11.0 | -1.9 | 39.8 | 57.6 | 3.2 | +0.8 |
-| 4 | 36082 The-Viltrumites | 4-1-0 | 41.5 | 41.1 | 13.9 | 12.9 | 54.4 | 69.6 | 3.6 | +0.4 |
-| 5 | 38470 HD-Tech | 2-3-0 | 33.5 | 25.2 | 5.6 | -8.0 | 25.5 | 72.2 | 2.8 | -0.8 |
-| 6 | 27468 ITKAN SMS Matcha Buzz | 3-2-0 | 32.0 | 28.9 | 11.2 | -12.0 | 20.0 | 45.0 | 2.9 | +0.1 |
-| 7 | 25659 RECOILROBOTICS | 3-2-0 | 26.5 | 20.4 | 1.5 | 6.7 | 33.2 | 72.4 | 3.0 | 0.0 |
-| 8 | 15524 Cardinalbots | 2-3-0 | 24.6 | 26.9 | 4.0 | 4.5 | 29.0 | 53.6 | 2.5 | -0.5 |
-| 9 | 36538 Crimson Command (UR) | 3-2-0 | 23.5 | 19.1 | 3.4 | -8.5 | 15.0 | 43.2 | 2.5 | +0.5 |
-| 10 | 13072 Fellowship of the Robot | 1-4-0 | 18.3 | 19.1 | -0.1 | 0.1 | 18.5 | 24.8 | 0.7 | +0.3 |
-| 11 | 9626 Hockabots | 2-3-0 | 18.2 | 13.9 | 4.8 | -7.2 | 11.0 | 36.0 | 2.9 | -0.9 |
-| 12 | 36923 CircuitForge | 3-2-0 | 15.3 | 17.7 | 12.3 | 3.7 | 19.1 | 35.0 | 2.4 | +0.6 |
-| 13 | 15878 Braswell Bengalbots | 1-4-0 | 14.4 | 10.7 | 4.2 | 8.9 | 23.3 | 33.0 | 1.1 | -0.1 |
-| 14 | 24290 RoboRulers | 2-3-0 | 14.3 | 12.9 | 6.3 | -0.0 | 14.3 | 51.8 | 2.2 | -0.2 |
-| 15 | 38297 MonkBots | 2-3-0 | 13.8 | 7.2 | 1.7 | -1.2 | 12.7 | 46.4 | 2.5 | -0.5 |
-| 16 | 9054 Greenhill Robotics Gold | 2-3-0 | 11.2 | 7.0 | 6.1 | 16.5 | 27.7 | 32.8 | 0.9 | +1.1 |
-| 17 | 7904 Robotigers | 1-4-0 | 5.8 | 4.3 | 0.6 | 2.0 | 7.8 | 50.0 | 2.2 | -1.2 |
-| 18 | 38286 Pixels n' Pliers | 2-3-0 | 3.6 | 4.1 | 1.9 | -7.1 | -3.5 | 27.4 | 2.2 | -0.2 |
-| 19 | 37438 CDA Spontaneous Combust… | 4-1-0 | 3.3 | 5.4 | 3.0 | 12.5 | 15.9 | 54.2 | 3.2 | +0.8 |
-| 20 | 32495 VeritasVikings | 0-5-0 | 0.7 | 2.7 | 1.8 | -7.4 | -6.8 | 35.2 | 1.2 | -1.2 |
-| 21 | 37626 ITKAN 2026 FTC Wildflow… | 2-3-0 | -9.3 | -9.3 | -6.0 | -2.8 | -12.1 | 33.8 | 1.7 | +0.3 |
+| 1 | 19564 ITKAN Solar | 5-0-0 | 132.9 | 135.9 | 40.2 | -1.7 | 131.1 | 149.6 | 5.0 | 0.0 |
+| 2 | 21171 ITKAN Lunar | 4-1-0 | 99.3 | 99.8 | 43.1 | -12.3 | 87.0 | 113.4 | 4.0 | 0.0 |
+| 3 | 9045 Greenhill Robotics Green | 4-1-0 | 42.1 | 45.7 | 11.4 | -2.3 | 39.7 | 57.6 | 3.2 | +0.8 |
+| 4 | 36082 The-Viltrumites | 4-1-0 | 40.9 | 40.8 | 13.6 | 11.6 | 52.6 | 69.6 | 3.6 | +0.4 |
+| 5 | 38470 HD-Tech | 2-3-0 | 33.5 | 25.1 | 5.4 | -7.7 | 25.8 | 72.2 | 2.7 | -0.7 |
+| 6 | 27468 ITKAN SMS Matcha Buzz | 3-2-0 | 32.2 | 29.0 | 11.3 | -11.6 | 20.6 | 45.0 | 2.9 | +0.1 |
+| 7 | 25659 RECOILROBOTICS | 3-2-0 | 26.5 | 20.3 | 1.4 | 7.3 | 33.9 | 72.4 | 3.0 | 0.0 |
+| 8 | 15524 Cardinalbots | 2-3-0 | 24.5 | 26.8 | 3.9 | 4.2 | 28.7 | 53.6 | 2.5 | -0.5 |
+| 9 | 36538 Crimson Command (UR) | 3-2-0 | 23.0 | 18.8 | 3.1 | -9.3 | 13.7 | 43.2 | 2.5 | +0.5 |
+| 10 | 9626 Hockabots | 2-3-0 | 18.5 | 14.2 | 5.2 | -7.2 | 11.2 | 36.0 | 2.9 | -0.9 |
+| 11 | 13072 Fellowship of the Robot | 1-4-0 | 18.0 | 19.1 | -0.0 | -1.6 | 16.5 | 24.8 | 0.7 | +0.3 |
+| 12 | 36923 CircuitForge | 3-2-0 | 17.6 | 19.1 | 13.5 | 7.4 | 24.9 | 35.0 | 2.5 | +0.5 |
+| 13 | 24290 RoboRulers | 2-3-0 | 14.4 | 13.2 | 6.6 | -0.7 | 13.7 | 51.8 | 2.2 | -0.2 |
+| 14 | 15878 Braswell Bengalbots | 1-4-0 | 14.4 | 10.6 | 4.2 | 9.5 | 23.9 | 33.0 | 1.1 | -0.1 |
+| 15 | 38297 MonkBots | 2-3-0 | 13.4 | 6.9 | 1.4 | -2.2 | 11.2 | 46.4 | 2.5 | -0.5 |
+| 16 | 9054 Greenhill Robotics Gold | 2-3-0 | 10.5 | 5.7 | 4.7 | 19.6 | 30.1 | 32.8 | 0.9 | +1.1 |
+| 17 | 7904 Robotigers | 1-4-0 | 5.8 | 4.3 | 0.6 | 1.8 | 7.6 | 50.0 | 2.2 | -1.2 |
+| 18 | 37438 CDA Spontaneous Combust… | 4-1-0 | 3.4 | 5.4 | 3.0 | 12.9 | 16.3 | 54.2 | 3.2 | +0.8 |
+| 19 | 38286 Pixels n' Pliers | 2-3-0 | 3.3 | 3.9 | 1.7 | -7.3 | -4.0 | 27.4 | 2.2 | -0.2 |
+| 20 | 32495 VeritasVikings | 0-5-0 | 0.7 | 2.6 | 1.8 | -7.0 | -6.3 | 35.2 | 1.2 | -1.2 |
+| 21 | 37626 ITKAN Wildflowers | 2-3-0 | -9.2 | -9.3 | -6.0 | -1.8 | -11.0 | 33.8 | 1.7 | +0.3 |
 
 Def: differences between teams are consistent with random match-to-match variation (p = 0.48); treat them as noise.
 
@@ -78,27 +78,27 @@ Def: differences between teams are consistent with random match-to-match variati
 
 | # | Team | Partner OPR | Opp OPR | Avg-team win% |
 |---:|---|---:|---:|---:|
-| 1 | 13072 Fellowship of the Robot | 6.5 | 75.9 | 20% |
-| 2 | 15878 Braswell Bengalbots | 18.6 | 74.8 | 29% |
-| 3 | 9054 Greenhill Robotics Gold | 21.6 | 74.2 | 32% |
-| 4 | 21171 ITKAN Lunar | 14.2 | 62.5 | 47% |
-| 5 | 9045 Greenhill Robotics Green | 15.8 | 55.9 | 50% |
-| 6 | 19564 ITKAN Solar | 16.7 | 43.6 | 50% |
-| 7 | 38470 HD-Tech | 38.7 | 54.8 | 51% |
-| 8 | 15524 Cardinalbots | 29.0 | 66.2 | 51% |
-| 9 | 36538 Crimson Command (UR) | 19.7 | 49.6 | 53% |
-| 10 | 27468 ITKAN SMS Matcha Buzz | 13.0 | 45.6 | 53% |
-| 11 | 24290 RoboRulers | 34.7 | 47.8 | 54% |
-| 12 | 32495 VeritasVikings | 34.5 | 58.2 | 56% |
-| 13 | 37626 ITKAN 2026 FTC Wildflow… | 43.1 | 60.7 | 58% |
-| 14 | 25659 RECOILROBOTICS | 36.3 | 53.5 | 59% |
-| 15 | 38297 MonkBots | 32.6 | 59.8 | 60% |
-| 16 | 36082 The-Viltrumites | 28.1 | 42.3 | 60% |
-| 17 | 7904 Robotigers | 44.2 | 46.8 | 62% |
-| 18 | 36923 CircuitForge | 18.7 | 35.5 | 63% |
-| 19 | 9626 Hockabots | 17.8 | 28.8 | 65% |
-| 20 | 38286 Pixels n' Pliers | 23.8 | 54.6 | 65% |
-| 21 | 37438 CDA Spontaneous Combust… | 50.9 | 34.2 | 87% |
+| 1 | 13072 Fellowship of the Robot | 6.8 | 76.0 | 20% |
+| 2 | 15878 Braswell Bengalbots | 18.6 | 75.2 | 29% |
+| 3 | 9054 Greenhill Robotics Gold | 22.1 | 74.5 | 32% |
+| 4 | 21171 ITKAN Lunar | 14.1 | 62.2 | 47% |
+| 5 | 9045 Greenhill Robotics Green | 15.5 | 56.2 | 49% |
+| 6 | 38470 HD-Tech | 38.7 | 55.0 | 50% |
+| 7 | 19564 ITKAN Solar | 16.7 | 43.4 | 51% |
+| 8 | 15524 Cardinalbots | 29.1 | 66.1 | 51% |
+| 9 | 27468 ITKAN SMS Matcha Buzz | 12.8 | 45.9 | 52% |
+| 10 | 36538 Crimson Command (UR) | 20.2 | 49.5 | 53% |
+| 11 | 24290 RoboRulers | 34.6 | 47.9 | 54% |
+| 12 | 32495 VeritasVikings | 34.5 | 58.5 | 56% |
+| 13 | 37626 ITKAN Wildflowers | 43.0 | 61.1 | 57% |
+| 14 | 25659 RECOILROBOTICS | 36.3 | 53.9 | 59% |
+| 15 | 38297 MonkBots | 33.0 | 59.6 | 60% |
+| 16 | 36082 The-Viltrumites | 28.7 | 42.1 | 61% |
+| 17 | 7904 Robotigers | 44.2 | 46.5 | 62% |
+| 18 | 36923 CircuitForge | 18.2 | 35.6 | 62% |
+| 19 | 9626 Hockabots | 17.5 | 29.1 | 65% |
+| 20 | 38286 Pixels n' Pliers | 24.1 | 54.6 | 66% |
+| 21 | 37438 CDA Spontaneous Combust… | 50.8 | 34.3 | 87% |
 
 ## Glossary
 

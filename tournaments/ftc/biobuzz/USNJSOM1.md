@@ -16,7 +16,7 @@ Rankings, OPR, schedule difficulty, and more, calculated from the 21 qualificati
 [Results on FTC Events](https://ftc-events.firstinspires.org/2026/USNJSOM1)
 
 - Qualification matches played: 21 of 21
-- Teams: 14 · Playoff alliances: 4 · Average OPR: 20.2 · Match margin σ: 10.9
+- Teams: 14 · Playoff alliances: 4 · Average OPR: 20.3 · Match margin σ: 11.2
 
 ## Rankings
 
@@ -43,20 +43,20 @@ These rankings cover this meet only; the official rankings are league rankings t
 
 | # | Team | W-L-T | OPR | npOPR | Auto | Def | Margin | Avg Score | xW | Luck |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 1 | 19735 Hornet Silver | 5-1-0 | 46.0 | 38.6 | 18.8 | 3.8 | 49.8 | 59.3 | 4.7 | +0.3 |
-| 2 | 22261 Hornet Blue | 4-2-0 | 36.1 | 36.0 | 10.9 | 5.2 | 41.3 | 48.5 | 4.2 | -0.2 |
-| 3 | 36975 8iBot | 5-1-0 | 35.4 | 29.6 | 8.1 | -0.2 | 35.3 | 49.5 | 4.2 | +0.8 |
-| 4 | 37961 COUNTERWEIGHT | 4-2-0 | 32.8 | 27.5 | 6.5 | -1.0 | 31.8 | 55.5 | 4.5 | -0.5 |
-| 5 | 36611 Wild Circuits | 3-3-0 | 24.6 | 22.8 | 3.1 | 1.7 | 26.4 | 39.5 | 2.7 | +0.3 |
-| 6 | 17377 Pennsauken Robotics | 3-3-0 | 17.7 | 17.6 | -3.1 | 0.9 | 18.6 | 37.0 | 2.7 | +0.3 |
-| 7 | 13124 Voyagers - Blue | 3-3-0 | 17.3 | 11.1 | 2.7 | -4.2 | 13.0 | 38.7 | 3.2 | -0.2 |
-| 8 | 31127 Robotech Outliers | 2-4-0 | 15.7 | 11.2 | 1.5 | 2.4 | 18.1 | 39.2 | 2.2 | -0.2 |
-| 9 | 32294 Brave Robotics Pink | 2-4-0 | 14.7 | 16.4 | 7.5 | -2.2 | 12.4 | 38.0 | 2.6 | -0.6 |
-| 10 | 13115 Brave Robotics | 1-5-0 | 13.9 | 10.6 | 2.9 | -2.3 | 11.5 | 32.8 | 2.2 | -1.2 |
-| 11 | 23743 Hornet Hive | 4-2-0 | 12.4 | 16.1 | 10.1 | 3.7 | 16.1 | 36.0 | 2.6 | +1.4 |
-| 12 | 17036 Robotech Anomaly | 2-4-0 | 10.7 | 10.8 | 7.8 | -0.7 | 10.0 | 32.0 | 2.3 | -0.3 |
-| 13 | 10974 IronMariners | 2-4-0 | 6.0 | 10.0 | -2.3 | 3.9 | 9.9 | 29.8 | 1.6 | +0.4 |
-| 14 | 32830 Cyberdogs | 2-4-0 | 0.2 | 3.6 | -1.0 | -11.1 | -10.9 | 31.2 | 2.2 | -0.2 |
+| 1 | 19735 Hornet Silver | 5-1-0 | 45.6 | 38.1 | 18.6 | 4.0 | 49.6 | 59.3 | 4.7 | +0.3 |
+| 2 | 22261 Hornet Blue | 4-2-0 | 35.8 | 35.6 | 10.7 | 4.6 | 40.4 | 48.5 | 4.2 | -0.2 |
+| 3 | 36975 8iBot | 5-1-0 | 35.4 | 29.5 | 8.1 | -0.0 | 35.4 | 49.5 | 4.2 | +0.8 |
+| 4 | 37961 COUNTERWEIGHT | 4-2-0 | 32.9 | 27.6 | 6.6 | -0.8 | 32.1 | 55.5 | 4.5 | -0.5 |
+| 5 | 36611 Wild Circuits | 3-3-0 | 24.6 | 22.7 | 3.1 | 1.3 | 25.9 | 39.5 | 2.7 | +0.3 |
+| 6 | 17377 Pennsauken Robotics | 3-3-0 | 17.4 | 17.3 | -3.3 | 1.3 | 18.7 | 37.0 | 2.7 | +0.3 |
+| 7 | 13124 Voyagers - Blue | 3-3-0 | 17.3 | 11.3 | 2.7 | -3.9 | 13.5 | 38.7 | 3.2 | -0.2 |
+| 8 | 32294 Brave Robotics Pink | 2-4-0 | 16.7 | 18.4 | 9.0 | -2.6 | 14.1 | 38.0 | 2.8 | -0.8 |
+| 9 | 31127 Robotech Outliers | 2-4-0 | 15.5 | 11.0 | 1.3 | 2.7 | 18.2 | 39.2 | 2.2 | -0.2 |
+| 10 | 13115 Brave Robotics | 1-5-0 | 13.6 | 10.4 | 2.7 | -2.1 | 11.6 | 32.8 | 2.2 | -1.2 |
+| 11 | 23743 Hornet Hive | 4-2-0 | 12.5 | 16.2 | 10.2 | 3.8 | 16.2 | 36.0 | 2.5 | +1.5 |
+| 12 | 17036 Robotech Anomaly | 2-4-0 | 10.9 | 11.4 | 7.8 | 1.9 | 12.8 | 32.0 | 2.3 | -0.3 |
+| 13 | 10974 IronMariners | 2-4-0 | 6.1 | 10.1 | -2.2 | 3.5 | 9.6 | 29.8 | 1.6 | +0.4 |
+| 14 | 32830 Cyberdogs | 2-4-0 | 0.3 | 3.7 | -1.0 | -11.2 | -10.9 | 31.2 | 2.1 | -0.1 |
 
 Def: differences between teams are consistent with random match-to-match variation (p = 0.51); treat them as noise.
 
@@ -64,20 +64,20 @@ Def: differences between teams are consistent with random match-to-match variati
 
 | # | Team | Partner OPR | Opp OPR | Avg-team win% |
 |---:|---|---:|---:|---:|
-| 1 | 19735 Hornet Silver | 13.4 | 41.0 | 36% |
-| 2 | 36611 Wild Circuits | 14.9 | 41.1 | 39% |
-| 3 | 22261 Hornet Blue | 12.4 | 38.8 | 41% |
-| 4 | 36975 8iBot | 14.1 | 38.5 | 41% |
-| 5 | 31127 Robotech Outliers | 23.4 | 42.3 | 44% |
-| 6 | 13115 Brave Robotics | 19.0 | 42.3 | 45% |
-| 7 | 17036 Robotech Anomaly | 21.3 | 43.0 | 46% |
-| 8 | 17377 Pennsauken Robotics | 19.3 | 38.8 | 51% |
-| 9 | 37961 COUNTERWEIGHT | 22.7 | 38.8 | 52% |
-| 10 | 32294 Brave Robotics Pink | 23.3 | 44.7 | 53% |
-| 11 | 23743 Hornet Hive | 23.6 | 41.1 | 60% |
-| 12 | 13124 Voyagers - Blue | 21.4 | 38.5 | 61% |
-| 13 | 10974 IronMariners | 23.8 | 38.6 | 63% |
-| 14 | 32830 Cyberdogs | 30.9 | 39.5 | 74% |
+| 1 | 19735 Hornet Silver | 13.7 | 41.5 | 37% |
+| 2 | 36611 Wild Circuits | 14.9 | 41.3 | 39% |
+| 3 | 36975 8iBot | 14.1 | 38.6 | 40% |
+| 4 | 22261 Hornet Blue | 12.7 | 38.7 | 42% |
+| 5 | 31127 Robotech Outliers | 23.7 | 42.6 | 45% |
+| 6 | 13115 Brave Robotics | 19.2 | 42.6 | 46% |
+| 7 | 17036 Robotech Anomaly | 21.5 | 42.8 | 46% |
+| 8 | 17377 Pennsauken Robotics | 19.6 | 39.1 | 52% |
+| 9 | 37961 COUNTERWEIGHT | 22.6 | 39.1 | 53% |
+| 10 | 32294 Brave Robotics Pink | 23.1 | 44.5 | 53% |
+| 11 | 23743 Hornet Hive | 23.5 | 41.3 | 59% |
+| 12 | 13124 Voyagers - Blue | 21.3 | 38.6 | 60% |
+| 13 | 10974 IronMariners | 23.7 | 38.8 | 63% |
+| 14 | 32830 Cyberdogs | 30.9 | 39.8 | 74% |
 
 ## Glossary
 

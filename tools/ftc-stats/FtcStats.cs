@@ -216,7 +216,12 @@ class DataSource(Options opts)
 
 // ---------------------------------------------------------------------------
 
-record Slot(int Team, bool Surrogate, bool Dq);
+// NoShow: the team didn't come to the field (schedule's noShow flag).
+record Slot(int Team, bool Surrogate, bool Dq, bool NoShow = false)
+{
+    // Disqualified and no-show teams get no RP or tiebreak points for the match.
+    public bool Zeroed => Dq || NoShow;
+}
 
 // NpScore: score without the foul points the opponents gave away (the ranking tiebreaker).
 // Bonuses: bonus ranking point flags from the score details (null if not available).
@@ -224,6 +229,8 @@ record Slot(int Team, bool Surrogate, bool Dq);
 record Alliance(List<Slot> Slots, int? Score, int? Auto, int? NpScore, Dictionary<string, bool>? Bonuses, double? Tiebreak2 = null)
 {
     public IEnumerable<int> Teams => Slots.Select(s => s.Team);
+    // The robots that actually played; a no-show contributed nothing to the score.
+    public IEnumerable<int> OnField => Slots.Where(s => !s.NoShow).Select(s => s.Team);
 }
 
 record Match(int Number, Alliance Red, Alliance Blue)
@@ -284,7 +291,8 @@ record Tournament(List<Match> Matches, List<int> Teams, Dictionary<int, string> 
                     {
                         int team = (int)t!["teamNumber"]!;
                         names[team] = ((string?)t["teamName"] ?? "").Trim();
-                        return new Slot(team, (bool?)t["surrogate"] == true, dqs.Contains(team));
+                        return new Slot(team, (bool?)t["surrogate"] == true, dqs.Contains(team),
+                            result is not null && (bool?)t["noShow"] == true);
                     })
                     .ToList();
                 // score{Color}Foul is the foul points that alliance committed, which go to the other alliance.
@@ -314,6 +322,8 @@ record Tournament(List<Match> Matches, List<int> Teams, Dictionary<int, string> 
 class Model
 {
     public required Dictionary<int, double> Opr, NpOpr, AutoOpr;
+    // False when no played match has auto points (e.g. results read off a livestream's results screens).
+    public required bool HasAuto;
     // Def: points per match the team holds opponents below what their OPRs predict.
     // Margin: OPR + Def, the team's contribution to its alliance's winning margin.
     public required Dictionary<int, double> Def, Margin;
@@ -347,10 +357,10 @@ class Model
             var rhs = new double[n];
             foreach (var (a, v) in data)
             {
-                foreach (int t1 in a.Teams)
+                foreach (int t1 in a.OnField)
                 {
                     rhs[index[t1]] += v!.Value;
-                    foreach (int t2 in a.Teams) ata[index[t1], index[t2]] += 1;
+                    foreach (int t2 in a.OnField) ata[index[t1], index[t2]] += 1;
                 }
             }
             for (int i = 0; i < n; i++)
@@ -375,7 +385,8 @@ class Model
         {
             Opr = opr,
             NpOpr = Solve((m, a) => a.NpScore),
-            AutoOpr = Solve((m, a) => a.Auto ?? 0),
+            AutoOpr = Solve((m, a) => a.Auto),
+            HasAuto = rows.Any(r => r.a.Auto is not null),
             Def = def,
             Margin = evt.Teams.ToDictionary(t => t, t => opr[t] + def[t]),
 
@@ -562,11 +573,14 @@ record Playoffs(List<PlayoffAlliance> Alliances, List<PlayoffMatch> Matches, Lis
     }
 
     // Match videos come as youtu.be links; the site uses youtube.com/watch?v= for uploads.
+    // A start time (t=) is kept so links into a livestream jump to the match.
     static string? YouTubeUrl(string? url)
     {
         if (string.IsNullOrWhiteSpace(url)) return null;
         var m = Regex.Match(url, @"(?:youtu\.be/|v=|/live/)([\w-]{11})");
-        return m.Success ? $"https://www.youtube.com/watch?v={m.Groups[1].Value}" : url.Trim();
+        if (!m.Success) return url.Trim();
+        var t = Regex.Match(url, @"[?&]t=(\d+)");
+        return $"https://www.youtube.com/watch?v={m.Groups[1].Value}" + (t.Success ? $"&t={t.Groups[1].Value}" : "");
     }
 }
 
@@ -600,8 +614,8 @@ static class Rp
     public static int AllianceCount(int teams) => teams <= 10 ? 2 : teams <= 20 ? 4 : teams <= 40 ? 6 : 8;
 }
 
-// Ranking-point standings. Surrogate appearances don't count, and a disqualified team gets
-// 0 RP and 0 tiebreak points for the match.
+// Ranking-point standings. Surrogate appearances don't count, and a disqualified or no-show team
+// gets 0 RP and 0 tiebreak points for the match.
 class Standings
 {
     public required Dictionary<int, double> RpTotal, NpTotal, Tb2Total, AutoTotal;
@@ -632,11 +646,10 @@ class Standings
                 int allianceRp = Rp.ForAlliance(m, a);
                 foreach (var slot in a.Slots.Where(s => !s.Surrogate))
                 {
-                    // A disqualified team gets no RP or tiebreak points for the match.
-                    rp[slot.Team] += slot.Dq ? 0 : allianceRp;
-                    np[slot.Team] += slot.Dq ? 0 : a.NpScore!.Value;
-                    tb2[slot.Team] += slot.Dq ? 0 : a.Tiebreak2 ?? 0;
-                    auto[slot.Team] += slot.Dq ? 0 : a.Auto ?? 0;
+                    rp[slot.Team] += slot.Zeroed ? 0 : allianceRp;
+                    np[slot.Team] += slot.Zeroed ? 0 : a.NpScore!.Value;
+                    tb2[slot.Team] += slot.Zeroed ? 0 : a.Tiebreak2 ?? 0;
+                    auto[slot.Team] += slot.Zeroed ? 0 : a.Auto ?? 0;
                     counted[slot.Team]++;
                 }
             }
@@ -1021,6 +1034,8 @@ class Report(Tournament evt, Tournament full, Model model, Dictionary<int, Offic
             ("Partner / Opp OPR", "Average partner OPR and average opposing-alliance OPR total, over the full qual schedule"),
             ("Avg-team win%", "Win rate a perfectly average team would expect in this team's matches (lower = harder schedule)"),
         ]);
+        if (!model.HasAuto)
+            glossary.RemoveAll(g => g.Term == "Auto");
         if (remaining.Count > 0)
             glossary.Add(("Proj W", "Current wins (ties = ½) plus win probability in remaining matches"));
         if (opts.Markdown)
@@ -1207,6 +1222,12 @@ class Report(Tournament evt, Tournament full, Model model, Dictionary<int, Offic
                 F(l.ExpectedWins), (l.Wins + l.Ties * 0.5 - l.ExpectedWins).ToString("+0.0;-0.0;0.0"),
             };
             rows.Add(row.ToArray());
+        }
+        if (!model.HasAuto)
+        {
+            int col = header.IndexOf("Auto");
+            header.RemoveAt(col);
+            rows = rows.Select(r => r.Where((_, c) => c != col).ToArray()).ToList();
         }
         Table(header.ToArray(), rows, leftAligned: ["Name"]);
         PrintDefenseNote();

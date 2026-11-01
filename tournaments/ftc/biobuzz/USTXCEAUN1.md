@@ -16,7 +16,7 @@ Rankings, OPR, schedule difficulty, and more, calculated from the 7 qualificatio
 [Results on FTC Events](https://ftc-events.firstinspires.org/2026/USTXCEAUN1)
 
 - Qualification matches played: 7 of 7
-- Teams: 10 · Playoff alliances: 2 · Average OPR: 17.3 · Match margin σ: 25.7
+- Teams: 10 · Playoff alliances: 2 · Average OPR: 18.6 · Match margin σ: 34.1
 - 1 scheduled qualification match has no posted results and is left out.
 
 ## Rankings
@@ -40,16 +40,16 @@ Computed rankings match the official rankings.
 
 | # | Team | W-L-T | OPR | npOPR | Auto | Def | Margin | Avg Score | xW | Luck |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 1 | 36363 Spectre | 3-0-0 | 56.0 | 56.0 | 15.6 | 12.8 | 68.7 | 65.3 | 2.9 | +0.1 |
-| 2 | 14361 Robolobos Ghost | 2-0-0 | 34.6 | 34.6 | -0.0 | 5.8 | 40.3 | 49.0 | 1.8 | +0.2 |
-| 3 | 35827 Nothing BOT Robotics! | 2-1-0 | 17.8 | 17.8 | 5.5 | -13.3 | 4.6 | 35.3 | 1.5 | +0.5 |
-| 4 | 19412 Archytas | 2-1-0 | 12.2 | 12.2 | 7.0 | -8.1 | 4.1 | 37.0 | 2.0 | 0.0 |
-| 5 | 18244 Hestia | 1-2-0 | 11.4 | 11.4 | -1.6 | -3.3 | 8.1 | 35.0 | 1.0 | 0.0 |
-| 6 | 37942 Short Circuit | 1-2-0 | 11.0 | 11.0 | 3.6 | -1.3 | 9.7 | 30.0 | 1.0 | 0.0 |
-| 7 | 16556 Steminists | 0-3-0 | 10.4 | 10.4 | 2.4 | -4.2 | 6.2 | 18.7 | 1.0 | -1.0 |
-| 8 | 36008 Galactic Penguins | 1-2-0 | 8.0 | 8.0 | 0.1 | -0.2 | 7.8 | 19.3 | 0.8 | +0.2 |
-| 9 | 16555 Deus ex Maquina | 1-1-0 | 6.9 | 6.9 | 2.1 | 22.8 | 29.7 | 21.5 | 0.6 | +0.4 |
-| 10 | 25662 Luna | 1-2-0 | 4.5 | 4.5 | -0.2 | -1.5 | 3.1 | 30.3 | 1.4 | -0.4 |
+| 1 | 36363 Spectre | 3-0-0 | 53.2 | 53.2 | 15.6 | 17.9 | 71.1 | 65.3 | 2.6 | +0.4 |
+| 2 | 14361 Robolobos Ghost | 2-0-0 | 34.2 | 34.2 | -0.0 | 10.4 | 44.6 | 49.0 | 1.5 | +0.5 |
+| 3 | 35827 Nothing BOT Robotics! | 2-1-0 | 19.1 | 19.1 | 5.5 | -14.8 | 4.3 | 35.3 | 1.4 | +0.6 |
+| 4 | 36008 Galactic Penguins | 1-2-0 | 17.0 | 17.0 | 3.6 | 0.0 | 17.0 | 19.3 | 1.1 | -0.1 |
+| 5 | 18244 Hestia | 1-2-0 | 15.9 | 15.9 | -1.5 | -6.6 | 9.3 | 35.0 | 1.2 | -0.2 |
+| 6 | 19412 Archytas | 2-1-0 | 15.3 | 15.3 | 7.0 | -5.8 | 9.5 | 37.0 | 2.1 | -0.1 |
+| 7 | 16556 Steminists | 0-3-0 | 11.8 | 11.8 | 2.4 | -2.4 | 9.4 | 18.7 | 1.2 | -1.2 |
+| 8 | 37942 Short Circuit | 1-2-0 | 10.5 | 10.5 | 3.6 | 1.5 | 12.0 | 30.0 | 0.9 | +0.1 |
+| 9 | 25662 Luna | 1-2-0 | 5.1 | 5.1 | -0.2 | 0.2 | 5.3 | 30.3 | 1.3 | -0.3 |
+| 10 | 16555 Deus ex Maquina | 1-1-0 | 4.0 | 4.0 | 2.0 | 26.5 | 30.5 | 21.5 | 0.6 | +0.4 |
 
 Def: not enough matches to tell defense apart from random variation.
 
@@ -57,16 +57,16 @@ Def: not enough matches to tell defense apart from random variation.
 
 | # | Team | Partner OPR | Opp OPR | Avg-team win% |
 |---:|---|---:|---:|---:|
-| 1 | 36008 Galactic Penguins | 11.3 | 42.9 | 34% |
-| 2 | 18244 Hestia | 23.6 | 52.5 | 36% |
-| 3 | 37942 Short Circuit | 19.0 | 46.1 | 38% |
-| 4 | 16555 Deus ex Maquina | 14.6 | 41.6 | 40% |
-| 5 | 16556 Steminists | 8.2 | 30.2 | 44% |
-| 6 | 35827 Nothing BOT Robotics! | 17.5 | 35.2 | 50% |
-| 7 | 36363 Spectre | 9.4 | 22.2 | 57% |
-| 8 | 25662 Luna | 25.8 | 30.3 | 59% |
-| 9 | 14361 Robolobos Ghost | 14.4 | 17.0 | 71% |
-| 10 | 19412 Archytas | 24.8 | 19.7 | 73% |
+| 1 | 37942 Short Circuit | 19.5 | 50.4 | 38% |
+| 2 | 36008 Galactic Penguins | 14.4 | 43.4 | 40% |
+| 3 | 18244 Hestia | 24.7 | 52.2 | 40% |
+| 4 | 16555 Deus ex Maquina | 17.5 | 42.8 | 43% |
+| 5 | 16556 Steminists | 12.5 | 33.4 | 47% |
+| 6 | 35827 Nothing BOT Robotics! | 16.2 | 37.3 | 48% |
+| 7 | 36363 Spectre | 12.1 | 27.5 | 54% |
+| 8 | 25662 Luna | 25.2 | 35.2 | 55% |
+| 9 | 14361 Robolobos Ghost | 14.8 | 22.3 | 62% |
+| 10 | 19412 Archytas | 27.4 | 24.3 | 72% |
 
 ## Glossary
 

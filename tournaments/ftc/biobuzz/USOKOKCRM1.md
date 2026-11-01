@@ -13,7 +13,7 @@ Rankings, OPR, schedule difficulty, and more, calculated from the 26 qualificati
 
 **Tip:** Click on any team number to highlight all of that team's appearances on the page, or click a column heading to sort.
 
-[Results on FTC Events](https://ftc-events.firstinspires.org/2026/USOKOKCRM1)
+[Results on FTC Events](https://ftc-events.firstinspires.org/2026/USOKOKCRM1) · [Livestream part 1](https://www.youtube.com/live/wdSvEzzNXLI) · [Livestream part 2](https://www.youtube.com/live/GfnGVDw5u5E)
 
 - Qualification matches played: 26 of 26
 - Teams: 17 · Playoff alliances: 4 · Average OPR: 27.6 · Match margin σ: 20.4

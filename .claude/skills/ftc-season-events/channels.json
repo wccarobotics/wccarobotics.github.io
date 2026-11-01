@@ -27,6 +27,8 @@
     { "name": "Sesi Pernambuco", "handle": "@sesipernambucoficial", "region": "Brazil (Recife; titles like \"FTC - 23/10\")" },
     { "name": "Jason Cheng", "handle": "@jasoncheng9310", "region": "WA (Ritchie/Maxwell/Watt league meets)" },
     { "name": "FIRST Tech Challenge - Three Sisters League", "handle": "@ftcthreesistersleague", "region": "OR (Three Sisters League, Eugene)" },
-    { "name": "NTX FTC", "handle": "@ntxftc", "region": "TX (North Texas leagues)" }
+    { "name": "NTX FTC", "handle": "@ntxftc", "region": "TX (North Texas leagues)" },
+    { "name": "The Level Ups (10368)", "handle": "@10368TheLevelUps", "region": "OK (Carver League meets, Yukon; titles may not name the league)" },
+    { "name": "JUSTICE FTC", "handle": "@justiceftc", "region": "Brazil (Goiás; streamed an unofficial Oct 31 amistoso, may stream BRGOQ on Nov 12)" }
   ]
 }

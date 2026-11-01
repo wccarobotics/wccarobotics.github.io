@@ -1,0 +1,54 @@
+{
+  "_comment": "Events that aren't in the FTC Events system (e.g. unofficial scrimmages), with results read off their livestream's results and rankings screens. build_season_pages.py converts each one to FTC API-format JSON and runs FtcStats.cs on it. Match 'red'/'blue' list teams by station; 'score' is [red, blue] final score; 'foul' is [red, blue] foul points committed (awarded to the other alliance); 'bonus' lists the bonus RP flags each alliance earned; 'surrogate' lists teams whose appearance doesn't count, 'noShow' teams that weren't on the field, and 'dq' teams that were disqualified. 'auto' is [red, blue] auto points, read from the score overlay at the start of teleop (it includes leave and park). 't' is the match start in the video, in seconds.",
+  "BRGOAMI1": {
+    "name": "Amistoso FTC - Planalto",
+    "date": "2026-10-31",
+    "city": "SESI Planalto, Goiás",
+    "country": "Brazil",
+    "video": "https://www.youtube.com/live/mDmLDCKXviQ",
+    "notes": [
+      "An unofficial friendly hosted by SESI Planalto, so it isn't on FTC Events. Results were read from the results and rankings screens shown on the [JUSTICE FTC livestream](https://www.youtube.com/live/mDmLDCKXviQ), and auto points from the score overlay at the start of teleop.",
+      "Qualification 5 had two surrogates (23276 and 31146). 38388 (Blue Gear, from Brasília) was still on the road for Qualifications 2–4 and arrived after Qualification 6, so those three are no-shows: no ranking or tiebreak points, and left out of OPR."
+    ],
+    "teams": {
+      "16054": "STORM TECH CANAÃ",
+      "21036": "JUSTICE FTC TEAM",
+      "21069": "OUTPUT Jundiaí",
+      "23276": "TECHBONDERS",
+      "26963": "RIVERPOLLO - FTC",
+      "31146": "TALOS ARENA FTC",
+      "38388": "BLUE GEAR"
+    },
+    "bonusNames": ["swarmRP", "pollinator1RP", "pollinator2RP"],
+    "quals": [
+      { "t": 6975,  "red": [21036, 16054], "blue": [31146, 23276], "auto": [25, 8], "score": [95, 21], "bonus": { "red": ["pollinator1RP"] } },
+      { "t": 7635,  "red": [38388, 31146], "blue": [26963, 21069], "auto": [0, 5], "score": [7, 62], "noShow": [38388] },
+      { "t": 8425,  "red": [21069, 21036], "blue": [16054, 38388], "auto": [28, 25], "score": [93, 52], "bonus": { "red": ["swarmRP"] }, "noShow": [38388] },
+      { "t": 9025,  "red": [26963, 38388], "blue": [23276, 16054], "auto": [8, 23], "score": [57, 48], "noShow": [38388] },
+      { "t": 13360, "red": [26963, 23276], "blue": [31146, 21036], "auto": [8, 3], "score": [78, 48], "bonus": { "red": ["swarmRP"] }, "surrogate": [23276, 31146] },
+      { "t": 13915, "red": [21069, 31146], "blue": [16054, 26963], "auto": [0, 36], "score": [20, 89], "bonus": { "blue": ["swarmRP"] } },
+      { "t": 15230, "red": [21036, 23276], "blue": [38388, 21069], "auto": [8, 0], "score": [69, 41] },
+      { "t": 15945, "red": [23276, 26963], "blue": [16054, 21069], "auto": [0, 28], "score": [53, 61] },
+      { "t": 16675, "red": [31146, 16054], "blue": [38388, 21036], "auto": [8, 11], "score": [47, 89], "bonus": { "blue": ["swarmRP"] } },
+      { "t": 17640, "red": [23276, 38388], "blue": [31146, 26963], "auto": [0, 28], "score": [13, 87] },
+      { "t": 18265, "red": [21069, 23276], "blue": [21036, 31146], "auto": [0, 0], "score": [33, 69] }
+    ],
+    "rankings": [
+      { "team": 21036, "rs": 3.00, "points": 77.17, "tips": 2.83 },
+      { "team": 26963, "rs": 2.83, "points": 71.00, "tips": 2.50 },
+      { "team": 16054, "rs": 1.83, "points": 65.33, "tips": 2.33 },
+      { "team": 21069, "rs": 1.67, "points": 51.67, "tips": 1.50 },
+      { "team": 31146, "rs": 1.00, "points": 41.83, "tips": 1.17 },
+      { "team": 38388, "rs": 0.67, "points": 23.83, "tips": 0.67 },
+      { "team": 23276, "rs": 0.50, "points": 39.50, "tips": 1.17 }
+    ],
+    "alliances": [
+      { "number": 1, "captain": 21036, "round1": 26963 },
+      { "number": 2, "captain": 16054, "round1": 21069 }
+    ],
+    "playoffs": [
+      { "description": "Finals Match 1", "t": 20305, "red": 1, "blue": 2, "auto": [31, 25], "score": [65, 58] },
+      { "description": "Finals Match 2", "t": 21345, "red": 1, "blue": 2, "auto": [36, 28], "score": [147, 80], "foul": [0, 20] }
+    ]
+  }
+}

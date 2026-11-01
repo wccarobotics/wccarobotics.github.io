@@ -13,7 +13,7 @@ Rankings, OPR, schedule difficulty, and more, calculated from the 13 qualificati
 
 **Tip:** Click on any team number to highlight all of that team's appearances on the page, or click a column heading to sort.
 
-[Results on FTC Events](https://ftc-events.firstinspires.org/2026/USORWIN)
+[Results on FTC Events](https://ftc-events.firstinspires.org/2026/USORWIN) · [Livestream](https://www.youtube.com/live/0UQdsgZR9_k)
 
 - Qualification matches played: 13 of 13
 - Teams: 10 · Playoff alliances: 2 · Average OPR: 18.3 · Match margin σ: 14.0

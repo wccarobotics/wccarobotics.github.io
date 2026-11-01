@@ -16,7 +16,7 @@ Rankings, OPR, schedule difficulty, and more, calculated from the 18 qualificati
 [Results on FTC Events](https://ftc-events.firstinspires.org/2026/USWAMAM1)
 
 - Qualification matches played: 18 of 18
-- Teams: 12 · Playoff alliances: 4 · Average OPR: 21.9 · Match margin σ: 20.1
+- Teams: 12 · Playoff alliances: 4 · Average OPR: 21.9 · Match margin σ: 20.3
 
 ## Rankings
 
@@ -41,18 +41,18 @@ These rankings cover this meet only; the official rankings are league rankings t
 
 | # | Team | W-L-T | OPR | npOPR | Auto | Def | Margin | Avg Score | xW | Luck |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 1 | 23405 Crash Out! | 5-1-0 | 45.7 | 46.8 | 25.3 | 1.8 | 47.4 | 64.0 | 5.2 | -0.2 |
-| 2 | 24130 Short Circuit | 5-1-0 | 45.0 | 39.2 | 24.8 | 5.1 | 50.1 | 62.5 | 4.8 | +0.2 |
-| 3 | 6188 SiBorgs | 6-0-0 | 35.7 | 31.0 | 8.1 | -2.3 | 33.4 | 62.0 | 4.9 | +1.1 |
-| 4 | 23404 Bot Not Found | 4-2-0 | 20.5 | 25.0 | 3.7 | -1.3 | 19.2 | 43.8 | 3.0 | +1.0 |
-| 5 | 22484 Catapult | 3-3-0 | 20.2 | 14.2 | 5.2 | 8.6 | 28.8 | 40.3 | 2.8 | +0.2 |
-| 6 | 37664 CKMS - Pink Pickled Pot… | 3-3-0 | 18.3 | 15.9 | 2.7 | -1.6 | 16.6 | 41.5 | 2.9 | +0.1 |
-| 7 | 22485 Furball Force | 3-3-0 | 17.7 | 11.2 | 4.3 | -3.4 | 14.3 | 43.7 | 2.7 | +0.3 |
-| 8 | 32954 Bot Got Found | 1-5-0 | 15.1 | 18.1 | 8.9 | 3.0 | 18.1 | 35.7 | 2.1 | -1.1 |
-| 9 | 12069 Cataclysm | 2-4-0 | 13.7 | 15.8 | 4.0 | -7.8 | 6.0 | 37.3 | 2.8 | -0.8 |
-| 10 | 24861 CKMS - Dark Star | 1-5-0 | 13.3 | 12.3 | 4.6 | 1.6 | 14.9 | 27.5 | 1.4 | -0.4 |
-| 11 | 25778 CKMS - Mango Bob | 1-5-0 | 9.4 | 11.5 | 3.6 | -4.3 | 5.1 | 35.0 | 1.8 | -0.8 |
-| 12 | 24860 CKMS - Bob the Builders | 2-4-0 | 8.1 | 5.1 | -1.2 | 0.7 | 8.8 | 32.0 | 1.7 | +0.3 |
+| 1 | 23405 Crash Out! | 5-1-0 | 45.6 | 46.3 | 25.2 | 1.0 | 46.6 | 64.0 | 5.2 | -0.2 |
+| 2 | 24130 Short Circuit | 5-1-0 | 44.8 | 38.7 | 24.6 | 5.1 | 49.9 | 62.5 | 4.8 | +0.2 |
+| 3 | 6188 SiBorgs | 6-0-0 | 35.7 | 31.1 | 8.1 | -1.9 | 33.8 | 62.0 | 4.9 | +1.1 |
+| 4 | 23404 Bot Not Found | 4-2-0 | 20.6 | 25.2 | 3.8 | -1.3 | 19.2 | 43.8 | 3.1 | +0.9 |
+| 5 | 22484 Catapult | 3-3-0 | 20.5 | 14.2 | 5.2 | 7.3 | 27.8 | 40.3 | 2.8 | +0.2 |
+| 6 | 37664 CKMS - Pink Pickled Pot… | 3-3-0 | 17.8 | 15.4 | 2.6 | -0.8 | 17.1 | 41.5 | 2.8 | +0.2 |
+| 7 | 22485 Furball Force | 3-3-0 | 17.2 | 10.8 | 4.2 | -2.5 | 14.7 | 43.7 | 2.6 | +0.4 |
+| 8 | 32954 Bot Got Found | 1-5-0 | 15.2 | 18.4 | 8.9 | 2.9 | 18.1 | 35.7 | 2.1 | -1.1 |
+| 9 | 24861 CKMS - Dark Star | 1-5-0 | 13.1 | 11.8 | 4.4 | 1.3 | 14.4 | 27.5 | 1.4 | -0.4 |
+| 10 | 12069 Cataclysm | 2-4-0 | 12.5 | 15.8 | 3.9 | -2.2 | 10.4 | 37.3 | 2.7 | -0.7 |
+| 11 | 25778 CKMS - Mango Bob | 1-5-0 | 11.9 | 14.5 | 4.3 | -6.3 | 5.7 | 35.0 | 2.0 | -1.0 |
+| 12 | 24860 CKMS - Bob the Builders | 2-4-0 | 8.3 | 5.2 | -1.1 | -0.1 | 8.2 | 32.0 | 1.7 | +0.3 |
 
 Def: differences between teams are consistent with random match-to-match variation (p = 0.94); treat them as noise.
 
@@ -60,18 +60,18 @@ Def: differences between teams are consistent with random match-to-match variati
 
 | # | Team | Partner OPR | Opp OPR | Avg-team win% |
 |---:|---|---:|---:|---:|
-| 1 | 24861 CKMS - Dark Star | 14.2 | 45.9 | 35% |
-| 2 | 32954 Bot Got Found | 20.5 | 44.1 | 42% |
-| 3 | 25778 CKMS - Mango Bob | 25.6 | 49.5 | 43% |
-| 4 | 24860 CKMS - Bob the Builders | 23.9 | 48.4 | 45% |
-| 5 | 22485 Furball Force | 26.0 | 51.5 | 47% |
-| 6 | 22484 Catapult | 20.2 | 43.4 | 48% |
-| 7 | 23404 Bot Not Found | 23.3 | 44.2 | 52% |
-| 8 | 37664 CKMS - Pink Pickled Pot… | 23.2 | 43.3 | 52% |
-| 9 | 12069 Cataclysm | 23.6 | 39.0 | 54% |
-| 10 | 23405 Crash Out! | 18.3 | 37.5 | 56% |
-| 11 | 24130 Short Circuit | 17.5 | 38.5 | 59% |
-| 12 | 6188 SiBorgs | 26.3 | 40.0 | 64% |
+| 1 | 24861 CKMS - Dark Star | 14.4 | 46.2 | 35% |
+| 2 | 32954 Bot Got Found | 20.4 | 43.7 | 43% |
+| 3 | 25778 CKMS - Mango Bob | 25.2 | 48.9 | 43% |
+| 4 | 24860 CKMS - Bob the Builders | 23.7 | 48.5 | 45% |
+| 5 | 22485 Furball Force | 26.4 | 51.7 | 47% |
+| 6 | 22484 Catapult | 19.9 | 43.4 | 48% |
+| 7 | 37664 CKMS - Pink Pickled Pot… | 23.7 | 43.5 | 52% |
+| 8 | 23404 Bot Not Found | 23.3 | 44.0 | 53% |
+| 9 | 12069 Cataclysm | 24.0 | 39.7 | 55% |
+| 10 | 23405 Crash Out! | 18.4 | 37.7 | 55% |
+| 11 | 24130 Short Circuit | 17.7 | 39.2 | 58% |
+| 12 | 6188 SiBorgs | 26.3 | 40.1 | 63% |
 
 ## Glossary
 

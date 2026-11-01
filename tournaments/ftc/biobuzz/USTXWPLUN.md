@@ -16,7 +16,7 @@ Rankings, OPR, schedule difficulty, and more, calculated from the 25 qualificati
 [Results on FTC Events](https://ftc-events.firstinspires.org/2026/USTXWPLUN)
 
 - Qualification matches played: 25 of 25
-- Teams: 20 · Playoff alliances: 4 · Average OPR: 9.7 · Match margin σ: 10.3
+- Teams: 20 · Playoff alliances: 4 · Average OPR: 10.3 · Match margin σ: 10.7
 
 ## Rankings
 
@@ -49,26 +49,26 @@ Computed rankings match the official rankings.
 
 | # | Team | W-L-T | OPR | npOPR | Auto | Def | Margin | Avg Score | xW | Luck |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 1 | 26933 Patriots Macrina | 3-2-0 | 21.7 | 21.7 | 0.2 | 0.9 | 22.6 | 29.2 | 3.7 | -0.7 |
-| 2 | 19733 Bionic Bumblebees | 5-0-0 | 18.9 | 18.9 | 6.8 | 0.5 | 19.4 | 27.2 | 3.9 | +1.1 |
-| 3 | 15592 T-Force | 3-2-0 | 17.3 | 17.3 | 4.7 | -0.3 | 17.0 | 24.4 | 3.4 | -0.4 |
-| 4 | 30052 RoboRaiders Mechanics | 3-1-1 | 15.7 | 15.7 | 4.2 | 3.7 | 19.4 | 22.2 | 2.6 | +0.9 |
-| 5 | 11719 Iron Hook | 3-2-0 | 15.2 | 15.2 | 6.4 | -2.3 | 12.9 | 24.6 | 3.0 | 0.0 |
-| 6 | 38702 Mech-dranos | 3-1-1 | 13.3 | 13.3 | 3.3 | -1.4 | 11.8 | 19.8 | 2.6 | +0.9 |
-| 7 | 37510 Wired Warriors | 2-3-0 | 13.0 | 13.0 | 2.1 | -2.0 | 11.1 | 23.6 | 2.9 | -0.9 |
-| 8 | 19734 The Roboters | 4-1-0 | 10.4 | 10.4 | 3.4 | 0.8 | 11.3 | 20.4 | 3.1 | +0.9 |
-| 9 | 26830 Screwstein | 2-3-0 | 9.4 | 9.4 | -1.3 | -0.6 | 8.8 | 21.2 | 2.8 | -0.8 |
-| 10 | 25642 RoboRaiders Technicians | 2-3-0 | 8.7 | 8.7 | -1.3 | 0.8 | 9.5 | 19.8 | 2.4 | -0.4 |
-| 11 | 15622 The Resistance | 2-2-1 | 8.5 | 8.5 | -0.1 | 0.4 | 8.9 | 17.8 | 2.0 | +0.5 |
-| 12 | 4921 The Dropouts | 1-4-0 | 6.9 | 6.9 | 1.7 | -2.7 | 4.2 | 16.2 | 2.4 | -1.4 |
-| 13 | 26828 The Niddlers | 1-4-0 | 6.6 | 6.6 | 1.6 | 1.3 | 7.9 | 16.0 | 2.0 | -1.0 |
-| 14 | 24207 Shallowater Sting | 2-3-0 | 5.7 | 5.7 | -0.0 | 1.3 | 7.1 | 14.2 | 1.5 | +0.5 |
-| 15 | 10676 Lady Warbots | 2-3-0 | 5.3 | 5.3 | 2.5 | -0.8 | 4.5 | 16.6 | 2.3 | -0.3 |
-| 16 | 37703 Obsidian Saints | 1-4-0 | 5.1 | 5.1 | -0.6 | -0.7 | 4.4 | 13.8 | 1.1 | -0.1 |
-| 17 | 13788 Talkington Tinies | 1-4-0 | 4.8 | 4.8 | 0.6 | -1.6 | 3.2 | 15.0 | 1.6 | -0.6 |
-| 18 | 4859 Westerner Robotic Outla… | 4-1-0 | 4.5 | 4.5 | 1.2 | 3.6 | 8.1 | 18.6 | 2.7 | +1.3 |
-| 19 | 17461 Trial & Error | 2-2-1 | 2.1 | 2.1 | -0.6 | 1.7 | 3.8 | 13.6 | 2.0 | +0.5 |
-| 20 | 26930 The Power Nappers | 2-3-0 | 1.7 | 1.7 | -1.1 | -2.8 | -1.1 | 15.4 | 2.1 | -0.1 |
+| 1 | 26933 Patriots Macrina | 3-2-0 | 21.6 | 21.6 | 0.2 | 1.3 | 22.9 | 29.2 | 3.3 | -0.3 |
+| 2 | 19733 Bionic Bumblebees | 5-0-0 | 20.0 | 20.0 | 7.0 | 0.2 | 20.2 | 27.2 | 4.2 | +0.8 |
+| 3 | 15592 T-Force | 3-2-0 | 17.6 | 17.6 | 4.8 | 0.2 | 17.8 | 24.4 | 3.6 | -0.6 |
+| 4 | 30052 RoboRaiders Mechanics | 3-1-1 | 17.3 | 17.3 | 4.5 | 3.5 | 20.8 | 22.2 | 2.7 | +0.8 |
+| 5 | 38702 Mech-dranos | 3-1-1 | 15.6 | 15.6 | 3.5 | -0.8 | 14.9 | 19.8 | 3.1 | +0.4 |
+| 6 | 11719 Iron Hook | 3-2-0 | 15.4 | 15.4 | 6.6 | -1.6 | 13.8 | 24.6 | 3.2 | -0.2 |
+| 7 | 37510 Wired Warriors | 2-3-0 | 13.4 | 13.4 | 2.3 | 0.3 | 13.7 | 23.6 | 2.6 | -0.6 |
+| 8 | 19734 The Roboters | 4-1-0 | 10.2 | 10.2 | 3.3 | 1.9 | 12.1 | 20.4 | 2.8 | +1.2 |
+| 9 | 4859 Westerner Robotic Outla… | 4-1-0 | 9.7 | 9.7 | 1.7 | 0.0 | 9.7 | 18.6 | 3.8 | +0.2 |
+| 10 | 26830 Screwstein | 2-3-0 | 9.2 | 9.2 | -1.3 | 2.2 | 11.4 | 21.2 | 2.5 | -0.5 |
+| 11 | 25642 RoboRaiders Technicians | 2-3-0 | 8.9 | 8.9 | -1.3 | 2.4 | 11.3 | 19.8 | 2.1 | -0.1 |
+| 12 | 4921 The Dropouts | 1-4-0 | 8.3 | 8.3 | 2.0 | -3.6 | 4.7 | 16.2 | 2.6 | -1.6 |
+| 13 | 15622 The Resistance | 2-2-1 | 7.9 | 7.9 | -0.2 | 1.8 | 9.7 | 17.8 | 1.7 | +0.8 |
+| 14 | 24207 Shallowater Sting | 2-3-0 | 7.5 | 7.5 | 0.4 | 1.7 | 9.2 | 14.2 | 1.8 | +0.2 |
+| 15 | 26828 The Niddlers | 1-4-0 | 5.8 | 5.8 | 0.9 | -1.5 | 4.3 | 16.0 | 1.8 | -0.8 |
+| 16 | 10676 Lady Warbots | 2-3-0 | 4.9 | 4.9 | 2.4 | -1.2 | 3.7 | 16.6 | 2.3 | -0.3 |
+| 17 | 13788 Talkington Tinies | 1-4-0 | 4.8 | 4.8 | 0.6 | -0.3 | 4.5 | 15.0 | 1.4 | -0.4 |
+| 18 | 37703 Obsidian Saints | 1-4-0 | 4.4 | 4.4 | -0.7 | -1.4 | 3.0 | 13.8 | 1.1 | -0.1 |
+| 19 | 26930 The Power Nappers | 2-3-0 | 1.5 | 1.5 | -1.2 | -1.0 | 0.5 | 15.4 | 1.8 | +0.2 |
+| 20 | 17461 Trial & Error | 2-2-1 | 1.1 | 1.1 | -0.6 | 2.9 | 4.1 | 13.6 | 1.8 | +0.7 |
 
 Def: differences between teams are consistent with random match-to-match variation (p > 0.99); treat them as noise.
 
@@ -76,26 +76,26 @@ Def: differences between teams are consistent with random match-to-match variati
 
 | # | Team | Partner OPR | Opp OPR | Avg-team win% |
 |---:|---|---:|---:|---:|
-| 1 | 30052 RoboRaiders Mechanics | 6.5 | 22.1 | 34% |
-| 2 | 37703 Obsidian Saints | 8.7 | 23.2 | 35% |
-| 3 | 24207 Shallowater Sting | 8.5 | 21.3 | 38% |
-| 4 | 38702 Mech-dranos | 6.5 | 19.1 | 41% |
-| 5 | 26933 Patriots Macrina | 7.5 | 20.1 | 41% |
-| 6 | 15622 The Resistance | 9.3 | 22.2 | 42% |
-| 7 | 11719 Iron Hook | 9.4 | 21.4 | 42% |
-| 8 | 15592 T-Force | 7.1 | 19.3 | 46% |
-| 9 | 13788 Talkington Tinies | 10.2 | 20.1 | 49% |
-| 10 | 19733 Bionic Bumblebees | 8.3 | 18.4 | 50% |
-| 11 | 37510 Wired Warriors | 10.6 | 20.0 | 50% |
-| 12 | 25642 RoboRaiders Technicians | 11.1 | 19.3 | 51% |
-| 13 | 26828 The Niddlers | 9.4 | 18.6 | 52% |
-| 14 | 4921 The Dropouts | 9.3 | 17.8 | 56% |
-| 15 | 26830 Screwstein | 11.8 | 19.3 | 57% |
-| 16 | 10676 Lady Warbots | 11.3 | 17.9 | 59% |
-| 17 | 19734 The Roboters | 10.0 | 17.1 | 59% |
-| 18 | 17461 Trial & Error | 11.5 | 16.4 | 63% |
-| 19 | 26930 The Power Nappers | 13.7 | 18.6 | 64% |
-| 20 | 4859 Westerner Robotic Outla… | 14.1 | 17.4 | 71% |
+| 1 | 30052 RoboRaiders Mechanics | 6.0 | 22.4 | 33% |
+| 2 | 37703 Obsidian Saints | 9.4 | 23.8 | 37% |
+| 3 | 26933 Patriots Macrina | 7.6 | 22.4 | 38% |
+| 4 | 15622 The Resistance | 9.9 | 24.1 | 39% |
+| 5 | 24207 Shallowater Sting | 9.7 | 21.6 | 43% |
+| 6 | 13788 Talkington Tinies | 10.2 | 21.8 | 45% |
+| 7 | 25642 RoboRaiders Technicians | 10.9 | 21.6 | 45% |
+| 8 | 37510 Wired Warriors | 10.2 | 22.1 | 45% |
+| 9 | 38702 Mech-dranos | 7.6 | 19.0 | 47% |
+| 10 | 11719 Iron Hook | 11.2 | 22.2 | 47% |
+| 11 | 26828 The Niddlers | 9.9 | 19.8 | 51% |
+| 12 | 26830 Screwstein | 12.0 | 21.2 | 53% |
+| 13 | 15592 T-Force | 8.8 | 19.3 | 53% |
+| 14 | 19733 Bionic Bumblebees | 9.1 | 18.5 | 53% |
+| 15 | 4921 The Dropouts | 9.0 | 17.8 | 56% |
+| 16 | 19734 The Roboters | 10.2 | 18.5 | 57% |
+| 17 | 10676 Lady Warbots | 11.7 | 18.7 | 58% |
+| 18 | 26930 The Power Nappers | 13.9 | 20.8 | 59% |
+| 19 | 17461 Trial & Error | 12.5 | 17.7 | 62% |
+| 20 | 4859 Westerner Robotic Outla… | 15.2 | 16.9 | 77% |
 
 ## Glossary
 

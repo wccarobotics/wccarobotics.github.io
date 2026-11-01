@@ -6,6 +6,9 @@ Usage (from anywhere in the repo):
 
 Videos: livestream links from the FTC Events API are included automatically. Add videos found
 elsewhere (e.g. by searching YouTube) to season-videos.json next to this script.
+
+Unofficial events that aren't on FTC Events (scrimmages whose results were read off a livestream)
+go in unofficial-events.json; they're converted to API-format JSON and run through FtcStats.cs too.
 """
 
 import argparse
@@ -87,21 +90,34 @@ def location(event):
     return f"{event['city']}, {event['country']}"
 
 
-def stats_page(season, event, played, teams, videos, season_year):
-    """Returns the stats page markdown and FtcStats' summary of the event (OPR, high score)."""
+def stats_page(season, event, played, teams, videos, season_year, unofficial=None):
+    """Returns the stats page markdown and FtcStats' summary of the event (OPR, high score).
+
+    `unofficial` is the event's entry from unofficial-events.json; its data is read from
+    API-format files written by write_unofficial_api_files instead of the FTC API."""
     summary_file = REPO / ".scratch" / "season-summaries" / f"{event['code']}.json"
     summary_file.parent.mkdir(parents=True, exist_ok=True)
+    load = ["--load", str(write_unofficial_api_files(season, event["code"], unofficial))] if unofficial else []
     result = subprocess.run(
         ["dotnet", "run", "FtcStats.cs", "--", str(season), event["code"], "--markdown", "--no-title",
-         "--summary", str(summary_file)]
+         "--summary", str(summary_file)] + load
         + (["--final"] if event["dateEnd"][:10] < datetime.date.today().isoformat() else []),
         cwd=TOOL_DIR, capture_output=True, text=True, encoding="utf-8")
     if result.returncode != 0:
         raise RuntimeError(f"FtcStats failed for {event['code']}:\n{result.stderr}{result.stdout}")
     summary = json.loads(summary_file.read_text(encoding="utf-8"))
+    stats = result.stdout.strip()
 
     name = event["name"].strip()
-    links = [f"[Results on FTC Events](https://ftc-events.firstinspires.org/{season}/{event['code']})"]
+    if unofficial:
+        links = []
+        notes = "".join(f"{n}\n\n" for n in unofficial.get("notes", []))
+        stats = stats.replace(
+            "<small>Match data provided by the [FIRST Tech Challenge Events API](https://ftc-events.firstinspires.org/services/API).</small>",
+            "<small>Match data read from the event livestream.</small>")
+    else:
+        links = [f"[Results on FTC Events](https://ftc-events.firstinspires.org/{season}/{event['code']})"]
+        notes = ""
     links += [f"[{v['label']}]({v['url']})" for v in videos]
     # The title is written as a JSON string, which is also a valid YAML double-quoted string, so
     # event names containing quotes (NTX "Marcus Mayhem" Scrimmage) can't break the front matter.
@@ -118,12 +134,80 @@ title: {json.dumps(name + " — Event Stats", ensure_ascii=False)}
 
 Rankings, OPR, schedule difficulty, and more, calculated from the {played} qualification matches played by {teams} teams, followed by the playoffs and awards when the event had them. The glossary at the bottom of the page explains each column.
 
-**Tip:** Click on any team number to highlight all of that team's appearances on the page, or click a column heading to sort.
+{notes}**Tip:** Click on any team number to highlight all of that team's appearances on the page, or click a column heading to sort.
 
 {" · ".join(links)}
 
-{result.stdout.strip()}
+{stats}
 """
+
+
+def write_unofficial_api_files(season, code, ev):
+    """Writes an unofficial-events.json entry as the FTC API responses FtcStats.cs reads with --load."""
+    out = REPO / ".scratch" / "unofficial-events" / code
+    out.mkdir(parents=True, exist_ok=True)
+    date = ev["date"]
+    names = {int(t): n for t, n in ev["teams"].items()}
+
+    def stations(red, blue):
+        return [(t, f"{color}{i + 1}") for color, side in (("Red", red), ("Blue", blue)) for i, t in enumerate(side)]
+
+    def result(m, number, level, description, red, blue):
+        dq = set(m.get("dq", []))
+        foul = m.get("foul", [0, 0])
+        return {
+            "actualStartTime": f"{date}T00:00:00", "postResultTime": f"{date}T00:00:00",
+            "description": description, "tournamentLevel": level, "series": 0, "matchNumber": number,
+            "scoreRedFinal": m["score"][0], "scoreRedFoul": foul[0], "scoreRedAuto": m.get("auto", [None])[0],
+            "scoreBlueFinal": m["score"][1], "scoreBlueFoul": foul[1], "scoreBlueAuto": m.get("auto", [None, None])[1],
+            "videoURL": f"{ev['video']}?t={m['t']}" if ev.get("video") and "t" in m else None,
+            "teams": [{"teamNumber": t, "station": st, "dq": t in dq, "onField": True} for t, st in stations(red, blue)],
+        }
+
+    schedule, matches, scores = [], [], []
+    for n, m in enumerate(ev["quals"], 1):
+        surrogate, no_show = set(m.get("surrogate", [])), set(m.get("noShow", []))
+        schedule.append({
+            "description": f"Qualification {n}", "tournamentLevel": "QUALIFICATION", "matchNumber": n,
+            "teams": [{"teamNumber": t, "station": st, "teamName": names.get(t, ""), "surrogate": t in surrogate, "noShow": t in no_show}
+                      for t, st in stations(m["red"], m["blue"])],
+        })
+        matches.append(result(m, n, "QUALIFICATION", f"Qualification {n}", m["red"], m["blue"]))
+        scores.append({"matchLevel": "QUALIFICATION", "matchNumber": n, "alliances": [
+            {"alliance": color, **{b: b in m.get("bonus", {}).get(color.lower(), []) for b in ev["bonusNames"]}}
+            for color in ("Red", "Blue")]})
+
+    # Official W-L-T and matches played, for FtcStats' check against the official rankings.
+    record = {t: [0, 0, 0, 0] for t in names}
+    for m in ev["quals"]:
+        for color, side in ((0, m["red"]), (1, m["blue"])):
+            for t in side:
+                if t in m.get("surrogate", []):
+                    continue
+                mine, theirs = m["score"][color], m["score"][1 - color]
+                record[t][0 if mine > theirs else 1 if mine < theirs else 2] += 1
+                record[t][3] += 1
+    rankings = [{"rank": i, "teamNumber": r["team"], "teamName": names.get(r["team"], ""),
+                 "sortOrder1": r["rs"], "sortOrder2": r["points"], "sortOrder3": r.get("tips", 0), "sortOrder4": 0,
+                 "wins": record[r["team"]][0], "losses": record[r["team"]][1], "ties": record[r["team"]][2],
+                 "matchesPlayed": record[r["team"]][3], "matchesCounted": record[r["team"]][3]}
+                for i, r in enumerate(ev["rankings"], 1)]
+
+    roles = ("captain", "round1", "round2", "backup")
+    alliances = [{"number": a["number"], **{k: {"teamNumber": a[k]} for k in roles if k in a}}
+                 for a in ev.get("alliances", [])]
+    members = {a["number"]: [a[k] for k in roles[:3] if k in a] for a in ev.get("alliances", [])}
+    playoffs = [result(m, n, "PLAYOFF", m["description"], members[m["red"]], members[m["blue"]])
+                for n, m in enumerate(ev.get("playoffs", []), 1)]
+
+    event = {"code": code, "name": ev["name"], "city": ev["city"], "stateprov": "", "country": ev["country"],
+             "dateStart": f"{date}T00:00:00", "dateEnd": f"{date}T00:00:00"}
+    for name, key, value in [("schedule", "schedule", schedule), ("matches", "matches", matches),
+                             ("scores", "matchScores", scores), ("event", "events", [event]),
+                             ("rankings", "rankings", rankings), ("playoff-matches", "matches", playoffs),
+                             ("alliances", "alliances", alliances), ("awards", "awards", [])]:
+        (out / f"{season}-{code}-{name}.json").write_text(json.dumps({key: value}, ensure_ascii=False), encoding="utf-8")
+    return out
 
 
 def index_page(rows, season_year, generated):
@@ -155,7 +239,8 @@ def index_page(rows, season_year, generated):
         # Events link to their stats page; practice-only events have none, so link the official results.
         link = f"./{r['code']}" if r["has_stats"] else f"https://ftc-events.firstinspires.org/{r['season']}/{r['code']}"
         winners = " / ".join(str(t) for t in (s or {}).get("winners") or []) or "—"
-        lines.append(f"| {r['date']} | [{r['name']}]({link}) | {r['location']} | {r['teams']} | {r['played']} | "
+        mark = " †" if r.get("unofficial") else ""
+        lines.append(f"| {r['date']} | [{r['name']}]({link}){mark} | {r['location']} | {r['teams']} | {r['played']} | "
                      f"{level} | {winners} | {videos} |")
     lines += [
         "",
@@ -166,6 +251,8 @@ def index_page(rows, season_year, generated):
         "Click a column heading to sort.",
         "",
         "\\* Fewer than 3 matches per team, so these OPRs are especially rough.",
+        "",
+        "† Unofficial event that isn't on FTC Events; its results were read from the livestream.",
         "",
         f"<small>Updated {generated:%B} {generated.day}, {generated.year}. Event and match data provided by the "
         "[FIRST Tech Challenge Events API](https://ftc-events.firstinspires.org/services/API).</small>",
@@ -201,7 +288,7 @@ def main():
         quals = [m for m in all_played if m["tournamentLevel"] == "QUALIFICATION"]
         teams = len({t["teamNumber"] for m in all_played for t in m["teams"]})
         videos = event_videos(event, curated)
-        row = dict(season=args.season, code=event["code"], name=event["name"].strip(),
+        row = dict(season=args.season, code=event["code"], name=event["name"].strip(), start=event["dateStart"],
                    date=short_date(event["dateStart"], event["dateEnd"]), location=location(event),
                    teams=teams, played=len(quals), videos=videos)
         print(f"{event['code']}: {len(quals)} quals of {len(all_played)} matches, {teams} teams, "
@@ -215,6 +302,23 @@ def main():
             row["played"] = f"{len(all_played)} practice"
             row["has_stats"] = False
         rows.append(row)
+
+    unofficial = json.loads((TOOL_DIR / "unofficial-events.json").read_text(encoding="utf-8"))
+    for code, ev in unofficial.items():
+        if code.startswith("_") or ev["date"] > today.isoformat():
+            continue
+        event = {"code": code, "name": ev["name"], "dateStart": ev["date"], "dateEnd": ev["date"],
+                 "city": ev["city"], "country": ev["country"], "stateprov": "", "liveStreamUrl": ev.get("video")}
+        videos = event_videos(event, curated)
+        teams = len({t for m in ev["quals"] for t in m["red"] + m["blue"]})
+        row = dict(season=args.season, code=code, name=ev["name"], start=ev["date"], unofficial=True,
+                   date=short_date(ev["date"], ev["date"]), location=location(event),
+                   teams=teams, played=len(ev["quals"]), videos=videos, has_stats=True)
+        print(f"{code}: unofficial, {len(ev['quals'])} quals, {teams} teams, {len(videos)} video(s)", file=sys.stderr)
+        row["summary"], page = stats_page(args.season, event, len(ev["quals"]), teams, videos, season_year, unofficial=ev)
+        (out / f"{code}.md").write_text(page, encoding="utf-8", newline="\n")
+        rows.append(row)
+    rows.sort(key=lambda r: (r["start"][:10], r["code"]), reverse=True)
 
     (out / "index.md").write_text(index_page(rows, season_year, today), encoding="utf-8", newline="\n")
     print(f"Wrote {sum(1 for r in rows if r['played'] and isinstance(r['played'], int))} stats pages and an index of {len(rows)} events to {out}", file=sys.stderr)

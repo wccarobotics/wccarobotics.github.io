@@ -16,7 +16,7 @@ Rankings, OPR, schedule difficulty, and more, calculated from the 9 qualificatio
 [Results on FTC Events](https://ftc-events.firstinspires.org/2026/USCOMSS)
 
 - Qualification matches played: 9 of 9
-- Teams: 4 · Playoff alliances: 2 · Average OPR: 13.3 · Match margin σ: 8.1
+- Teams: 4 · Playoff alliances: 2 · Average OPR: 13.5 · Match margin σ: 8.2
 - 3 scheduled qualification matches have no posted results and are left out.
 
 ## Rankings
@@ -34,10 +34,10 @@ Computed rankings match the official rankings.
 
 | # | Team | W-L-T | OPR | npOPR | Auto | Def | Margin | Avg Score | xW | Luck |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 1 | 19541 Bionic Sharks | 9-0-0 | 31.4 | 28.1 | 8.5 | 0.0 | 31.4 | 38.7 | 9.0 | 0.0 |
-| 2 | 37142 Timberview Cyberwolves 2 | 3-6-0 | 10.2 | 11.9 | 0.0 | -0.0 | 10.2 | 24.6 | 3.0 | 0.0 |
-| 3 | 36729 Timberview CyberWolves | 3-6-0 | 7.6 | 4.2 | 4.2 | -0.0 | 7.6 | 22.8 | 3.0 | 0.0 |
-| 4 | 11561 The Headless Horsemen | 3-6-0 | 4.1 | 5.7 | -0.7 | -0.0 | 4.1 | 20.4 | 3.0 | 0.0 |
+| 1 | 19541 Bionic Sharks | 9-0-0 | 31.1 | 27.9 | 8.2 | 0.9 | 31.9 | 38.7 | 9.0 | 0.0 |
+| 2 | 37142 Timberview Cyberwolves 2 | 3-6-0 | 9.9 | 11.7 | -0.3 | 0.9 | 10.8 | 24.6 | 3.0 | 0.0 |
+| 3 | 36729 Timberview CyberWolves | 3-6-0 | 7.9 | 4.3 | 4.7 | -0.9 | 7.0 | 22.8 | 3.0 | 0.0 |
+| 4 | 11561 The Headless Horsemen | 3-6-0 | 5.0 | 6.3 | -0.1 | -0.6 | 4.4 | 20.4 | 3.0 | 0.0 |
 
 Def: with this schedule, defense can't be told apart from offense (e.g. every match includes every team), so treat it as noise.
 
@@ -45,10 +45,10 @@ Def: with this schedule, defense can't be told apart from offense (e.g. every ma
 
 | # | Team | Partner OPR | Opp OPR | Avg-team win% |
 |---:|---|---:|---:|---:|
-| 1 | 11561 The Headless Horsemen | 16.4 | 32.8 | 34% |
-| 2 | 37142 Timberview Cyberwolves 2 | 14.3 | 28.7 | 35% |
-| 3 | 36729 Timberview CyberWolves | 15.2 | 30.4 | 36% |
-| 4 | 19541 Bionic Sharks | 7.3 | 14.6 | 73% |
+| 1 | 11561 The Headless Horsemen | 16.3 | 32.6 | 35% |
+| 2 | 37142 Timberview Cyberwolves 2 | 14.7 | 29.3 | 35% |
+| 3 | 36729 Timberview CyberWolves | 15.3 | 30.7 | 35% |
+| 4 | 19541 Bionic Sharks | 7.6 | 15.2 | 74% |
 
 ## Glossary
 

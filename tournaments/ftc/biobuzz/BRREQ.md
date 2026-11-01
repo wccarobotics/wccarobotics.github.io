@@ -16,7 +16,7 @@ Rankings, OPR, schedule difficulty, and more, calculated from the 18 qualificati
 [Results on FTC Events](https://ftc-events.firstinspires.org/2026/BRREQ) · [Day 1 livestream](https://www.youtube.com/live/K0E1Unp4MxI) · [Day 2 livestream](https://www.youtube.com/live/m-kLWQ3HhjA)
 
 - Qualification matches played: 18 of 18
-- Teams: 12 · Playoff alliances: 4 · Average OPR: 41.2 · Match margin σ: 31.5
+- Teams: 12 · Playoff alliances: 4 · Average OPR: 42.5 · Match margin σ: 34.3
 
 ## Rankings
 
@@ -41,18 +41,18 @@ Computed rankings match the official rankings.
 
 | # | Team | W-L-T | OPR | npOPR | Auto | Def | Margin | Avg Score | xW | Luck |
 |---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 1 | 31445 V-LEGACY | 4-2-0 | 87.5 | 74.7 | 14.9 | 2.1 | 89.6 | 123.0 | 4.6 | -0.6 |
-| 2 | 16058 Rev Atom | 5-1-0 | 84.3 | 83.8 | 13.7 | -4.1 | 80.2 | 120.3 | 4.5 | +0.5 |
-| 3 | 22660 Unity Sunset | 5-1-0 | 70.4 | 71.0 | 21.7 | 5.9 | 76.3 | 98.3 | 4.2 | +0.8 |
-| 4 | 31168 CYBERTECH | 4-2-0 | 41.3 | 42.6 | 4.1 | -1.0 | 40.3 | 75.5 | 2.7 | +1.3 |
-| 5 | 17893 CodeTech | 3-3-0 | 39.2 | 30.8 | 11.3 | -6.3 | 33.0 | 78.2 | 2.9 | +0.1 |
-| 6 | 35014 Sky Tech | 2-4-0 | 33.7 | 25.9 | 5.5 | 0.7 | 34.4 | 77.2 | 2.7 | -0.7 |
-| 7 | 23504 Space Tech | 2-4-0 | 31.3 | 28.7 | -0.8 | -2.1 | 29.2 | 78.3 | 3.4 | -1.4 |
-| 8 | 17799 Newgen | 2-4-0 | 23.3 | 19.3 | 7.7 | 11.7 | 35.0 | 59.7 | 1.8 | +0.2 |
-| 9 | 35761 KYRIOS IRON | 3-3-0 | 23.2 | 26.3 | 11.7 | 5.2 | 28.5 | 80.0 | 2.9 | +0.1 |
-| 10 | 27094 Princess Tech | 3-3-0 | 22.5 | 23.7 | 13.7 | 1.2 | 23.7 | 69.7 | 2.7 | +0.3 |
-| 11 | 26303 Damas Robotic Team | 0-6-0 | 20.5 | 19.5 | 8.3 | -16.9 | 3.6 | 65.7 | 1.0 | -1.0 |
-| 12 | 32834 FOX Robotics | 3-3-0 | 17.7 | 21.3 | 2.9 | 3.7 | 21.4 | 64.2 | 2.7 | +0.3 |
+| 1 | 16058 Rev Atom | 5-1-0 | 86.8 | 86.2 | 14.4 | -8.3 | 78.5 | 120.3 | 4.5 | +0.5 |
+| 2 | 31445 V-LEGACY | 4-2-0 | 83.1 | 70.2 | 13.4 | 3.3 | 86.5 | 123.0 | 4.6 | -0.6 |
+| 3 | 22660 Unity Sunset | 5-1-0 | 72.7 | 70.5 | 19.8 | 9.4 | 82.1 | 98.3 | 4.1 | +0.9 |
+| 4 | 35014 Sky Tech | 2-4-0 | 47.6 | 39.7 | 9.6 | -0.3 | 47.3 | 77.2 | 3.2 | -1.2 |
+| 5 | 23504 Space Tech | 2-4-0 | 45.3 | 42.7 | 3.4 | -3.6 | 41.7 | 78.3 | 4.0 | -2.0 |
+| 6 | 31168 CYBERTECH | 4-2-0 | 40.2 | 41.8 | 4.1 | 1.9 | 42.1 | 75.5 | 2.3 | +1.7 |
+| 7 | 17893 CodeTech | 3-3-0 | 34.8 | 26.3 | 9.8 | -0.7 | 34.1 | 78.2 | 2.6 | +0.4 |
+| 8 | 27094 Princess Tech | 3-3-0 | 21.8 | 22.9 | 13.4 | 4.3 | 26.1 | 69.7 | 2.7 | +0.3 |
+| 9 | 17799 Newgen | 2-4-0 | 21.6 | 17.3 | 6.9 | 14.8 | 36.4 | 59.7 | 1.8 | +0.2 |
+| 10 | 35761 KYRIOS IRON | 3-3-0 | 21.3 | 24.9 | 11.6 | 6.9 | 28.2 | 80.0 | 2.7 | +0.3 |
+| 11 | 26303 Damas Robotic Team | 0-6-0 | 18.5 | 18.0 | 8.2 | -15.2 | 3.3 | 65.7 | 0.9 | -0.9 |
+| 12 | 32834 FOX Robotics | 3-3-0 | 16.3 | 20.4 | 3.0 | 3.9 | 20.3 | 64.2 | 2.7 | +0.3 |
 
 Def: differences between teams are consistent with random match-to-match variation (p = 0.66); treat them as noise.
 
@@ -60,18 +60,18 @@ Def: differences between teams are consistent with random match-to-match variati
 
 | # | Team | Partner OPR | Opp OPR | Avg-team win% |
 |---:|---|---:|---:|---:|
-| 1 | 26303 Damas Robotic Team | 45.2 | 101.2 | 34% |
-| 2 | 16058 Rev Atom | 36.0 | 81.4 | 41% |
-| 3 | 31445 V-LEGACY | 35.5 | 80.2 | 43% |
-| 4 | 22660 Unity Sunset | 28.0 | 76.0 | 44% |
-| 5 | 31168 CYBERTECH | 34.2 | 80.8 | 45% |
-| 6 | 17799 Newgen | 36.4 | 92.7 | 46% |
-| 7 | 17893 CodeTech | 38.9 | 81.5 | 51% |
-| 8 | 35014 Sky Tech | 43.4 | 80.6 | 51% |
-| 9 | 27094 Princess Tech | 47.2 | 76.9 | 56% |
-| 10 | 32834 FOX Robotics | 46.5 | 83.4 | 58% |
-| 11 | 35761 KYRIOS IRON | 56.8 | 81.6 | 62% |
-| 12 | 23504 Space Tech | 47.0 | 73.8 | 66% |
+| 1 | 26303 Damas Robotic Team | 47.2 | 104.4 | 35% |
+| 2 | 31168 CYBERTECH | 35.3 | 85.9 | 41% |
+| 3 | 16058 Rev Atom | 33.5 | 79.9 | 43% |
+| 4 | 22660 Unity Sunset | 31.5 | 80.4 | 44% |
+| 5 | 17799 Newgen | 38.1 | 95.9 | 44% |
+| 6 | 31445 V-LEGACY | 39.9 | 81.2 | 46% |
+| 7 | 17893 CodeTech | 43.4 | 87.3 | 50% |
+| 8 | 35014 Sky Tech | 41.7 | 80.7 | 50% |
+| 9 | 27094 Princess Tech | 47.9 | 80.6 | 57% |
+| 10 | 32834 FOX Robotics | 47.8 | 85.8 | 57% |
+| 11 | 35761 KYRIOS IRON | 58.7 | 84.2 | 62% |
+| 12 | 23504 Space Tech | 45.1 | 73.7 | 64% |
 
 ## Playoffs
 
